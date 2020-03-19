@@ -1,0 +1,74 @@
+repositories {
+    mavenCentral()
+}
+
+def isModule = false
+if (project.ext.has("isModule")) {
+    isModule = project.ext.isModule.booleanValue()
+}
+
+if (isModule) {
+    apply plugin: 'com.android.library'
+} else {
+    apply plugin: 'com.android.application'
+}
+
+def version_code = 1.0
+if (project.ext.has("versionCode")) {
+    version_code = project.ext.getProperty("versionCode") as Integer
+}
+
+def version_name = "1.0"
+if (project.ext.has("versionName")) {
+    version_name = project.ext.getProperty("versionName") as String
+}
+def resource_prefix = ""
+if (project.ext.has("resourcePrefix")) {
+    resource_prefix = project.ext.getProperty("resourcePrefix") as String
+}
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    resourcePrefix "${resource_prefix}"
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+
+        versionCode version_code
+        versionName = version_name
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    sourceSets {
+        main {
+            if (isModule) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                //集成开发模式下排除debug文件夹中的所有Java文件
+                java {
+                    exclude 'debug/**'
+                }
+            } else {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+                res.srcDirs +="src/main/res_debug"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+
