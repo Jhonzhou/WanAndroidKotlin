@@ -1,0 +1,25 @@
+ext {
+    isModule =project.rootProject.baseLibrary.toBoolean()
+    versionCode = 1
+    versionName = "1.0"
+    artifactId = "baselibrary"
+    groupId = "com.bee"
+    packaging = "aar"
+//    resourcePrefix = "baseLibrary"
+}
+apply from: project.rootProject.uri('module.gradle')
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api rootProject.ext.dependencies.appcompact_androidx
+    api rootProject.ext.dependencies.core_androidx
+    api rootProject.ext.dependencies.constraintlayout_androidx
+
+    implementation rootProject.ext.dependencies.support_test_runner
+    implementation rootProject.ext.dependencies.espresso_core
+    implementation rootProject.ext.dependencies.junit
+
+    implementation rootProject.ext.dependencies.kotlin_stdlib
+}
+

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--                    -禁止修改(主题变更除外)               -->
+
+    <!--标题栏字体颜色-->
+    <color name="color_text_primary">#121518</color>
+    <!--标题栏背景色-->
+    <color name="color_primary">#ffffff</color>
+    <!--导航栏背景色-->
+    <color name="color_primary_dark">@color/color_primary</color>
+    <!--表示CheckBox、EditText、Switch、Spinner、RadioButton等控件默认时的色调 -->
+    <color name="color_control_normal">@color/color_accent</color>
+    <!--表示CheckBox、EditText、Switch、Spinner、RadioButton等控件激活时候的色调-->
+    <color name="color_control_activated">@color/color_accent</color>
+    <!--默认系统控件颜色 例如：exitText游标、进度条颜色等-->
+    <color name="color_accent">#4590E4</color>
+    <!--常用背景色-->
+    <color name="color_common_bg">#F1F1F1</color>
+    <color name="color_divider">#ECECEC</color>
+
+    <!--                    -禁止修改(主题变更除外)               -->
+    <color name="common_blue">#4F9AFE</color>
+
+    <color name="red">#FF3737</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#ff000000</color>
+    <color name="theme_blue">#ff028be6</color>
+    <color name="theme_blue_gray">#ff199bf1</color>
+    <color name="text_black">#ff333333</color>
+    <color name="background_tab_pressed">#6633B5E5</color>
+    <color name="text_gray">#7A7F85</color>
+    <color name="app_black_light">#666666</color>
+
+
+    <color name="transparent">#00000000</color>
+    <color name="color_scheme_2_1">#6DCAEC</color>
+    <color name="color_scheme_2_2">#33B5E5</color>
+    <color name="color_scheme_2_3">#24ADDE</color>
+    <color name="color_scheme_2_4">#16A5D7</color>
+
+    <color name="common_divider_color">@color/color_divider</color>
+
+    <color name="app_title_bar_color">#f7f8f8</color>
+
+    <color name="color_line">#eaeaea</color>
+
+
+    <color name="green">#FF99CC00</color>
+    <color name="blue">#FF33B5E5</color>
+
+    <color name="black_title">#FF343434</color>
+
+    <!--弹窗二级标题颜色-->
+    <color name="color_hint_tips">#808080</color>
+
+
+    <color name="app_base_bg_color">#F1F1F1</color>
+    <color name="app_base_color">#FFFF4444</color>
+    <color name="we_chat_bg_grey">#eaeaea</color>
+
+</resources>
