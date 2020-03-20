@@ -1,8 +1,7 @@
 package com.bee.wanandroidkotlin.ui
 
 import android.content.Intent
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.bee.baselibrary.ui.BaseActivity
 import com.bee.wanandroidkotlin.MainActivity
 
 /**
@@ -12,9 +11,13 @@ import com.bee.wanandroidkotlin.MainActivity
  * @date:  2020/3/19
  * @Description:
  */
-class SplashActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+class SplashActivity : BaseActivity() {
+    override fun getContentLayoutId(): Int = 0
+
+    override fun initView() {
+    }
+
+    override fun initData(intent: Intent?) {
         startActivity(Intent(this, MainActivity::class.java))
     }
 
