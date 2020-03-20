@@ -1,9 +1,7 @@
 package com.bee.baselibrary.utils
 
-import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import java.lang.Exception
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -12,7 +10,7 @@ import kotlin.reflect.KProperty
  */
 class Preference<T>(private val key: String, private var value: T) : ReadWriteProperty<Any?, T> {
     companion object {
-        lateinit var spInstance: SharedPreferences
+       private lateinit var spInstance: SharedPreferences
 
         fun initContext(context: Context) {
             spInstance = context.applicationContext.getSharedPreferences(

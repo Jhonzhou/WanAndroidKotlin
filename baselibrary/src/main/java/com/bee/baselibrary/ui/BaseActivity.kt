@@ -1,6 +1,7 @@
 package com.bee.baselibrary.ui
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.DrawableRes
@@ -15,13 +16,21 @@ import kotlinx.android.synthetic.main.layout_common_title.*
  * 基类activity
  */
 abstract class BaseActivity : AppCompatActivity() {
-    private lateinit var toolBarBuilder: CommonToolBarBuilder
+    protected lateinit var toolBarBuilder: CommonToolBarBuilder
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        beforeSetContent()
         initRootView()
         initView()
         initListener()
         initData(intent)
+    }
+
+    protected open fun beforeSetContent() {
+        //沉侵式状态栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
     }
 
     override fun onNewIntent(intent: Intent?) {

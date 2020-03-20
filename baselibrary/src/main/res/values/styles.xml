@@ -8,7 +8,6 @@
     <style name="Base.Activity.Style" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:dropDownSpinnerStyle">@style/SpinnerStyle</item>
         <item name="android:textColorPrimary">@color/color_text_primary</item>
-
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorAccent">@color/color_accent</item>
