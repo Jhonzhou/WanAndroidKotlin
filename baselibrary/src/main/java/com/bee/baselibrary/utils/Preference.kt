@@ -10,7 +10,7 @@ import kotlin.reflect.KProperty
  */
 class Preference<T>(private val key: String, private var value: T) : ReadWriteProperty<Any?, T> {
     companion object {
-       private lateinit var spInstance: SharedPreferences
+        private lateinit var spInstance: SharedPreferences
 
         fun initContext(context: Context) {
             spInstance = context.applicationContext.getSharedPreferences(

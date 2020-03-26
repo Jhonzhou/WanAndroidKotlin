@@ -6,13 +6,17 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
     defaultConfig {
         applicationId "com.bee.wanandroidkotlin"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -27,5 +31,20 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.dependencies.kotlin_stdlib
 
+
+    api rootProject.ext.dependencies.multidex
+
+    api rootProject.ext.dependencies.glide
+    api rootProject.ext.dependencies.gson
+
+    api rootProject.ext.dependencies.retrofit
+    api rootProject.ext.dependencies.retrofit_converter_gson
+//    api rootProject.ext.dependencies.retrofit_adapter_rxjava
+    api rootProject.ext.dependencies.kotlin_coroutines
+    api rootProject.ext.dependencies.kotlin_coroutines_android
+
+//    api rootProject.ext.dependencies.okhttp
+    api rootProject.ext.dependencies.okhttp_logging_interceptor
+    api rootProject.ext.dependencies.rxjava
     api project(':baselibrary')
 }

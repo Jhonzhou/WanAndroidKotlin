@@ -1,7 +1,7 @@
 package com.bee.wanandroidkotlin.ui
 
 import android.content.Intent
-import com.bee.baselibrary.ui.BaseActivity
+import com.bee.baselibrary.base.BaseActivity
 
 /**
  *

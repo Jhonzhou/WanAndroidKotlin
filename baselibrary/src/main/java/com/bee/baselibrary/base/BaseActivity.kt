@@ -1,5 +1,6 @@
-package com.bee.baselibrary.ui
+package com.bee.baselibrary.base
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -8,6 +9,8 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import com.bee.baselibrary.R
+import com.bee.baselibrary.ui.CommonToolBarBuilder
+import com.bee.baselibrary.view.dialog.TipDialog
 import kotlinx.android.synthetic.main.base_fragment_and_activity.*
 import kotlinx.android.synthetic.main.common_error_page.*
 import kotlinx.android.synthetic.main.layout_common_title.*
@@ -17,6 +20,7 @@ import kotlinx.android.synthetic.main.layout_common_title.*
  */
 abstract class BaseActivity : AppCompatActivity() {
     protected lateinit var toolBarBuilder: CommonToolBarBuilder
+    protected var loadingDialog: TipDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         beforeSetContent()
@@ -33,6 +37,8 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
+    fun getMActivity(): Activity = this
+
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         initData(intent)
@@ -44,6 +50,27 @@ abstract class BaseActivity : AppCompatActivity() {
         val contentLayoutId = getContentLayoutId()
         if (contentLayoutId > 0) {
             layoutInflater.inflate(contentLayoutId, baseContainer)
+        }
+    }
+
+    fun showLoading(content: String = "") {
+
+        if (loadingDialog == null) {
+            loadingDialog = TipDialog.Builder(this)
+                    .setIconType(TipDialog.Builder.ICON_TYPE_LOADING)
+                    .setTipWord(content)
+                    .create()
+            loadingDialog?.setCancelable(true)
+            loadingDialog?.setCanceledOnTouchOutside(true)
+        }
+        loadingDialog?.show()
+    }
+
+    fun hideLoadingDialog() {
+        loadingDialog?.apply {
+            if (isShowing) {
+                dismiss()
+            }
         }
     }
 

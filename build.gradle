@@ -18,7 +18,7 @@ buildscript {
         maven {url 'http://developer.huawei.com/repo/'}
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.1'
+        classpath 'com.android.tools.build:gradle:3.4.2'
         classpath rootProject.ext.dependencies.kotlin_plugin
     }
 }
@@ -32,8 +32,6 @@ allprojects {
         maven {
             url 'https://jitpack.io'
         }
-        jcenter()
-        google()
 
         maven { url 'https://dl.google.com/dl/android/maven2/' }
 

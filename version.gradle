@@ -16,24 +16,29 @@ ext {
             mavenUploadVersionName = '1.3.3-SNAPSHOT'
     ]
     versions = [
-            module          : '1.3.3',
-            okhttp          : '3.4.1',
-            retrofit        : '2.2.0',
-            lifecycleVersion: "1.1.1",
-            kotlin_version  : '1.3.31',
-            glide           : '4.9.0',
+            module                                       : '1.3.3',
+            okhttp                                       : '3.4.1',
+            retrofit                                     : '2.7.2',
+            retrofit2_converter_kotlin_coroutines_version: '1.0.0',
+
+            lifecycleVersion                             : "1.1.1",
+            kotlin_version                               : '1.3.31',
+            glide                                        : '4.9.0',
+            rxjava                                       : '3.0.0',
     ]
 
     dependencies = [
             appcompact_androidx         : 'androidx.appcompat:appcompat:1.1.0',
             core_androidx               : 'androidx.core:core-ktx:1.2.0',
             constraintlayout_androidx   : 'androidx.constraintlayout:constraintlayout:1.1.3',
+            android_material            : 'com.google.android.material:material:1.1.0',
 
             "multidex"                  : "com.android.support:multidex:1.0.0",
 
             "kotlin_stdlib"             : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin_version}",
             "kotlin_plugin"             : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin_version}",
-
+            kotlin_coroutines           : "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5",
+            kotlin_coroutines_android   : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5",
 
 
             "junit"                     : 'junit:junit:4.12',
@@ -43,23 +48,25 @@ ext {
 
 
 
-            LifeExtensions              : "android.arch.lifecycle:extensions:$versions.lifecycleVersion",
-            LifeViewModle               : "android.arch.lifecycle:viewmodel:$versions.lifecycleVersion",
-            LifeCommon                  : "android.arch.lifecycle:common:$versions.lifecycleVersion",
-            LifeRuntime                 : "android.arch.lifecycle:runtime:$versions.lifecycleVersion",
-            LifeLiveData                : "android.arch.lifecycle:livedata-core:$versions.lifecycleVersion",
-            LifeAnnotationProcessor     : "android.arch.lifecycle:compiler:$versions.lifecycleVersion",
+//            LifeExtensions              : "android.arch.lifecycle:extensions:$versions.lifecycleVersion",
+//            LifeViewModle               : "android.arch.lifecycle:viewmodel:$versions.lifecycleVersion",
+//            LifeCommon                  : "android.arch.lifecycle:common:$versions.lifecycleVersion",
+//            LifeRuntime                 : "android.arch.lifecycle:runtime:$versions.lifecycleVersion",
+//            LifeLiveData                : "android.arch.lifecycle:livedata-core:$versions.lifecycleVersion",
+//            LifeAnnotationProcessor     : "android.arch.lifecycle:compiler:$versions.lifecycleVersion",
 
             "gson"                      : "com.google.code.gson:gson:2.6.2",
 
             "retrofit"                  : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
-            "retrofit-converter-gson"   : "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
-            "retrofit-adapter-rxjava"   : "com.squareup.retrofit2:adapter-rxjava:${versions.retrofit}",
+            "retrofit_converter_gson"   : "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
+            "retrofit_adapter_rxjava"   : "com.squareup.retrofit2:adapter-rxjava:${versions.retrofit}",
             retrofit_converter_scalars  : "com.squareup.retrofit2:converter-scalars:${versions.retrofit}",
 
+
+            rxjava                      : "io.reactivex.rxjava3:rxjava:${versions.rxjava}",
+
             "okhttp"                    : "com.squareup.okhttp3:okhttp:${versions.okhttp}",
-            "okhttp-logging-interceptor": "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}",
-            "orhanobut-logger"          : "com.github.orhanobut:logger:1.12",
+            "okhttp_logging_interceptor": "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}",
 
 
             //图片库glide

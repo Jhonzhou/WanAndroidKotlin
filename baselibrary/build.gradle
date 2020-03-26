@@ -12,9 +12,11 @@ apply from: project.rootProject.uri('module.gradle')
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    api rootProject.ext.dependencies.android_material
     api rootProject.ext.dependencies.appcompact_androidx
     api rootProject.ext.dependencies.core_androidx
     api rootProject.ext.dependencies.constraintlayout_androidx
+
 
     implementation rootProject.ext.dependencies.support_test_runner
     implementation rootProject.ext.dependencies.espresso_core

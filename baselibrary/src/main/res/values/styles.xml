@@ -83,4 +83,12 @@
         <item name="arrowHeadLength">8dp</item>
     </style>
 
+    <!-- 设置全屏-->
+    <style name="NoActionBar.Fullscreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+
 </resources>
