@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.layout_common_title.*
  */
 abstract class BaseActivity : AppCompatActivity() {
     protected lateinit var toolBarBuilder: CommonToolBarBuilder
-    protected var loadingDialog: TipDialog? = null
+    private var loadingDialog: TipDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         beforeSetContent()
