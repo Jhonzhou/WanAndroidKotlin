@@ -1,13 +1,12 @@
 package com.bee.baselibrary.base
 
-import android.app.Activity
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.bee.baselibrary.R
 import com.bee.baselibrary.ui.CommonToolBarBuilder
 import com.bee.baselibrary.view.dialog.TipDialog
@@ -16,48 +15,49 @@ import kotlinx.android.synthetic.main.common_error_page.*
 import kotlinx.android.synthetic.main.layout_common_title.*
 
 /**
- * 基类activity
+ *
+ * 基类Fragment
+ * @author: JhonZhou
+ * @date:  2020/3/30
+ * @Description:
  */
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseFragment : Fragment() {
     protected lateinit var toolBarBuilder: CommonToolBarBuilder
     private var loadingDialog: TipDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        beforeSetContent()
-        initRootView()
+        beforeCreateViewContent()
+    }
+
+    protected open fun beforeCreateViewContent() {
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val baseView = layoutInflater.inflate(R.layout.base_fragment_and_activity, container, false)
+        initRootView(baseView)
         initView()
+        return baseView
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         initListener()
-        initData(intent)
+        initData(arguments)
     }
 
-    protected open fun beforeSetContent() {
-        //沉侵式状态栏
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        }
-    }
-
-    fun getMActivity(): Activity = this
-
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        initData(intent)
-    }
-
-    private fun initRootView() {
-        setContentView(R.layout.base_fragment_and_activity)
-        toolBarBuilder = CommonToolBarBuilder(this, common_toolbar)
+    private fun initRootView(rootView: View) {
+        toolBarBuilder = CommonToolBarBuilder(activity!!, common_toolbar)
         val contentLayoutId = getContentLayoutId()
         if (contentLayoutId > 0) {
             layoutInflater.inflate(contentLayoutId, baseContainer)
         }
+
     }
 
     fun showLoading(content: String = "") {
-
         if (loadingDialog == null) {
-            loadingDialog = TipDialog.Builder(this)
+            loadingDialog = TipDialog.Builder(context!!)
                     .setIconType(TipDialog.Builder.ICON_TYPE_LOADING)
                     .setTipWord(content)
                     .create()
@@ -89,13 +89,12 @@ abstract class BaseActivity : AppCompatActivity() {
     /**
      * 初始化数据
      */
-    abstract fun initData(intent: Intent?)
+    abstract fun initData(savedInstanceState: Bundle?)
 
     /**
      * 初始化监听
      */
     open fun initListener() {
-
     }
 
 

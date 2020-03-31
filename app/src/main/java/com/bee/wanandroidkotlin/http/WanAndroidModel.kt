@@ -1,9 +1,9 @@
 package com.bee.wanandroidkotlin.http
 
 import com.bee.baselibrary.base.BaseDataModel
+import com.bee.baselibrary.utils.tryCatch
 import com.bee.wanandroidkotlin.http.beans.LoginResponseBean
 import com.bee.wanandroidkotlin.http.beans.ResponseResult
-import com.bee.wanandroidkotlin.utils.tryCatch
 import com.google.gson.JsonParseException
 import kotlinx.coroutines.*
 import retrofit2.HttpException
@@ -41,15 +41,6 @@ class WanAndroidModel : BaseDataModel() {
     companion object {
         private val service: WanAndroidService = RetrofitUtils.getService(WanAndroidService::class.java)
         private val jobMap: HashMap<WanAndroidModel, ArrayList<Job>> = hashMapOf()
-
-        private fun <T> handleException(throwable: Throwable, clazz: Class<T>? = null): ResponseResult<T> {
-            val errorMsg = if (throwable.message == null) {
-                "网络请求失败,请稍后再试"
-            } else {
-                throwable.message.toString()
-            }
-            return ResponseResult(ResponseResult.CODE_EXCEPTION, errorMsg)
-        }
 
         private fun <T> handleResponse(response: Response<ResponseResult<T>>): ResponseResult<T> {
             return if (response.isSuccessful) {
@@ -96,16 +87,16 @@ class WanAndroidModel : BaseDataModel() {
         list = list ?: arrayListOf()
         list.add(job)
         jobMap[this] = list
+        jobMap.remove(this)
     }
 
-    suspend fun login(username: String, password: String): ResponseResult<LoginResponseBean> {
+    private suspend fun <T> withHttpContext(block: () -> ResponseResult<T>): ResponseResult<T> {
         val job = GlobalScope.async {
             withContext(Dispatchers.IO) {
                 tryCatchAndResult {
-                    val loginCall = service.login(username, password)
-                    val response = loginCall.execute()
-                    handleResponse(response)
+                    block()
                 }
+
             }
         }
         addToCancelMap(job)
@@ -113,19 +104,20 @@ class WanAndroidModel : BaseDataModel() {
         return job.getCompleted()
     }
 
-    suspend fun register(username: String, password: String, rePassword: String): ResponseResult<LoginResponseBean> {
-        val job = GlobalScope.async {
-            withContext(Dispatchers.IO) {
-                tryCatchAndResult {
-                    val registerCall = service.register(username, password, rePassword)
-                    val response = registerCall.execute()
-                    handleResponse(response)
-                }
-            }
+    suspend fun login(username: String, password: String): ResponseResult<LoginResponseBean> {
+        return withHttpContext {
+            val loginCall = service.login(username, password)
+            val response = loginCall.execute()
+            handleResponse(response)
         }
-        addToCancelMap(job)
-        job.join()
-        return job.getCompleted()
+    }
+
+    suspend fun register(username: String, password: String, rePassword: String): ResponseResult<LoginResponseBean> {
+        return withHttpContext {
+            val registerCall = service.register(username, password, rePassword)
+            val response = registerCall.execute()
+            handleResponse(response)
+        }
     }
 
 }

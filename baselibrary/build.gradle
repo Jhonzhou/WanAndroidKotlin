@@ -1,5 +1,5 @@
 ext {
-    isModule =project.rootProject.baseLibrary.toBoolean()
+    isModule = project.rootProject.baseLibrary.toBoolean()
     versionCode = 1
     versionName = "1.0"
     artifactId = "baselibrary"
@@ -12,10 +12,16 @@ apply from: project.rootProject.uri('module.gradle')
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    api rootProject.ext.dependencies.lifecycle_extensions
+
     api rootProject.ext.dependencies.android_material
     api rootProject.ext.dependencies.appcompact_androidx
     api rootProject.ext.dependencies.core_androidx
+    api rootProject.ext.dependencies.refresh_androidx
     api rootProject.ext.dependencies.constraintlayout_androidx
+
+    api rootProject.ext.dependencies.kotlin_coroutines
+    api rootProject.ext.dependencies.kotlin_coroutines_android
 
 
     implementation rootProject.ext.dependencies.support_test_runner

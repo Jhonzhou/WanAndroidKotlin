@@ -1,10 +1,11 @@
-package com.bee.wanandroidkotlin.ui
+package com.bee.wanandroidkotlin.ui.activity
 
 import android.content.Intent
 import android.text.TextUtils
 import android.view.View
 import com.bee.baselibrary.base.BaseActivity
 import com.bee.baselibrary.utils.Preference
+import com.bee.baselibrary.utils.launchMain
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.constants.Constants
 import com.bee.wanandroidkotlin.http.WanAndroidModel
@@ -12,9 +13,6 @@ import com.bee.wanandroidkotlin.utils.ToastAlone
 import kotlinx.android.synthetic.main.activity_login.etName
 import kotlinx.android.synthetic.main.activity_login.etPassword
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 /**
  *
@@ -64,7 +62,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
                     ToastAlone.showToast("两次密码不一致")
                     return
                 }
-                GlobalScope.launch(Dispatchers.Main) {
+                launchMain {
                     showLoading()
                     val responseResult = WanAndroidModel().register(name.toString(), password.toString(), rePassword.toString())
                     responseResult.handlerResult {

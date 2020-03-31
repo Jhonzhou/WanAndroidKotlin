@@ -3,6 +3,7 @@
     <style name="AppTheme.Launcher" parent="NoActionBar.Fullscreen">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
-        <item name="android:windowBackground">@drawable/mt</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowDisablePreview">true</item>
     </style>
 </resources>

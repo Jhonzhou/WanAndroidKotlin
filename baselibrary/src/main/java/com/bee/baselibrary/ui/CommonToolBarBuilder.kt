@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.appcompat.widget.Toolbar
 import com.bee.baselibrary.R
 
@@ -15,15 +16,13 @@ import com.bee.baselibrary.R
  * @author zhouxiaojun
  * @date  2019/6/17
  */
-class CommonToolBarBuilder(activity: Activity, toolbar: Toolbar) {
+class CommonToolBarBuilder(private var mActivity: Activity, private var toolbar: Toolbar) {
     private val defaultBackIconResId = R.drawable.ic_back
 
     private var tvCenterTitle: TextView? = null
     private var tvRight: TextView? = null
     private var ivRight: ImageView? = null
     private var ivRightTwo: ImageView? = null
-    private var mActivity: Activity = activity
-    private var toolbar: Toolbar = toolbar
 
     init {
 
@@ -37,6 +36,20 @@ class CommonToolBarBuilder(activity: Activity, toolbar: Toolbar) {
         }
     }
 
+    /**
+     * 显示公共的title
+     */
+    fun showCommonBaseTitle() {
+        toolbar.visibility = View.VISIBLE
+    }
+
+    /**
+     * 隐藏公共标题
+     */
+    fun hideCommonBaseTitle() {
+        toolbar.visibility = View.GONE
+    }
+
     fun hideBackIcon(): CommonToolBarBuilder {
         toolbar.navigationIcon = null
         return this
@@ -44,6 +57,11 @@ class CommonToolBarBuilder(activity: Activity, toolbar: Toolbar) {
 
     fun setBackCallBack(clickListener: View.OnClickListener?): CommonToolBarBuilder {
         toolbar.setNavigationOnClickListener(clickListener)
+        return this
+    }
+
+    fun setTitle(@StringRes titleRes: Int, @ColorInt textColor: Int = -1, clickListener: View.OnClickListener? = null): CommonToolBarBuilder {
+        setTitle(mActivity.resources.getString(titleRes), textColor, clickListener)
         return this
     }
 

@@ -8,14 +8,14 @@
     <application
         android:name=".WanAndroidKotlinApplication"
         android:allowBackup="false"
-        android:icon="@drawable/mt"
+        android:icon="@drawable/ic_logo_blue"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/activity_style"
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".ui.activity.SplashActivity"
             android:theme="@style/AppTheme.Launcher"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait">
@@ -26,15 +26,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui.activity.LoginActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.RegisterActivity"
+            android:name=".ui.activity.RegisterActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait" />
     </application>

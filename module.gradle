@@ -13,7 +13,7 @@ if (isModule) {
     apply plugin: 'com.android.application'
 }
 
-def version_code = 1.0
+def version_code = 1
 if (project.ext.has("versionCode")) {
     version_code = project.ext.getProperty("versionCode") as Integer
 }
