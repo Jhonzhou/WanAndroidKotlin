@@ -1,7 +1,8 @@
 package com.bee.baselibrary.base
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 
 /**
  *
@@ -10,12 +11,7 @@ import androidx.lifecycle.ViewModel
  * @date:  2020/3/26
  * @Description:
  */
-open class BaseViewModel<T : BaseDataModel> : ViewModel() {
-    var httpModel: T? = null
+abstract class BaseViewModel(application: Application) : AndroidViewModel(application) {
     protected val loadingType: MutableLiveData<Boolean> = MutableLiveData()
-    override fun onCleared() {
-        super.onCleared()
-        httpModel?.onDestroy()
-    }
-    
+
 }

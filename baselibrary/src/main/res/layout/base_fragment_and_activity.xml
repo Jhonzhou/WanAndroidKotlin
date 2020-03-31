@@ -8,12 +8,6 @@
 
     <include layout="@layout/layout_common_title" />
 
-    <View
-        android:id="@+id/v_title_divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/color_common_bg" />
-
     <FrameLayout
         android:id="@+id/baseContainer"
         android:layout_width="match_parent"

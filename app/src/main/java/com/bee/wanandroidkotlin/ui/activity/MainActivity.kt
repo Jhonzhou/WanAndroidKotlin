@@ -26,14 +26,13 @@ class MainActivity : BaseActivity() {
     override fun initView() {
         toolBarBuilder.hideCommonBaseTitle()
         bottomNavigationView.itemIconTintList = null
-
-
+        showFragment(0)
     }
 
     override fun initListener() {
         super.initListener()
         bottomNavigationView.setOnNavigationItemSelectedListener {
-            var position = 0
+            val position: Int
             when (it.itemId) {
                 R.id.navigation_home -> {
                     position = 0
@@ -66,11 +65,16 @@ class MainActivity : BaseActivity() {
             return
         }
         supportFragmentManager.beginTransaction().apply {
-            currentFragment?.let { current ->
-                if (current.isHidden) {
-                    this.hide(current)
+            currentFragment?.let {
+                if (!it.isHidden) {
+                    hide(it)
                 }
             }
+            if (!selectFragment.isAdded) {
+               add(R.id.flContainer, selectFragment)
+            }
+            show(selectFragment)
+            currentFragment = selectFragment
         }.commit()
     }
 

@@ -19,7 +19,6 @@ class HomeGroundFragment : BaseFragment() {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }

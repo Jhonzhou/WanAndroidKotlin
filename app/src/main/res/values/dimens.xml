@@ -9,5 +9,5 @@
     <dimen name="dividing_line">30dp</dimen>
     <dimen name="set_padding">26dp</dimen>
     <dimen name="padding_left">15dp</dimen>
-    <dimen name="padding_right">15</dimen>
+    <dimen name="padding_right">15dp</dimen>
 </resources>

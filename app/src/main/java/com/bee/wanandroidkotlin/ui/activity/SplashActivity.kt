@@ -5,6 +5,7 @@ import com.bee.baselibrary.base.BaseActivity
 import com.bee.baselibrary.utils.Preference
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.constants.Constants
+import kotlinx.android.synthetic.main.activity_splash.*
 
 /**
  *
@@ -21,6 +22,15 @@ class SplashActivity : BaseActivity() {
 
     override fun initData(intent: Intent?) {
         toolBarBuilder.hideCommonBaseTitle()
+    }
+
+    override fun initListener() {
+        super.initListener()
+        tvTitle.setOnClickListener{
+            openNext()
+        }
+    }
+    private fun openNext(){
         val isLogin by Preference(Constants.SP.SP_LOGIN, false)
         if (isLogin) {
             startActivity(Intent(this, MainActivity::class.java))
@@ -28,7 +38,5 @@ class SplashActivity : BaseActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
         }
         finish()
-
     }
-
 }

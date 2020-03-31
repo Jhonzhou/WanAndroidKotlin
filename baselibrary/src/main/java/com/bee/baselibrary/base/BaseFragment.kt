@@ -1,6 +1,8 @@
 package com.bee.baselibrary.base
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,19 +27,18 @@ abstract class BaseFragment : Fragment() {
     protected lateinit var toolBarBuilder: CommonToolBarBuilder
     private var loadingDialog: TipDialog? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        beforeCreateViewContent()
-    }
 
     protected open fun beforeCreateViewContent() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val baseView = layoutInflater.inflate(R.layout.base_fragment_and_activity, container, false)
-        initRootView(baseView)
-        initView()
-        return baseView
+        beforeCreateViewContent()
+        return layoutInflater.inflate(R.layout.base_fragment_and_activity, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initRootView(view)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -52,7 +53,7 @@ abstract class BaseFragment : Fragment() {
         if (contentLayoutId > 0) {
             layoutInflater.inflate(contentLayoutId, baseContainer)
         }
-
+        initView()
     }
 
     fun showLoading(content: String = "") {
@@ -109,6 +110,46 @@ abstract class BaseFragment : Fragment() {
         cl_error_page.visibility = View.VISIBLE
         tv_error_hint.text = errorContent
         iv_error_content.setImageResource(errorImage)
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        Log.e(javaClass.name,"onStart")
+    }
+    override fun onResume() {
+        super.onResume()
+        Log.e(this.javaClass.name,"onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.e(this.javaClass.name,"onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e(this.javaClass.name,"onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e(this.javaClass.name,"onDestroy")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.e(this.javaClass.name,"onDetach")
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.e(this.javaClass.name,"onAttach")
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.e(this.javaClass.name,"onCreate")
     }
 
 }

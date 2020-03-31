@@ -25,6 +25,10 @@ object HttpConstants {
      * 首页数据
      */
     const val HOME_LIST = "/article/list/{page}/json"
+    /**
+     * 首页banner
+     */
+    const val HOME_BANNER = "/banner/json"
 
 
 }

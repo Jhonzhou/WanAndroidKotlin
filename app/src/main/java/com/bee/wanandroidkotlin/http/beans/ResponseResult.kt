@@ -20,14 +20,14 @@ data class ResponseResult<T>(var errorCode: Int, var errorMsg: String?, var data
     /**
      * 判断网络请求是否成功
      */
-    private fun isSuccessful(): Boolean = errorCode == CODE_SUCCESS
+     fun isSuccessful(): Boolean = errorCode == CODE_SUCCESS
 
     /**
      * 是否是发生异常
      */
-    private fun isException(): Boolean = errorCode == CODE_EXCEPTION
+     fun isException(): Boolean = errorCode == CODE_EXCEPTION
 
-    private fun isCancel(): Boolean = errorCode == CODE_CANCEL
+     fun isCancel(): Boolean = errorCode == CODE_CANCEL
 
     fun handlerResult(
             errorBlock: (result: ResponseResult<T>) -> Unit = {
