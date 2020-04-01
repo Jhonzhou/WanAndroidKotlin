@@ -1,5 +1,6 @@
 package com.bee.wanandroidkotlin.ui.adapter.delegate
 
+import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -27,8 +28,15 @@ class HomePageListDelegate : ItemViewDelegate<HomePageListResponseData> {
         val tvTop = holder.getView<TextView>(R.id.tvTop)
         val tvSuperChapterName = holder.getView<TextView>(R.id.tvSuperChapterName)
         val ivCollect = holder.getView<ImageView>(R.id.ivCollect)
-
-        tvUserName.text = item.author?: item.shareUser ?: ""
+        var userName = ""
+        if (TextUtils.isEmpty(item.author)) {
+            userName = item.author!!
+        } else {
+            if (TextUtils.isEmpty(item.shareUser)) {
+                userName = item.shareUser!!
+            }
+        }
+        tvUserName.text = userName
         tvTime.text = item.niceDate ?: ""
         tvTitle.text = item.title ?: ""
         tvTop.visibility = if (item.type == 0) {

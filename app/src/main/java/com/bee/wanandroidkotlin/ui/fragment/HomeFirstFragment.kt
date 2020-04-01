@@ -9,6 +9,7 @@ import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.ui.HomeFirstViewModel
 import com.bee.wanandroidkotlin.ui.adapter.HomeBannerAdapter
 import com.bee.wanandroidkotlin.ui.adapter.HomePageListAdapter
+import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.fragment_home_first.*
 
 /**
@@ -44,8 +45,10 @@ class HomeFirstFragment : BaseFragment() {
         srlRefresh.isVerticalScrollBarEnabled = true
         srlRefresh.setOnRefreshListener {
             mViewMode.reLoadHomePageList()
-
         }
+        ablLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            srlRefresh.isEnabled = verticalOffset >= 0
+        })
     }
 
     override fun initData(savedInstanceState: Bundle?) {

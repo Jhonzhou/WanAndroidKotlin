@@ -8,7 +8,6 @@ import com.bee.wanandroidkotlin.http.WanAndroidModel
 import com.bee.wanandroidkotlin.http.beans.HomeBannerResponse
 import com.bee.wanandroidkotlin.http.beans.HomePageListResponseData
 import com.bee.wanandroidkotlin.http.beans.ResponseResult
-import kotlinx.coroutines.delay
 
 /**
  *
@@ -65,7 +64,6 @@ class HomeFirstViewModel(application: Application) : BaseViewModel(application) 
 
     private suspend fun getHomePageList(): ArrayList<HomePageListResponseData> {
         val resultList: ArrayList<HomePageListResponseData> = arrayListOf()
-        delay(5000L)
         val homePageList = httpModel.getHomePageList(currentPage)
         homePageList.handlerResult {
             it.data?.apply {

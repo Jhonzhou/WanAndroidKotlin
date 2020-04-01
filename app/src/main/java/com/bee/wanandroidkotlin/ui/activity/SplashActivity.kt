@@ -26,6 +26,7 @@ class SplashActivity : BaseActivity() {
 
     override fun initListener() {
         super.initListener()
+        openNext()
         tvTitle.setOnClickListener{
             openNext()
         }

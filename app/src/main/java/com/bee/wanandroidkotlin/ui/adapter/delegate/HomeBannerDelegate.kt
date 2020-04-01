@@ -1,7 +1,7 @@
 package com.bee.wanandroidkotlin.ui.adapter.delegate
 
-import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import com.bee.baselibrary.adapter.BaseViewHolder
 import com.bee.baselibrary.adapter.ItemViewDelegate
 import com.bee.wanandroidkotlin.R
@@ -23,11 +23,8 @@ class HomeBannerDelegate : ItemViewDelegate<HomeBannerResponse> {
 
     override fun convert(holder: BaseViewHolder, item: HomeBannerResponse, position: Int) {
         val bannerImage = holder.getView<ImageView>(R.id.bannerImage)
-        val bannerTitle = holder.getView<Button>(R.id.tvBannerTitle)
-        bannerTitle.text = "${item.title}我是副标题"
-//        bannerTitle.visibility = View.VISIBLE
-//        bannerTitle.gravity=Gravity.CENTER_VERTICAL
-//        bannerTitle.setPadding(DensityUtils.dp2px(15F),0,DensityUtils.dp2px(15F),0)
+        val bannerTitle = holder.getView<TextView>(R.id.tvBannerTitle)
+        bannerTitle.text = item.title
         Glide.with(bannerImage).load(item.imagePath).into(bannerImage)
 
     }
