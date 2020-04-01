@@ -3,6 +3,7 @@ package com.bee.wanandroidkotlin.ui.fragment
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bee.baselibrary.base.BaseFragment
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.ui.HomeFirstViewModel
@@ -28,8 +29,8 @@ class HomeFirstFragment : BaseFragment() {
 
     override fun initView() {
         toolBarBuilder.hideCommonBaseTitle()
-//        toolBarBuilder.setTitle(R.string.s_home)
         vpBanner.adapter = bannerAdapter
+        rvContent.layoutManager = LinearLayoutManager(activity)
     }
 
     override fun initListener() {
