@@ -38,13 +38,12 @@
     <color name="color_scheme_2_3">#24ADDE</color>
     <color name="color_scheme_2_4">#16A5D7</color>
 
-    <color name="common_divider_color">@color/color_divider</color>
-
     <color name="app_title_bar_color">#f7f8f8</color>
 
     <color name="color_line">#eaeaea</color>
 
 
+    <color name="red">#ff0000</color>
     <color name="green">#FF99CC00</color>
     <color name="blue">#FF33B5E5</color>
 

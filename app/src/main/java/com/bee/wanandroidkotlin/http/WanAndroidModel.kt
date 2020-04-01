@@ -6,9 +6,7 @@ import com.bee.wanandroidkotlin.http.WanAndroidModelManager.handleResponse
 import com.bee.wanandroidkotlin.http.WanAndroidModelManager.jobMap
 import com.bee.wanandroidkotlin.http.WanAndroidModelManager.service
 import com.bee.wanandroidkotlin.http.WanAndroidModelManager.tryCatchAndResult
-import com.bee.wanandroidkotlin.http.beans.HomeBannerResponse
-import com.bee.wanandroidkotlin.http.beans.LoginResponseBean
-import com.bee.wanandroidkotlin.http.beans.ResponseResult
+import com.bee.wanandroidkotlin.http.beans.*
 import kotlinx.coroutines.*
 
 /**
@@ -41,6 +39,22 @@ class WanAndroidModel : BaseDataModel() {
             val response = homeBannerCall.execute()
             handleResponse(response)
 
+        }
+    }
+
+    suspend fun getTopList(): ResponseResult<ArrayList<HomePageListResponseData>> {
+        return withHttpContext {
+            val topListCall = service.getTopList()
+            val response = topListCall.execute()
+            handleResponse(response)
+        }
+    }
+
+    suspend fun getHomePageList(page: Int): ResponseResult<HomePageListResponse> {
+        return withHttpContext {
+            val homePageListCall = service.getHomePageList(page)
+            val response = homePageListCall.execute()
+            handleResponse(response)
         }
     }
 

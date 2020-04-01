@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/padding_left"
+    android:paddingLeft="@dimen/padding_left"
+    android:paddingTop="5dp"
+    android:paddingEnd="@dimen/padding_right"
+    android:paddingRight="@dimen/padding_right">
+
+    <TextView
+        android:id="@+id/tvUserName"
+        tools:text="公众号"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/text_2" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        tools:text="2020 01-01 12:30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/text_2" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUserName"
+        android:layout_marginTop="5dp"
+        android:maxLines="2"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_1"
+        tools:text="玩玩Flutter的拖拽 实现一款万能遥控器" />
+
+    <View
+        android:id="@+id/v_center_divider"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_below="@+id/tvTitle" />
+
+    <TextView
+        android:id="@+id/tvTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_center_divider"
+        android:layout_alignStart="@+id/tvTitle"
+        android:layout_alignLeft="@+id/tvTitle"
+        android:layout_marginEnd="@dimen/padding_left"
+        android:layout_marginRight="@dimen/padding_left"
+        android:text="@string/s_top"
+        android:textColor="@color/red"
+        android:textSize="@dimen/text_2"
+        tools:visibility="visible" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_center_divider"
+        android:layout_toStartOf="@+id/ivCollect"
+        android:layout_toLeftOf="@+id/ivCollect"
+        android:layout_toEndOf="@+id/tvTop"
+        android:layout_toRightOf="@+id/tvTop"
+        android:gravity="start"
+        android:maxLines="1"
+        android:id="@+id/tvSuperChapterName"
+        android:textSize="@dimen/text_2"
+        tools:text="fsfsfsfsfw" />
+
+    <ImageView
+        android:id="@+id/ivCollect"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/v_center_divider"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_state_collect"
+        android:layout_marginBottom="5dp"
+        tools:ignore="ContentDescription" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_divider" />
+</RelativeLayout>

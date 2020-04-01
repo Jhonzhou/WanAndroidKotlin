@@ -1,14 +1,9 @@
 package com.bee.wanandroidkotlin.http
 
 import com.bee.wanandroidkotlin.constants.HttpConstants
-import com.bee.wanandroidkotlin.http.beans.HomeBannerResponse
-import com.bee.wanandroidkotlin.http.beans.LoginResponseBean
-import com.bee.wanandroidkotlin.http.beans.ResponseResult
+import com.bee.wanandroidkotlin.http.beans.*
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 /**
  *
@@ -37,6 +32,20 @@ interface WanAndroidService {
                  @Field("repassword") rePassword: String
     ): Call<ResponseResult<LoginResponseBean>>
 
+    /**
+     * 首页banner
+     */
     @GET(HttpConstants.HOME_BANNER)
     fun getHomeBanner(): Call<ResponseResult<List<HomeBannerResponse>>>
+
+    /**
+     * 首页文章列表
+     */
+    @GET(HttpConstants.TOP_LIST)
+    fun getTopList(): Call<ResponseResult<ArrayList<HomePageListResponseData>>>
+    /**
+     * 首页文章列表
+     */
+    @GET(HttpConstants.HOME_LIST)
+    fun getHomePageList(@Path("page") page: Int): Call<ResponseResult<HomePageListResponse>>
 }

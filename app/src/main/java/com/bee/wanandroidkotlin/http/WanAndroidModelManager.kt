@@ -57,6 +57,7 @@ object WanAndroidModelManager {
         } catch (_: CancellationException) {
             ResponseResult(ResponseResult.CODE_CANCEL, "")
         } catch (throwable: Throwable) {
+            throwable.printStackTrace()
             catchBlock(throwable)
         } finally {
 

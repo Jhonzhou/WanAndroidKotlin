@@ -56,7 +56,7 @@ abstract class BaseFragment : Fragment() {
         initView()
     }
 
-    fun showLoading(content: String = "") {
+    fun showLoadingDialog(content: String = "") {
         if (loadingDialog == null) {
             loadingDialog = TipDialog.Builder(context!!)
                     .setIconType(TipDialog.Builder.ICON_TYPE_LOADING)

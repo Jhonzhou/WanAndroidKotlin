@@ -10,37 +10,38 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <!--<androidx.coordinatorlayout.widget.CoordinatorLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<com.google.android.material.appbar.AppBarLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="215dp">-->
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vpBanner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="250dp"
+            android:background="@color/color_common_bg"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-            <com.google.android.material.appbar.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="215dp">
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/vpBanner"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:background="@color/color_common_bg" />
-
-                <!--<com.google.android.material.appbar.CollapsingToolbarLayout-->
-                    <!--app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
-                    <!--app:title=""-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content">-->
+        <!--<com.google.android.material.appbar.CollapsingToolbarLayout-->
+        <!--app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
+        <!--app:title=""-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
 
-                    <!---->
-                <!--</com.google.android.material.appbar.CollapsingToolbarLayout>-->
-            </com.google.android.material.appbar.AppBarLayout>
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <!---->
+        <!--</com.google.android.material.appbar.CollapsingToolbarLayout>-->
+        <!--</com.google.android.material.appbar.AppBarLayout>-->
+        <!--</androidx.coordinatorlayout.widget.CoordinatorLayout>-->
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
+            android:layout_marginBottom="5dp"
+            android:background="@color/white">
 
             <View
                 android:id="@+id/vPlaceHolder"
@@ -80,7 +81,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvContent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </LinearLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
