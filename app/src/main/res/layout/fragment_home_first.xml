@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/srlRefresh"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -37,22 +39,25 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-15dp"
                 android:background="@drawable/home_place_holder_corner"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="5dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp">
 
                     <ImageView
-                        android:id="@+id/iv_article"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:id="@+id/ivArticle"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/padding_left"
                         android:layout_marginLeft="@dimen/padding_left"
-                        android:src="@drawable/ic_article" />
+                        android:padding="8dp"
+                        android:src="@drawable/ic_article"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:id="@+id/tvTitle"
@@ -61,12 +66,24 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/padding_left"
                         android:layout_marginLeft="@dimen/padding_left"
-                        android:layout_toEndOf="@+id/iv_article"
-                        android:layout_toRightOf="@+id/iv_article"
+                        android:layout_toEndOf="@+id/ivArticle"
+                        android:layout_toRightOf="@+id/ivArticle"
                         android:text="文章列表"
                         android:textColor="@color/common_blue"
-                        android:textSize="@dimen/text_1"
+                        android:textSize="@dimen/text_title"
                         android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/ivSearch"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/padding_right"
+                        android:layout_marginRight="@dimen/padding_right"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_home_search" />
                 </RelativeLayout>
 
 

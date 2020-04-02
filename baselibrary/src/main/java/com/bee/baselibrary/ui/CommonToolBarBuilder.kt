@@ -2,6 +2,7 @@ package com.bee.baselibrary.ui
 
 import android.app.Activity
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorInt
@@ -23,9 +24,11 @@ class CommonToolBarBuilder(private var mActivity: Activity, private var toolbar:
     private var tvRight: TextView? = null
     private var ivRight: ImageView? = null
     private var ivRightTwo: ImageView? = null
+    private var flContainer: FrameLayout? = null
 
     init {
 
+        flContainer = toolbar.findViewById(R.id.fl_container)
         tvCenterTitle = toolbar.findViewById(R.id.tv_center_title)
         tvRight = toolbar.findViewById(R.id.tv_right)
         ivRight = toolbar.findViewById(R.id.iv_right)
@@ -41,6 +44,18 @@ class CommonToolBarBuilder(private var mActivity: Activity, private var toolbar:
      */
     fun showCommonBaseTitle() {
         toolbar.visibility = View.VISIBLE
+    }
+
+    fun addView(view: View) {
+        flContainer?.apply {
+            addView(view)
+            visibility = View.VISIBLE
+            tvCenterTitle?.visibility = View.GONE
+            tvRight?.visibility = View.GONE
+            ivRight?.visibility = View.GONE
+            ivRightTwo?.visibility = View.GONE
+        }
+
     }
 
     /**

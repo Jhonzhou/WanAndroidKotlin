@@ -6,12 +6,12 @@ import com.bee.wanandroidkotlin.ui.adapter.delegate.HomePageListDelegate
 
 /**
  *
- *
+ * 文章列表 适配器
  * @author: JhonZhou
  * @date:  2020/4/1
  * @Description:
  */
-class HomePageListAdapter : BaseRvAdapter<HomePageListResponseData>() {
+class ArticleListAdapter : BaseRvAdapter<HomePageListResponseData>() {
     init {
         addDelegate(HomePageListDelegate())
     }

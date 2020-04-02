@@ -1,4 +1,4 @@
-package com.bee.wanandroidkotlin.ui
+package com.bee.wanandroidkotlin.ui.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData

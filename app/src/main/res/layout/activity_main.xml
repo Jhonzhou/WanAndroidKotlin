@@ -16,8 +16,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
         app:itemTextColor="@color/bottom_navigation_item_selector"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/home_bottom_navigation" />

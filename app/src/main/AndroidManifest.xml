@@ -16,9 +16,9 @@
 
         <activity
             android:name=".ui.activity.SplashActivity"
-            android:theme="@style/AppTheme.Launcher"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,6 +35,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.RegisterActivity"
+            android:configChanges="keyboard|screenSize|orientation|layoutDirection"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.SearchActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait" />
     </application>

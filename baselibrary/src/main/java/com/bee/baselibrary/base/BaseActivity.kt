@@ -8,6 +8,7 @@ import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.bee.baselibrary.R
 import com.bee.baselibrary.ui.CommonToolBarBuilder
 import com.bee.baselibrary.view.dialog.TipDialog
@@ -52,6 +53,20 @@ abstract class BaseActivity : AppCompatActivity() {
         if (contentLayoutId > 0) {
             layoutInflater.inflate(contentLayoutId, baseContainer)
         }
+    }
+
+    fun displayFragment(fragment: Fragment, isAddToBack: Boolean = false) {
+        supportFragmentManager.beginTransaction().apply {
+            if (!fragment.isAdded) {
+                add(R.id.baseContainer, fragment)
+                if (isAddToBack) {
+                    addToBackStack(null)
+                }
+            }
+            if (fragment.isHidden) {
+                show(fragment)
+            }
+        }.commit()
     }
 
     fun showLoading(content: String = "") {
