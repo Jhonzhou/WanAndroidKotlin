@@ -42,7 +42,7 @@ class WanAndroidModel : BaseDataModel() {
         }
     }
 
-    suspend fun getTopList(): ResponseResult<ArrayList<HomePageListResponseData>> {
+    suspend fun getTopList(): ResponseResult<ArrayList<ArticleListResponseData>> {
         return withHttpContext {
             val topListCall = service.getTopList()
             val response = topListCall.execute()

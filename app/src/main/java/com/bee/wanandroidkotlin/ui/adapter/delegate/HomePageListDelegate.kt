@@ -7,7 +7,7 @@ import android.widget.TextView
 import com.bee.baselibrary.adapter.BaseViewHolder
 import com.bee.baselibrary.adapter.ItemViewDelegate
 import com.bee.wanandroidkotlin.R
-import com.bee.wanandroidkotlin.http.beans.HomePageListResponseData
+import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
 
 /**
  *
@@ -16,12 +16,12 @@ import com.bee.wanandroidkotlin.http.beans.HomePageListResponseData
  * @date:  2020/4/1
  * @Description:
  */
-class HomePageListDelegate : ItemViewDelegate<HomePageListResponseData> {
+class HomePageListDelegate : ItemViewDelegate<ArticleListResponseData> {
     override fun getItemViewLayoutId(): Int = R.layout.item_home_first_page
 
-    override fun isForViewType(item: HomePageListResponseData, position: Int): Boolean = true
+    override fun isForViewType(item: ArticleListResponseData, position: Int): Boolean = true
 
-    override fun convert(holder: BaseViewHolder, item: HomePageListResponseData, position: Int) {
+    override fun convert(holder: BaseViewHolder, item: ArticleListResponseData, position: Int) {
         val tvUserName = holder.getView<TextView>(R.id.tvUserName)
         val tvTime = holder.getView<TextView>(R.id.tvTime)
         val tvTitle = holder.getView<TextView>(R.id.tvTitle)

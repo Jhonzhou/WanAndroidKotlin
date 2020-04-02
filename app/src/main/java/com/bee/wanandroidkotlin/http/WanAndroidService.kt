@@ -42,7 +42,7 @@ interface WanAndroidService {
      * 首页文章列表
      */
     @GET(HttpConstants.TOP_LIST)
-    fun getTopList(): Call<ResponseResult<ArrayList<HomePageListResponseData>>>
+    fun getTopList(): Call<ResponseResult<ArrayList<ArticleListResponseData>>>
     /**
      * 首页文章列表
      */

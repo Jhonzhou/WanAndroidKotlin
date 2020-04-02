@@ -9,9 +9,9 @@ package com.bee.wanandroidkotlin.http.beans
  */
 data class HomePageListResponse(
         val curPage: Int,
-        val datas: List<HomePageListResponseData>?,
+        val datas: List<ArticleListResponseData>?,
         val offset: Int,
-        val over: Boolean ,
+        val over: Boolean,
         val pageCount: Int,
         val size: Int,
         val total: Int

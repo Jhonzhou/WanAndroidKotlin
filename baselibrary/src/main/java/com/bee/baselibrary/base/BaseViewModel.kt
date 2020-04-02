@@ -12,6 +12,8 @@ import androidx.lifecycle.MutableLiveData
  * @Description:
  */
 abstract class BaseViewModel(application: Application) : AndroidViewModel(application) {
-    protected val loadingType: MutableLiveData<Boolean> = MutableLiveData()
+    val loadingData: MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>()
+    }
 
 }

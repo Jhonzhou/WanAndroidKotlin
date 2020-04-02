@@ -1,7 +1,7 @@
 package com.bee.wanandroidkotlin.ui.adapter
 
 import com.bee.baselibrary.adapter.BaseRvAdapter
-import com.bee.wanandroidkotlin.http.beans.HomePageListResponseData
+import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
 import com.bee.wanandroidkotlin.ui.adapter.delegate.HomePageListDelegate
 
 /**
@@ -11,7 +11,7 @@ import com.bee.wanandroidkotlin.ui.adapter.delegate.HomePageListDelegate
  * @date:  2020/4/1
  * @Description:
  */
-class ArticleListAdapter : BaseRvAdapter<HomePageListResponseData>() {
+class ArticleListAdapter : BaseRvAdapter<ArticleListResponseData>() {
     init {
         addDelegate(HomePageListDelegate())
     }

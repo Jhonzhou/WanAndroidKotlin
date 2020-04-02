@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.bee.baselibrary.base.BaseViewModel
 import com.bee.baselibrary.utils.launchMain
 import com.bee.wanandroidkotlin.http.WanAndroidModel
+import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
 import com.bee.wanandroidkotlin.http.beans.HomeBannerResponse
-import com.bee.wanandroidkotlin.http.beans.HomePageListResponseData
 import com.bee.wanandroidkotlin.http.beans.ResponseResult
 
 /**
@@ -21,11 +21,8 @@ class HomeFirstViewModel(application: Application) : BaseViewModel(application) 
     val bannerData: MutableLiveData<ResponseResult<List<HomeBannerResponse>>> by lazy {
         MutableLiveData<ResponseResult<List<HomeBannerResponse>>>()
     }
-    val loadingData: MutableLiveData<Boolean> by lazy {
-        MutableLiveData<Boolean>()
-    }
-    val homePageListData: MutableLiveData<ArrayList<HomePageListResponseData>> by lazy {
-        MutableLiveData<ArrayList<HomePageListResponseData>>()
+    val homePageListData: MutableLiveData<ArrayList<ArticleListResponseData>> by lazy {
+        MutableLiveData<ArrayList<ArticleListResponseData>>()
     }
     private val httpModel: WanAndroidModel by lazy {
         WanAndroidModel()
@@ -41,7 +38,7 @@ class HomeFirstViewModel(application: Application) : BaseViewModel(application) 
         launchMain {
             loadingData.postValue(true)
             currentPage = 0
-            val topList: ArrayList<HomePageListResponseData> = arrayListOf()
+            val topList: ArrayList<ArticleListResponseData> = arrayListOf()
             val topListResult = httpModel.getTopList()
             topListResult.handlerResult {
                 it.data?.apply {
@@ -62,8 +59,8 @@ class HomeFirstViewModel(application: Application) : BaseViewModel(application) 
         }
     }
 
-    private suspend fun getHomePageList(): ArrayList<HomePageListResponseData> {
-        val resultList: ArrayList<HomePageListResponseData> = arrayListOf()
+    private suspend fun getHomePageList(): ArrayList<ArticleListResponseData> {
+        val resultList: ArrayList<ArticleListResponseData> = arrayListOf()
         val homePageList = httpModel.getHomePageList(currentPage)
         homePageList.handlerResult {
             it.data?.apply {
