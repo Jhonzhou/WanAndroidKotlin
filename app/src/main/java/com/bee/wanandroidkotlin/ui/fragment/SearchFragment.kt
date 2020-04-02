@@ -7,10 +7,13 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bee.baselibrary.base.BaseFragment
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.ui.adapter.ArticleListAdapter
+import com.bee.wanandroidkotlin.ui.viewmodel.SearchViewModel
 import com.bee.wanandroidkotlin.utils.ToastAlone
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.title_search_input_layout.*
@@ -24,6 +27,9 @@ import kotlinx.android.synthetic.main.title_search_input_layout.*
  */
 class SearchFragment : BaseFragment() {
     override fun getContentLayoutId(): Int = R.layout.fragment_search
+    private val mViewModel: SearchViewModel by lazy {
+        ViewModelProvider(this).get(SearchViewModel::class.java)
+    }
     private val mAdapter: ArticleListAdapter by lazy {
         ArticleListAdapter()
     }
@@ -73,11 +79,29 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun doSearch(keyWord: String?) {
-        ToastAlone.showToast(keyWord)
+        mViewModel.search(keyWord)
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-
+        mViewModel.searchResultData.observe(this, Observer {
+            if (it == null || it.isEmpty()) {
+                ToastAlone.showToast("搜索无结果")
+                rvContent.visibility = View.GONE
+                srlRefresh.isEnabled=false
+            } else {
+                mAdapter.setData(it)
+                rvContent.visibility = View.VISIBLE
+                srlRefresh.isEnabled=false
+            }
+        })
+        mViewModel.loadingData.observe(this, Observer {
+            if (it) {
+                showLoadingDialog()
+            } else {
+                srlRefresh.isRefreshing = false
+                hideLoadingDialog()
+            }
+        })
     }
 
 }

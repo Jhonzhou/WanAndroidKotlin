@@ -50,9 +50,17 @@ class WanAndroidModel : BaseDataModel() {
         }
     }
 
-    suspend fun getHomePageList(page: Int): ResponseResult<HomePageListResponse> {
+    suspend fun getHomePageList(page: Int): ResponseResult<ArticlePageListResponse> {
         return withHttpContext {
             val homePageListCall = service.getHomePageList(page)
+            val response = homePageListCall.execute()
+            handleResponse(response)
+        }
+    }
+
+    suspend fun search(page: Int, key: String): ResponseResult<ArticlePageListResponse> {
+        return withHttpContext {
+            val homePageListCall = service.search(page, key)
             val response = homePageListCall.execute()
             handleResponse(response)
         }

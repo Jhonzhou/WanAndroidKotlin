@@ -8,10 +8,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bee.baselibrary.base.BaseFragment
 import com.bee.wanandroidkotlin.R
-import com.bee.wanandroidkotlin.ui.viewmodel.HomeFirstViewModel
 import com.bee.wanandroidkotlin.ui.activity.SearchActivity
 import com.bee.wanandroidkotlin.ui.adapter.ArticleListAdapter
 import com.bee.wanandroidkotlin.ui.adapter.HomeBannerAdapter
+import com.bee.wanandroidkotlin.ui.viewmodel.HomeFirstViewModel
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.fragment_home_first.*
 import kotlin.math.abs
@@ -26,7 +26,7 @@ import kotlin.math.abs
 class HomeFirstFragment : BaseFragment() {
 
     override fun getContentLayoutId(): Int = R.layout.fragment_home_first
-    private val mViewMode: HomeFirstViewModel by lazy {
+    private val mViewModel: HomeFirstViewModel by lazy {
         ViewModelProvider(activity!!).get(HomeFirstViewModel::class.java)
     }
     private val bannerAdapter: HomeBannerAdapter by lazy {
@@ -48,7 +48,7 @@ class HomeFirstFragment : BaseFragment() {
         super.initListener()
         srlRefresh.isVerticalScrollBarEnabled = true
         srlRefresh.setOnRefreshListener {
-            mViewMode.reLoadHomePageList()
+            mViewModel.reLoadHomePageList()
         }
         ablLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             //解决下拉加载的滑动冲突
@@ -76,17 +76,17 @@ class HomeFirstFragment : BaseFragment() {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        mViewMode.bannerData.observe(this, Observer { result ->
+        mViewModel.bannerData.observe(this, Observer { result ->
             result ?: return@Observer
             result.handlerResult {
                 bannerAdapter.setData(it.data)
             }
         })
-        mViewMode.homePageListData.observe(this, Observer { result ->
+        mViewModel.homePageListData.observe(this, Observer { result ->
             result ?: return@Observer
             homePageListAdapter.setData(result)
         })
-        mViewMode.loadingData.observe(this, Observer {
+        mViewModel.loadingData.observe(this, Observer {
             if (it) {
                 showLoadingDialog()
             } else {
@@ -94,8 +94,8 @@ class HomeFirstFragment : BaseFragment() {
                 hideLoadingDialog()
             }
         })
-        mViewMode.reLoadHomePageList()
-        mViewMode.getHomeBanner()
+        mViewModel.reLoadHomePageList()
+        mViewModel.getHomeBanner()
     }
 
 }

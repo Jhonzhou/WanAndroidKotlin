@@ -35,6 +35,8 @@
         android:layout_below="@+id/tvUserName"
         android:layout_marginTop="8dp"
         android:maxLines="2"
+        android:ellipsize="end"
+
         android:textColor="@color/black"
         android:textSize="@dimen/text_1"
         tools:text="玩玩Flutter的拖拽 实现一款万能遥控器" />

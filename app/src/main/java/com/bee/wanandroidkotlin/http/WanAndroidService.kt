@@ -43,9 +43,16 @@ interface WanAndroidService {
      */
     @GET(HttpConstants.TOP_LIST)
     fun getTopList(): Call<ResponseResult<ArrayList<ArticleListResponseData>>>
+
     /**
      * 首页文章列表
      */
     @GET(HttpConstants.HOME_LIST)
-    fun getHomePageList(@Path("page") page: Int): Call<ResponseResult<HomePageListResponse>>
+    fun getHomePageList(@Path("page") page: Int): Call<ResponseResult<ArticlePageListResponse>>
+
+    /**
+     * 搜索
+     */
+    @POST(HttpConstants.SEARCH)
+    fun search(@Path("page") page: Int, @Query("k") key: String): Call<ResponseResult<ArticlePageListResponse>>
 }

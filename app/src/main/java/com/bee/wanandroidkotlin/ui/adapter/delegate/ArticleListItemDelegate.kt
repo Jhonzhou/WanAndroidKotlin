@@ -1,5 +1,6 @@
 package com.bee.wanandroidkotlin.ui.adapter.delegate
 
+import android.text.Html
 import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
@@ -16,8 +17,8 @@ import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
  * @date:  2020/4/1
  * @Description:
  */
-class HomePageListDelegate : ItemViewDelegate<ArticleListResponseData> {
-    override fun getItemViewLayoutId(): Int = R.layout.item_home_first_page
+class ArticleListItemDelegate : ItemViewDelegate<ArticleListResponseData> {
+    override fun getItemViewLayoutId(): Int = R.layout.item_article_item
 
     override fun isForViewType(item: ArticleListResponseData, position: Int): Boolean = true
 
@@ -38,7 +39,7 @@ class HomePageListDelegate : ItemViewDelegate<ArticleListResponseData> {
         }
         tvUserName.text = userName
         tvTime.text = item.niceDate ?: ""
-        tvTitle.text = item.title ?: ""
+        tvTitle.text = Html.fromHtml(item.title, Html.FROM_HTML_MODE_LEGACY) ?: ""
         tvTop.visibility = if (item.type == 0) {
             View.GONE
         } else {

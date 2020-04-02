@@ -51,7 +51,7 @@ class HomeFirstViewModel(application: Application) : BaseViewModel(application) 
         }
     }
 
-    fun loadHomePageList() {
+    fun loadMoreHomePageList() {
         launchMain {
             loadingData.postValue(true)
             homePageListData.postValue(getHomePageList())

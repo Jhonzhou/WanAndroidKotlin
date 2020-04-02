@@ -33,6 +33,10 @@ object HttpConstants {
      * 首页banner
      */
     const val HOME_BANNER = "/banner/json"
+    /**
+     * 搜索
+     */
+    const val SEARCH = "/article/query/{page}/json"
 
 
 }
