@@ -46,8 +46,9 @@ abstract class BaseFragment : Fragment() {
         initListener()
         initData(arguments)
     }
-
-    private fun initRootView(rootView: View) {
+    protected lateinit var rootView:View
+    private fun initRootView(view: View) {
+        rootView=view
         toolBarBuilder = CommonToolBarBuilder(activity!!, common_toolbar)
         val contentLayoutId = getContentLayoutId()
         if (contentLayoutId > 0) {

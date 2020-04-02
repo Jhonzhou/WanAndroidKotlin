@@ -33,6 +33,9 @@ class HomeFirstFragment : BaseFragment() {
     }
 
     override fun initView() {
+//        rootView.findViewById<LinearLayout>(R.id.ll_root).setBackgroundResource(R.color.black)
+
+
         toolBarBuilder.hideCommonBaseTitle()
         vpBanner.adapter = bannerAdapter
         rvContent.layoutManager = LinearLayoutManager(activity)
