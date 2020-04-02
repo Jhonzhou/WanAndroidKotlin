@@ -29,10 +29,10 @@ class HomePageListDelegate : ItemViewDelegate<HomePageListResponseData> {
         val tvSuperChapterName = holder.getView<TextView>(R.id.tvSuperChapterName)
         val ivCollect = holder.getView<ImageView>(R.id.ivCollect)
         var userName = ""
-        if (TextUtils.isEmpty(item.author)) {
+        if (!TextUtils.isEmpty(item.author)) {
             userName = item.author!!
         } else {
-            if (TextUtils.isEmpty(item.shareUser)) {
+            if (!TextUtils.isEmpty(item.shareUser)) {
                 userName = item.shareUser!!
             }
         }

@@ -26,14 +26,14 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:textColor="@color/text_gray"
-        android:textSize="@dimen/text_2" />
+        android:textSize="@dimen/text_3" />
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvUserName"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:maxLines="2"
         android:textColor="@color/black"
         android:textSize="@dimen/text_1"
@@ -42,7 +42,7 @@
     <View
         android:id="@+id/v_center_divider"
         android:layout_width="match_parent"
-        android:layout_height="5dp"
+        android:layout_height="8dp"
         android:layout_below="@+id/tvTitle" />
 
     <TextView
@@ -70,7 +70,7 @@
         android:gravity="start"
         android:maxLines="1"
         android:id="@+id/tvSuperChapterName"
-        android:textSize="@dimen/text_2"
+        android:textSize="@dimen/text_3"
         tools:text="fsfsfsfsfw" />
 
     <ImageView
