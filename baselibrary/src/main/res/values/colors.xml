@@ -16,7 +16,7 @@
     <color name="color_accent">#4590E4</color>
     <!--常用背景色-->
     <color name="color_common_bg">#F1F1F1</color>
-    <color name="color_divider">#ECECEC</color>
+    <color name="color_divider">#DDDDDD</color>
 
     <!--                    -禁止修改(主题变更除外)               -->
     <color name="common_blue">#4F9AFE</color>

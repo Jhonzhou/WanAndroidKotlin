@@ -2,12 +2,13 @@ package com.bee.wanandroidkotlin.ui.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import com.bee.baselibrary.ErrorState
 import com.bee.baselibrary.base.BaseViewModel
 import com.bee.baselibrary.utils.launchMain
 import com.bee.wanandroidkotlin.http.WanAndroidModel
 import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
 import com.bee.wanandroidkotlin.http.beans.HomeBannerResponse
-import com.bee.wanandroidkotlin.http.beans.ResponseResult
+import com.bee.wanandroidkotlin.utils.ToastAlone
 
 /**
  *
@@ -18,8 +19,8 @@ import com.bee.wanandroidkotlin.http.beans.ResponseResult
  */
 class HomeFirstViewModel(application: Application) : BaseViewModel(application) {
     private var currentPage = 0
-    val bannerData: MutableLiveData<ResponseResult<List<HomeBannerResponse>>> by lazy {
-        MutableLiveData<ResponseResult<List<HomeBannerResponse>>>()
+    val bannerData: MutableLiveData<List<HomeBannerResponse>> by lazy {
+        MutableLiveData<List<HomeBannerResponse>>()
     }
     val homePageListData: MutableLiveData<ArrayList<ArticleListResponseData>> by lazy {
         MutableLiveData<ArrayList<ArticleListResponseData>>()
@@ -30,7 +31,12 @@ class HomeFirstViewModel(application: Application) : BaseViewModel(application) 
 
     fun getHomeBanner() {
         launchMain {
-            bannerData.postValue(httpModel.getHomeBanner())
+            val homeBannerResult = httpModel.getHomeBanner()
+            homeBannerResult.handlerResult(errorBlock = {
+                bannerData.postValue(null)
+            }) {
+                bannerData.postValue(it.data)
+            }
         }
     }
 
@@ -38,17 +44,35 @@ class HomeFirstViewModel(application: Application) : BaseViewModel(application) 
         launchMain {
             loadingData.postValue(true)
             currentPage = 0
-            val topList: ArrayList<ArticleListResponseData> = arrayListOf()
-            val topListResult = httpModel.getTopList()
-            topListResult.handlerResult {
-                it.data?.apply {
-                    topList.addAll(this)
-                }
-            }
-            topList.addAll(getHomePageList())
-            homePageListData.postValue(topList)
+            val topList = getTopList()
+            val homePageList = getHomePageList()
+
             loadingData.postValue(false)
+            if (homePageList == null) {
+                showErrorPageData.postValue(ErrorState.NET_ERROR)
+                return@launchMain
+            } else {
+                topList.addAll(homePageList)
+            }
+            if (topList.isEmpty()) {
+                showErrorPageData.postValue(ErrorState.NO_DATA)
+            } else {
+                homePageListData.postValue(topList)
+            }
+
         }
+    }
+
+    private suspend fun getTopList(): ArrayList<ArticleListResponseData> {
+        val topList: ArrayList<ArticleListResponseData> = arrayListOf()
+        val topListResult = httpModel.getTopList()
+
+        topListResult.handlerResult {
+            it.data?.apply {
+                topList.addAll(this)
+            }
+        }
+        return topList
     }
 
     fun loadMoreHomePageList() {
@@ -59,14 +83,28 @@ class HomeFirstViewModel(application: Application) : BaseViewModel(application) 
         }
     }
 
-    private suspend fun getHomePageList(): ArrayList<ArticleListResponseData> {
-        val resultList: ArrayList<ArticleListResponseData> = arrayListOf()
+    /**
+     * 仅当首页网络请求失败时返回null
+     */
+    private suspend fun getHomePageList(): ArrayList<ArticleListResponseData>? {
+        var resultList: ArrayList<ArticleListResponseData>? = arrayListOf()
+        if (currentPage != 0) {
+            homePageListData.value?.let {
+                resultList!!.addAll(it)
+            }
+        }
         val homePageList = httpModel.getHomePageList(currentPage)
-        homePageList.handlerResult {
+        homePageList.handlerResult(errorBlock = {
+            ToastAlone.showToast(it.errorMsg)
+            if (resultList!!.isEmpty()) {
+                showErrorPageData.postValue(ErrorState.NET_ERROR)
+                resultList = null
+            }
+        }) {
             it.data?.apply {
                 currentPage = curPage
                 if (datas != null) {
-                    resultList.addAll(datas)
+                    resultList!!.addAll(datas)
                 }
             }
         }

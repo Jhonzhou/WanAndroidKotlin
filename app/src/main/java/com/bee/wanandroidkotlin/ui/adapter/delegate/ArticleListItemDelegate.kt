@@ -39,7 +39,7 @@ class ArticleListItemDelegate : ItemViewDelegate<ArticleListResponseData> {
         }
         tvUserName.text = userName
         tvTime.text = item.niceDate ?: ""
-        tvTitle.text = Html.fromHtml(item.title, Html.FROM_HTML_MODE_LEGACY) ?: ""
+        tvTitle.text = Html.fromHtml(item.title) ?: ""
         tvTop.visibility = if (item.type == 0) {
             View.GONE
         } else {

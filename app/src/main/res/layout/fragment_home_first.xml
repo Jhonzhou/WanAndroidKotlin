@@ -21,6 +21,7 @@
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
+                android:id="@+id/ctlVPContainer"
                 android:background="@color/transparent"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:title="">

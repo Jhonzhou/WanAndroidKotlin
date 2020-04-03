@@ -6,7 +6,10 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bee.baselibrary.ErrorState
 import com.bee.baselibrary.base.BaseFragment
+import com.bee.baselibrary.utils.setOnLoadMoreListener
+import com.bee.baselibrary.utils.showErrorPage
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.ui.activity.SearchActivity
 import com.bee.wanandroidkotlin.ui.adapter.ArticleListAdapter
@@ -71,16 +74,22 @@ class HomeFirstFragment : BaseFragment() {
             }
         })
         ivSearch.setOnClickListener {
-            startActivity(Intent(activity!!,SearchActivity::class.java))
+            startActivity(Intent(activity!!, SearchActivity::class.java))
+        }
+        rvContent.setOnLoadMoreListener {
+            mViewModel.loadMoreHomePageList()
         }
     }
 
-    override fun initData(savedInstanceState: Bundle?) {
+    override fun observeViewModelData() {
+        super.observeViewModelData()
         mViewModel.bannerData.observe(this, Observer { result ->
-            result ?: return@Observer
-            result.handlerResult {
-                bannerAdapter.setData(it.data)
+            ctlVPContainer.visibility = if (result == null || result.isEmpty()) {
+                View.GONE
+            } else {
+                View.VISIBLE
             }
+            bannerAdapter.setData(result)
         })
         mViewModel.homePageListData.observe(this, Observer { result ->
             result ?: return@Observer
@@ -94,8 +103,31 @@ class HomeFirstFragment : BaseFragment() {
                 hideLoadingDialog()
             }
         })
+        mViewModel.showErrorPageData.observe(this, Observer {
+            when (it) {
+                ErrorState.NET_ERROR -> {
+                    showErrorPage(it) {
+                        loadInitData()
+                        showCorrectPage()
+                    }
+                }
+                ErrorState.NO_DATA -> {
+                    showErrorPage(it)
+                }
+                else -> {
+                }
+            }
+        })
+    }
+
+    override fun initData(savedInstanceState: Bundle?) {
+        loadInitData()
+    }
+
+    private fun loadInitData() {
         mViewModel.reLoadHomePageList()
         mViewModel.getHomeBanner()
     }
+
 
 }

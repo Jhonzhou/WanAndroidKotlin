@@ -10,7 +10,10 @@ import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bee.baselibrary.ErrorState
 import com.bee.baselibrary.base.BaseFragment
+import com.bee.baselibrary.utils.setOnLoadMoreListener
+import com.bee.baselibrary.utils.showErrorPage
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.ui.adapter.ArticleListAdapter
 import com.bee.wanandroidkotlin.ui.viewmodel.SearchViewModel
@@ -48,6 +51,7 @@ class SearchFragment : BaseFragment() {
                 } else {
                     View.VISIBLE
                 }
+                mViewModel.search(key)
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -60,7 +64,7 @@ class SearchFragment : BaseFragment() {
         etSearch.setOnEditorActionListener { v, actionId, event ->
             return@setOnEditorActionListener when (actionId) {
                 EditorInfo.IME_ACTION_SEARCH -> {
-                    doSearch(v?.text?.toString())
+                    mViewModel.search(v?.text?.toString())
                     true
                 }
                 else -> {
@@ -76,22 +80,30 @@ class SearchFragment : BaseFragment() {
                 onBackPressed()
             }
         }
+        rvContent.setOnLoadMoreListener {
+            mViewModel.loadMoreSearchResult(etSearch.text.toString())
+        }
     }
 
-    private fun doSearch(keyWord: String?) {
-        mViewModel.search(keyWord)
+
+    override fun initListener() {
+        super.initListener()
+        srlRefresh.setOnRefreshListener {
+            mViewModel.search(etSearch.text.toString())
+        }
     }
 
-    override fun initData(savedInstanceState: Bundle?) {
+    override fun observeViewModelData() {
+        super.observeViewModelData()
         mViewModel.searchResultData.observe(this, Observer {
             if (it == null || it.isEmpty()) {
                 ToastAlone.showToast("搜索无结果")
                 rvContent.visibility = View.GONE
-                srlRefresh.isEnabled=false
+                srlRefresh.isEnabled = false
             } else {
                 mAdapter.setData(it)
                 rvContent.visibility = View.VISIBLE
-                srlRefresh.isEnabled=false
+                srlRefresh.isEnabled = true
             }
         })
         mViewModel.loadingData.observe(this, Observer {
@@ -102,6 +114,25 @@ class SearchFragment : BaseFragment() {
                 hideLoadingDialog()
             }
         })
+        mViewModel.showErrorPageData.observe(this, Observer {
+            when (it) {
+                ErrorState.NET_ERROR -> {
+                    showErrorPage(it) {
+                        mViewModel.search(etSearch.text.toString())
+                        showCorrectPage()
+                    }
+                }
+                ErrorState.NO_DATA -> {
+                    showErrorPage(it)
+                }
+                else -> {
+                }
+            }
+        })
+    }
+
+    override fun initData(savedInstanceState: Bundle?) {
+
     }
 
 }

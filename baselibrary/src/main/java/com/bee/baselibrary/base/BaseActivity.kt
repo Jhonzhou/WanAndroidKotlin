@@ -55,6 +55,13 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * 注册viewModel中数据对象
+     */
+    open fun observeViewModelData() {
+
+    }
+
     fun displayFragment(fragment: Fragment, isAddToBack: Boolean = false) {
         supportFragmentManager.beginTransaction().apply {
             if (!fragment.isAdded) {
