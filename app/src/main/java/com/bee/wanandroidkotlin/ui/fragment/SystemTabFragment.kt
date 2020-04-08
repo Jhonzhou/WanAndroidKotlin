@@ -6,16 +6,16 @@ import com.bee.wanandroidkotlin.R
 
 /**
  *
- * 主页 公众号tabFragment
+ * 体系 fragment
  * @author: JhonZhou
- * @date:  2020/3/30
+ * @date:  2020/4/8
  * @Description:
  */
-class HomeTencentFragment : BaseFragment() {
-    override fun getContentLayoutId(): Int = R.layout.fragment_home_tencent
+class SystemTabFragment : BaseFragment() {
+    override fun getContentLayoutId(): Int = R.layout.fragment_system_tab
 
     override fun initView() {
-        toolBarBuilder.setTitle(R.string.s_tencent)
+        toolBarBuilder.setTitle("体系")
     }
 
     override fun initData(arguments: Bundle?) {

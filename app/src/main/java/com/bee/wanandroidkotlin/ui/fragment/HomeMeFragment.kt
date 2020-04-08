@@ -18,7 +18,7 @@ class HomeMeFragment : BaseFragment() {
         toolBarBuilder.setTitle(R.string.s_me)
     }
 
-    override fun initData(savedInstanceState: Bundle?) {
+    override fun initData(arguments: Bundle?) {
     }
 
 

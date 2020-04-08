@@ -120,7 +120,7 @@ class HomeFirstFragment : BaseFragment() {
         })
     }
 
-    override fun initData(savedInstanceState: Bundle?) {
+    override fun initData(arguments: Bundle?) {
         loadInitData()
     }
 

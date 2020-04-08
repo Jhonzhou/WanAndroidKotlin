@@ -131,7 +131,7 @@ class SearchFragment : BaseFragment() {
         })
     }
 
-    override fun initData(savedInstanceState: Bundle?) {
+    override fun initData(arguments: Bundle?) {
 
     }
 

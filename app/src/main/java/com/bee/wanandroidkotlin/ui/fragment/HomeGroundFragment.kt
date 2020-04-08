@@ -1,8 +1,12 @@
 package com.bee.wanandroidkotlin.ui.fragment
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.bee.baselibrary.base.BaseFragment
 import com.bee.wanandroidkotlin.R
+import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.fragment_home_project.*
 
 /**
  *
@@ -13,12 +17,48 @@ import com.bee.wanandroidkotlin.R
  */
 class HomeGroundFragment : BaseFragment() {
     override fun getContentLayoutId(): Int = R.layout.fragment_home_ground
+    private val mAdapter: FragmentStateAdapter by lazy {
+        object : FragmentStateAdapter(this) {
+            override fun getItemCount(): Int = 2
 
-    override fun initView() {
-        toolBarBuilder.setTitle(R.string.s_ground)
+            override fun createFragment(position: Int): Fragment {
+                return when (position) {
+                    0 -> {
+                        SystemTabFragment()
+                    }
+                    1 -> {
+                        NavigationTabFragment()
+                    }
+                    else -> {
+                        throw IllegalArgumentException("current position $position not support")
+                    }
+                }
+            }
+
+        }
     }
 
-    override fun initData(savedInstanceState: Bundle?) {
+    override fun initView() {
+        toolBarBuilder.hideCommonBaseTitle()
+        vpContent.adapter = mAdapter
+        TabLayoutMediator(tlTitle, vpContent,
+                TabLayoutMediator.TabConfigurationStrategy { tab, position ->
+                    tab.text = when (position) {
+                        0 -> {
+                            "体系"
+                        }
+                        1 -> {
+                            "导航"
+                        }
+                        else -> {
+                            throw IllegalArgumentException("current position $position not support")
+                        }
+                    }
+                }).attach()
+    }
+
+    override fun initData(arguments: Bundle?) {
+
     }
 
 }

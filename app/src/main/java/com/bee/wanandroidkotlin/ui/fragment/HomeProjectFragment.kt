@@ -75,7 +75,7 @@ class HomeProjectFragment : BaseFragment() {
     }
 
     override fun initData(arguments: Bundle?) {
-//        mViewModel.getProjectTabListFromLocal()
+        mViewModel.getProjectTabListFromLocal()
         mViewModel.getProjectTabList()
     }
 

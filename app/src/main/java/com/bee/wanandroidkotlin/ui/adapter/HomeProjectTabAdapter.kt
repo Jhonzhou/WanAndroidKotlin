@@ -36,10 +36,10 @@ class HomeProjectTabAdapter(fragment: Fragment) : FragmentStateAdapter(fragment)
     }
 
     fun getItem(position: Int): ProjectTabResponseBean? {
-        if (mDataList.size > position) {
-            return mDataList[position]
+        return if (mDataList.size > position) {
+            mDataList[position]
         } else {
-            return null
+            null
         }
     }
 
