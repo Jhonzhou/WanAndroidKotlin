@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:tabGravity="fill"
-        app:tabMode="fixed" />
+        app:tabMode="scrollable" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vpContent"

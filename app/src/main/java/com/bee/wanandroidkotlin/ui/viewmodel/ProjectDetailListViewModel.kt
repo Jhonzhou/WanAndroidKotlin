@@ -17,7 +17,8 @@ import com.bee.wanandroidkotlin.http.beans.ProjectTabResponseBean
  */
 class ProjectDetailListViewModel(application: Application) : BaseAppViewModel(application) {
     private var currentPage = 0
-    private var initData: ProjectTabResponseBean? = null
+    var isLoaded = false
+    var initData: ProjectTabResponseBean? = null
     val detailListLiveData: MutableLiveData<ArrayList<ArticleListResponseData>> by lazy {
         MutableLiveData<ArrayList<ArticleListResponseData>>()
     }
@@ -28,7 +29,6 @@ class ProjectDetailListViewModel(application: Application) : BaseAppViewModel(ap
 
     fun loadMoreDetailList() {
         initData ?: return
-
         val resultList = arrayListOf<ArticleListResponseData>()
         if (currentPage != 0) {
             detailListLiveData.value?.let {
@@ -48,7 +48,7 @@ class ProjectDetailListViewModel(application: Application) : BaseAppViewModel(ap
                 it.data!!.datas?.apply {
                     resultList.addAll(this)
                 }
-                currentPage = it.data!!.curPage
+                currentPage = it.data!!.curPage + 1
                 if (resultList.isEmpty()) {
                     showErrorPageData.postValue(ErrorState.NO_DATA)
                 } else {
@@ -61,6 +61,8 @@ class ProjectDetailListViewModel(application: Application) : BaseAppViewModel(ap
 
     fun getDetailList() {
         currentPage = 0
+
+        isLoaded = true
         loadMoreDetailList()
     }
 }

@@ -50,11 +50,11 @@ class ProjectDetailListFragment : BaseFragment() {
     override fun observeViewModelData() {
         super.observeViewModelData()
         mViewModel.loadingData.observe(this, Observer {
-            if (it){
+            if (it) {
                 showLoadingDialog()
-            }else{
+            } else {
                 hideLoadingDialog()
-                srlRefresh.isRefreshing=false
+                srlRefresh.isRefreshing = false
             }
         })
         mViewModel.showErrorPageData.observe(this, Observer {
@@ -77,16 +77,25 @@ class ProjectDetailListFragment : BaseFragment() {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (!mViewModel.isLoaded) {
+            mViewModel.getDetailList()
+        }
+    }
+
     override fun initData(arguments: Bundle?) {
         arguments ?: showErrorPage(ErrorState.NO_DATA)
         if (arguments != null) {
             val responseBean = arguments.getSerializable(Constants.KEY_DATA) as ProjectTabResponseBean
             mViewModel.initData(responseBean)
-            mViewModel.getDetailList()
             return
         }
         showErrorPage(ErrorState.NO_DATA)
     }
 
+    override fun getLogTag(): String {
+        return "DetailListFragment---${mViewModel.initData?.name}"
+    }
 
 }

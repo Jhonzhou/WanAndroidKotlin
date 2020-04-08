@@ -1,7 +1,6 @@
 package com.bee.wanandroidkotlin.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bee.baselibrary.ErrorState
@@ -30,29 +29,24 @@ class HomeProjectFragment : BaseFragment() {
     }
 
     override fun initView() {
-        toolBarBuilder.setTitle(R.string.s_project)
         toolBarBuilder.hideCommonBaseTitle()
         vpContent.adapter = mAdapter
 
         TabLayoutMediator(tlTitle, vpContent,
                 TabLayoutMediator.TabConfigurationStrategy { tab, position ->
-                    tab.text="title$position text"
-                    Log.e("HomeProjectFragment","TabConfigurationStrategy position:${tab.text}")
-//
-//                    val responseBean = mAdapter.getItem(position)
-//                    responseBean?.apply {
-//                        tab.text = name
-//
-//                    }
+                    val responseBean = mAdapter.getItem(position)
+                    responseBean?.apply {
+                        tab.text = name
+                    }
                 }).attach()
     }
 
     override fun observeViewModelData() {
         super.observeViewModelData()
         mViewModel.loadingData.observe(this, Observer {
-            if (it){
+            if (it) {
                 showLoadingDialog()
-            }else{
+            } else {
                 hideLoadingDialog()
             }
         })
@@ -76,15 +70,7 @@ class HomeProjectFragment : BaseFragment() {
                 showErrorPage(ErrorState.NO_DATA)
                 return@Observer
             }
-//            tlTitle.removeAllTabs()
-//            for (responseBean in it) {
-//                tlTitle.addTab(tlTitle.newTab())
-//            }
             mAdapter.setData(it)
-            tlTitle.getTabAt(0)?.text="tlTitle.getTabAt0"
-            tlTitle.getTabAt(1)?.text="tlTitle.getTabAt1"
-            tlTitle.getTabAt(2)?.text="tlTitle.getTabAt2"
-            tlTitle.getTabAt(3)?.text="tlTitle.getTabAt3"
         })
     }
 

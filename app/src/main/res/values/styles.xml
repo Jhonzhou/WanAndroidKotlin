@@ -13,7 +13,7 @@
         <item name="tabIndicatorFullWidth">false</item>
         <item name="tabSelectedTextColor">@color/common_blue</item>
         <item name="tabTextAppearance">@style/SecondTitleTabLayoutStyleTextAppearance</item>
-        <item name="tabTextColor">@color/green</item>
+        <item name="tabTextColor">#7A7F85</item>
     </style>
     <style name="SecondTitleTabLayoutStyleTextAppearance">
         <item name="android:textSize">15sp</item>

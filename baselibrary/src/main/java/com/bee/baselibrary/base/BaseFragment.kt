@@ -1,6 +1,8 @@
 package com.bee.baselibrary.base
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -112,6 +114,51 @@ abstract class BaseFragment : Fragment() {
     fun showCorrectPage() {
         baseContainer.visibility = View.VISIBLE
         cl_error_page.visibility = View.GONE
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        Log.e(getLogTag(), "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e(this.getLogTag(), "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.e(this.getLogTag(), "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e(this.getLogTag(), "onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e(this.getLogTag(), "onDestroy")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.e(this.getLogTag(), "onDetach")
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.e(this.getLogTag(), "onAttach")
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.e(this.getLogTag(), "onCreate")
+    }
+
+    open fun getLogTag(): String {
+        return this.javaClass.name
     }
 
 }
