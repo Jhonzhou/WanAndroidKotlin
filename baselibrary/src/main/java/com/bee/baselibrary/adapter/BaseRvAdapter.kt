@@ -14,7 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 open class BaseRvAdapter<T> : RecyclerView.Adapter<BaseViewHolder>() {
     protected val mDataList: ArrayList<T> = arrayListOf()
     private val delegateManager: ItemViewDelegateManager<T> = ItemViewDelegateManager()
-
+    private var mOnItemClickListener: OnItemClickListener<T>? = null
+    private var mOnItemLongClickListener: OnItemLongClickListener<T>? = null
     override fun getItemViewType(position: Int): Int {
         if (delegateManager.getDelegateCount() <= 0) {
             return super.getItemViewType(position)
@@ -33,6 +34,28 @@ open class BaseRvAdapter<T> : RecyclerView.Adapter<BaseViewHolder>() {
                 ?: return super.createViewHolder(parent, viewType)
         val baseViewHolder = BaseViewHolder.createViewHolder(parent.context, parent, itemViewDelegate.getItemViewLayoutId())
         onViewHolderCreated(baseViewHolder, baseViewHolder.getConvertView(), itemViewDelegate)
+        mOnItemClickListener?.apply {
+            baseViewHolder.getConvertView().setOnClickListener {
+                val position = baseViewHolder.adapterPosition
+                if (position == -1) {
+                    return@setOnClickListener
+                } else if (position >= mDataList.size) {
+                    return@setOnClickListener
+                }
+                onItemClick(baseViewHolder, position, mDataList[position])
+            }
+        }
+        mOnItemLongClickListener?.apply {
+            baseViewHolder.getConvertView().setOnLongClickListener {
+                val position = baseViewHolder.adapterPosition
+                if (position == -1) {
+                    return@setOnLongClickListener false
+                } else if (position >= mDataList.size) {
+                    return@setOnLongClickListener false
+                }
+                return@setOnLongClickListener onItemLongClick(baseViewHolder, position, mDataList[position])
+            }
+        }
         return baseViewHolder
     }
 
@@ -82,5 +105,21 @@ open class BaseRvAdapter<T> : RecyclerView.Adapter<BaseViewHolder>() {
         if (position != -1) {
             notifyItemRemoved(position)
         }
+    }
+
+    fun setOnItemLongClickListener(clickListener: OnItemLongClickListener<T>) {
+        mOnItemLongClickListener = clickListener
+    }
+
+    fun setOnItemClickListener(clickListener: OnItemClickListener<T>) {
+        mOnItemClickListener = clickListener
+    }
+
+    interface OnItemLongClickListener<T> {
+        fun onItemLongClick(baseViewHolder: BaseViewHolder, position: Int, item: T): Boolean
+    }
+
+    interface OnItemClickListener<T> {
+        fun onItemClick(baseViewHolder: BaseViewHolder, position: Int, item: T)
     }
 }
