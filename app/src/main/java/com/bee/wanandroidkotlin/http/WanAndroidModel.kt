@@ -50,7 +50,7 @@ class WanAndroidModel : BaseDataModel() {
         }
     }
 
-    suspend fun getHomePageList(page: Int): ResponseResult<ArticlePageListResponse> {
+    suspend fun getHomePageList(page: Int): ResponseResult<PageListResponse> {
         return withHttpContext {
             val homePageListCall = service.getHomePageList(page)
             val response = homePageListCall.execute()
@@ -58,10 +58,26 @@ class WanAndroidModel : BaseDataModel() {
         }
     }
 
-    suspend fun search(page: Int, key: String): ResponseResult<ArticlePageListResponse> {
+    suspend fun search(page: Int, key: String): ResponseResult<PageListResponse> {
         return withHttpContext {
             val homePageListCall = service.search(page, key)
             val response = homePageListCall.execute()
+            handleResponse(response)
+        }
+    }
+
+    suspend fun getProjectDetailList(page: Int, cId: Int): ResponseResult<PageListResponse> {
+        return withHttpContext {
+            val mProjectTabListCall = service.getProjectDetailList(page, cId)
+            val response = mProjectTabListCall.execute()
+            handleResponse(response)
+        }
+    }
+
+    suspend fun getProjectTabList(): ResponseResult<List<ProjectTabResponseBean>> {
+        return withHttpContext {
+            val mProjectTabListCall = service.getProjectTabList()
+            val response = mProjectTabListCall.execute()
             handleResponse(response)
         }
     }

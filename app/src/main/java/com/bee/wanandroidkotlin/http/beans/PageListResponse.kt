@@ -7,7 +7,7 @@ package com.bee.wanandroidkotlin.http.beans
  * @date:  2020/4/1
  * @Description:
  */
-data class ArticlePageListResponse(
+data class PageListResponse(
         val curPage: Int,
         val datas: ArrayList<ArticleListResponseData>?,
         val offset: Int,

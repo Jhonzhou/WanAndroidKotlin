@@ -4,9 +4,8 @@ import android.app.Application
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import com.bee.baselibrary.ErrorState
-import com.bee.baselibrary.base.BaseViewModel
 import com.bee.baselibrary.utils.launchMain
-import com.bee.wanandroidkotlin.http.WanAndroidModel
+import com.bee.wanandroidkotlin.base.BaseAppViewModel
 import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
 import com.bee.wanandroidkotlin.utils.ToastAlone
 
@@ -17,11 +16,8 @@ import com.bee.wanandroidkotlin.utils.ToastAlone
  * @date:  2020/4/2
  * @Description:
  */
-class SearchViewModel(application: Application) : BaseViewModel(application) {
+class SearchViewModel(application: Application) : BaseAppViewModel(application) {
     private var currentPage = 0
-    private val httpModel: WanAndroidModel by lazy {
-        WanAndroidModel()
-    }
 
     val searchResultData: MutableLiveData<ArrayList<ArticleListResponseData>> by lazy {
         MutableLiveData<ArrayList<ArticleListResponseData>>()

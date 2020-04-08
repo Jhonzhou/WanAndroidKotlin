@@ -48,11 +48,23 @@ interface WanAndroidService {
      * 首页文章列表
      */
     @GET(HttpConstants.HOME_LIST)
-    fun getHomePageList(@Path("page") page: Int): Call<ResponseResult<ArticlePageListResponse>>
+    fun getHomePageList(@Path("page") page: Int): Call<ResponseResult<PageListResponse>>
 
     /**
      * 搜索
      */
     @POST(HttpConstants.SEARCH)
-    fun search(@Path("page") page: Int, @Query("k") key: String): Call<ResponseResult<ArticlePageListResponse>>
+    fun search(@Path("page") page: Int, @Query("k") key: String): Call<ResponseResult<PageListResponse>>
+
+    /**
+     * 项目分类
+     */
+    @GET(HttpConstants.PROJECT_TAB)
+    fun getProjectTabList(): Call<ResponseResult<List<ProjectTabResponseBean>>>
+
+    /**
+     * 项目分类列表详情
+     */
+    @GET(HttpConstants.PROJECT_TAB_DETAIL_LIST)
+    fun getProjectDetailList(@Path("page") page: Int, @Query("cid") cid: Int): Call<ResponseResult<PageListResponse>>
 }

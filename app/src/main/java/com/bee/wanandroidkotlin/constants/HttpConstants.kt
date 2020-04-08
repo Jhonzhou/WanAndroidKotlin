@@ -37,6 +37,14 @@ object HttpConstants {
      * 搜索
      */
     const val SEARCH = "/article/query/{page}/json"
+    /**
+     * 项目分类
+     */
+    const val PROJECT_TAB = "/project/tree/json"
+    /**
+     * 项目分类列表详情
+     */
+    const val PROJECT_TAB_DETAIL_LIST = "project/list/{page}/json"
 
 
 }

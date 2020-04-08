@@ -96,7 +96,7 @@ abstract class BaseFragment : Fragment() {
     /**
      * 初始化数据
      */
-    abstract fun initData(savedInstanceState: Bundle?)
+    abstract fun initData(arguments: Bundle?)
 
     /**
      * 初始化监听

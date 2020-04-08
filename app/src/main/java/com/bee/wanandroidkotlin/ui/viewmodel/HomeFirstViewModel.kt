@@ -3,9 +3,8 @@ package com.bee.wanandroidkotlin.ui.viewmodel
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.bee.baselibrary.ErrorState
-import com.bee.baselibrary.base.BaseViewModel
 import com.bee.baselibrary.utils.launchMain
-import com.bee.wanandroidkotlin.http.WanAndroidModel
+import com.bee.wanandroidkotlin.base.BaseAppViewModel
 import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
 import com.bee.wanandroidkotlin.http.beans.HomeBannerResponse
 import com.bee.wanandroidkotlin.utils.ToastAlone
@@ -17,16 +16,13 @@ import com.bee.wanandroidkotlin.utils.ToastAlone
  * @date:  2020/3/31
  * @Description:
  */
-class HomeFirstViewModel(application: Application) : BaseViewModel(application) {
+class HomeFirstViewModel(application: Application) : BaseAppViewModel(application) {
     private var currentPage = 0
     val bannerData: MutableLiveData<List<HomeBannerResponse>> by lazy {
         MutableLiveData<List<HomeBannerResponse>>()
     }
     val homePageListData: MutableLiveData<ArrayList<ArticleListResponseData>> by lazy {
         MutableLiveData<ArrayList<ArticleListResponseData>>()
-    }
-    private val httpModel: WanAndroidModel by lazy {
-        WanAndroidModel()
     }
 
     fun getHomeBanner() {
@@ -109,11 +105,6 @@ class HomeFirstViewModel(application: Application) : BaseViewModel(application) 
             }
         }
         return resultList
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        httpModel.onDestroy()
     }
 
 }
