@@ -15,7 +15,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name=".ui.activity.SplashActivity"
+            android:name="com.bee.wanandroidkotlin.ui.common.activity.SplashActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Launcher">
@@ -26,19 +26,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name=".ui.common.MainActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.LoginActivity"
+            android:name="com.bee.wanandroidkotlin.ui.common.activity.LoginActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.RegisterActivity"
+            android:name="com.bee.wanandroidkotlin.ui.common.activity.RegisterActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.SearchActivity"
+            android:name="com.bee.wanandroidkotlin.ui.common.activity.SearchActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait" />
     </application>
