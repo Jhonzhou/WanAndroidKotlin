@@ -121,10 +121,6 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
 
-    fun hideErrorPage() {
-        cl_error_page.visibility = View.GONE
-    }
-
     /**
      * 显示错误界面
      */

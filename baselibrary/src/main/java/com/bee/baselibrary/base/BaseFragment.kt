@@ -107,10 +107,6 @@ abstract class BaseFragment : Fragment() {
     }
 
 
-    fun hideErrorPage() {
-        cl_error_page.visibility = View.GONE
-    }
-
     fun showCorrectPage() {
         baseContainer.visibility = View.VISIBLE
         cl_error_page.visibility = View.GONE

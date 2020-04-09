@@ -59,6 +59,11 @@ fun RecyclerView.setOnLoadMoreListener(block: (RecyclerView) -> Unit) {
     })
 }
 
+fun BaseFragment.showCorrectPage() {
+    baseContainer.visibility = View.VISIBLE
+    cl_error_page.visibility = View.GONE
+}
+
 fun BaseFragment.showErrorPage(state: ErrorState, textClickListener: () -> Unit = {}) {
     val errorContent: String
     @DrawableRes val errorImage: Int
@@ -82,6 +87,11 @@ fun BaseFragment.showErrorPage(state: ErrorState, textClickListener: () -> Unit 
     tv_error_hint.setOnClickListener {
         textClickListener()
     }
+}
+
+fun BaseActivity.showCorrectPage() {
+    baseContainer.visibility = View.VISIBLE
+    cl_error_page.visibility = View.GONE
 }
 
 fun BaseActivity.showErrorPage(state: ErrorState, textClickListener: () -> Unit = {}) {

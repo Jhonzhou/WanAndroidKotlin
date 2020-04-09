@@ -1,6 +1,7 @@
 package com.bee.wanandroidkotlin.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bee.baselibrary.ErrorState
@@ -29,9 +30,10 @@ class HomeProjectFragment : BaseFragment() {
     }
 
     override fun initView() {
-        toolBarBuilder.hideCommonBaseTitle()
+//        toolBarBuilder.hideCommonBaseTitle()
         vpContent.adapter = mAdapter
-
+        toolBarBuilder.setTitle("项目tab")
+//setBackGround(R.color.red)
         TabLayoutMediator(tlTitle, vpContent,
                 TabLayoutMediator.TabConfigurationStrategy { tab, position ->
                     val responseBean = mAdapter.getItem(position)
@@ -53,15 +55,20 @@ class HomeProjectFragment : BaseFragment() {
         mViewModel.showErrorPageData.observe(this, Observer {
             when (it) {
                 ErrorState.NET_ERROR -> {
-                    showErrorPage(it) {
+                    Log.e(getLogTag(),"showErrorPageData state: net error")
+                    showErrorPage(it,"我错了真的错了我错了真的错了我错了真的错了我错了真的错了") {
                         mViewModel.getProjectTabList()
                         showCorrectPage()
                     }
+//                   showError()
+
                 }
                 ErrorState.NO_DATA -> {
+                    Log.e(getLogTag(),"showErrorPageData state: no data")
                     showErrorPage(it)
                 }
                 else -> {
+                    Log.e(getLogTag(),"showErrorPageData state: ...")
                 }
             }
         })
