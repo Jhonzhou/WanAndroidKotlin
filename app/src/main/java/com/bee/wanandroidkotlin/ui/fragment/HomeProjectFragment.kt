@@ -30,10 +30,8 @@ class HomeProjectFragment : BaseFragment() {
     }
 
     override fun initView() {
-//        toolBarBuilder.hideCommonBaseTitle()
+        toolBarBuilder.hideCommonBaseTitle()
         vpContent.adapter = mAdapter
-        toolBarBuilder.setTitle("项目tab")
-//setBackGround(R.color.red)
         TabLayoutMediator(tlTitle, vpContent,
                 TabLayoutMediator.TabConfigurationStrategy { tab, position ->
                     val responseBean = mAdapter.getItem(position)
@@ -56,12 +54,10 @@ class HomeProjectFragment : BaseFragment() {
             when (it) {
                 ErrorState.NET_ERROR -> {
                     Log.e(getLogTag(),"showErrorPageData state: net error")
-                    showErrorPage(it,"我错了真的错了我错了真的错了我错了真的错了我错了真的错了") {
+                    showErrorPage(it) {
                         mViewModel.getProjectTabList()
                         showCorrectPage()
                     }
-//                   showError()
-
                 }
                 ErrorState.NO_DATA -> {
                     Log.e(getLogTag(),"showErrorPageData state: no data")
