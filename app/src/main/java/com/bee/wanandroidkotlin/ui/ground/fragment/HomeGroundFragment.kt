@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.bee.baselibrary.base.BaseFragment
 import com.bee.wanandroidkotlin.R
-import com.bee.wanandroidkotlin.ui.project.fragment.TencentTagFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_home_project.*
 

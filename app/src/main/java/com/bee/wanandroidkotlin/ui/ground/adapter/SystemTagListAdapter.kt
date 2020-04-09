@@ -1,4 +1,4 @@
-package com.bee.wanandroidkotlin.ui.project.adapter
+package com.bee.wanandroidkotlin.ui.ground.adapter
 
 import android.widget.TextView
 import com.bee.baselibrary.adapter.BaseRvAdapter
