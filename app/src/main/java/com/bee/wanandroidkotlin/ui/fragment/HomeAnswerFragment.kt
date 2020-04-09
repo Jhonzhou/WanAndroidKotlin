@@ -6,20 +6,18 @@ import com.bee.wanandroidkotlin.R
 
 /**
  *
- * 体系 fragment
+ *  问答
  * @author: JhonZhou
- * @date:  2020/4/8
+ * @date:  2020/4/9
  * @Description:
  */
-class SystemTabFragment : BaseFragment() {
-    override fun getContentLayoutId(): Int = R.layout.fragment_system_tab
-
+class HomeAnswerFragment : BaseFragment() {
+    override fun getContentLayoutId(): Int = R.layout.fragment_home_answer
     override fun initView() {
-        toolBarBuilder.hideCommonBaseTitle()
+        toolBarBuilder.setTitle("问答")
     }
 
     override fun initData(arguments: Bundle?) {
-
     }
 
 }

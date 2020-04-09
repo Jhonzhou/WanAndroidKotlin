@@ -18,7 +18,7 @@ class MainActivity : BaseActivity() {
         list.add(HomeFirstFragment())
         list.add(HomeProjectFragment())
         list.add(HomeGroundFragment())
-        list.add(HomeTencentFragment())
+        list.add(HomeAnswerFragment())
         list.add(HomeMeFragment())
         list
     }
@@ -43,7 +43,7 @@ class MainActivity : BaseActivity() {
                 R.id.navigation_ground -> {
                     position = 2
                 }
-                R.id.navigation_tencent -> {
+                R.id.navigation_answer -> {
                     position = 3
                 }
                 R.id.navigation_me -> {

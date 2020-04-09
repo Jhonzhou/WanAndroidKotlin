@@ -19,7 +19,7 @@ class HomeGroundFragment : BaseFragment() {
     override fun getContentLayoutId(): Int = R.layout.fragment_home_ground
     private val mAdapter: FragmentStateAdapter by lazy {
         object : FragmentStateAdapter(this) {
-            override fun getItemCount(): Int = 2
+            override fun getItemCount(): Int = 3
 
             override fun createFragment(position: Int): Fragment {
                 return when (position) {
@@ -28,6 +28,9 @@ class HomeGroundFragment : BaseFragment() {
                     }
                     1 -> {
                         NavigationTabFragment()
+                    }
+                    2 -> {
+                        HomeTencentFragment()
                     }
                     else -> {
                         throw IllegalArgumentException("current position $position not support")
@@ -49,6 +52,9 @@ class HomeGroundFragment : BaseFragment() {
                         }
                         1 -> {
                             "导航"
+                        }
+                        2 -> {
+                            "公众号"
                         }
                         else -> {
                             throw IllegalArgumentException("current position $position not support")

@@ -15,9 +15,9 @@
         android:title="@string/s_ground" />
 
     <item
-        android:id="@+id/navigation_tencent"
-        android:icon="@drawable/ic_tencent"
-        android:title="@string/s_tencent" />
+        android:id="@+id/navigation_answer"
+        android:icon="@drawable/ic_answer"
+        android:title="@string/s_answer" />
     <item
         android:id="@+id/navigation_me"
         android:icon="@drawable/ic_me"
