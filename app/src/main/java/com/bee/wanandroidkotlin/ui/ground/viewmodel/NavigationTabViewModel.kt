@@ -23,8 +23,11 @@ class NavigationTabViewModel(application: Application) : BaseAppViewModel(applic
         launchMain {
             loadingData.postValue(true)
             val projectTabListCall = httpModel.getNavigationList()
-            projectTabListCall.handlerResult {
-
+            projectTabListCall.handlerResult (errorBlock = {
+                if (mNavigationTabList.value?.isEmpty() !=false) {
+                    showErrorPageData.postValue(ErrorState.NET_ERROR)
+                }
+            }){
                 if (it.data != null) {
                     mNavigationTabList.postValue(it.data)
                 } else {

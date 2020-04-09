@@ -3,9 +3,9 @@ package com.bee.wanandroidkotlin.ui.ground.viewmodel
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.bee.baselibrary.ErrorState
-import com.bee.wanandroidkotlin.utils.launchMain
 import com.bee.wanandroidkotlin.base.BaseAppViewModel
 import com.bee.wanandroidkotlin.http.beans.TagResponseBean
+import com.bee.wanandroidkotlin.utils.launchMain
 
 /**
  *
@@ -26,7 +26,7 @@ class SystemTagViewModel(application: Application) : BaseAppViewModel(applicatio
             loadingData.postValue(true)
             val projectTabListCall = httpModel.getTreeTagList()
             projectTabListCall.handlerResult(errorBlock = {
-                if (mSystemTagList.value?.isEmpty() == true) {
+                if (mSystemTagList.value?.isEmpty() !=false) {
                     showErrorPageData.postValue(ErrorState.NET_ERROR)
                 }
             }) {

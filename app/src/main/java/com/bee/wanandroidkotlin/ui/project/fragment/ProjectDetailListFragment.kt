@@ -6,13 +6,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bee.baselibrary.ErrorState
 import com.bee.baselibrary.base.BaseFragment
-import com.bee.wanandroidkotlin.utils.setOnLoadMoreListener
-import com.bee.wanandroidkotlin.utils.showErrorPage
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.constants.Constants
 import com.bee.wanandroidkotlin.http.beans.TagResponseBean
 import com.bee.wanandroidkotlin.ui.common.adapter.ArticleListAdapter
 import com.bee.wanandroidkotlin.ui.project.viewmodel.ProjectDetailListViewModel
+import com.bee.wanandroidkotlin.utils.observeErrorData
+import com.bee.wanandroidkotlin.utils.observeLoadData
+import com.bee.wanandroidkotlin.utils.setOnLoadMoreListener
+import com.bee.wanandroidkotlin.utils.showErrorPage
 import kotlinx.android.synthetic.main.fragment_project_detail_list.*
 
 /**
@@ -49,29 +51,12 @@ class ProjectDetailListFragment : BaseFragment() {
 
     override fun observeViewModelData() {
         super.observeViewModelData()
-        mViewModel.loadingData.observe(this, Observer {
-            if (it) {
-                showLoadingDialog()
-            } else {
-                hideLoadingDialog()
-                srlRefresh.isRefreshing = false
-            }
-        })
-        mViewModel.showErrorPageData.observe(this, Observer {
-            when (it) {
-                ErrorState.NET_ERROR -> {
-                    showErrorPage(it) {
-                        mViewModel.getDetailList()
-                        showCorrectPage()
-                    }
-                }
-                ErrorState.NO_DATA -> {
-                    showErrorPage(it)
-                }
-                else -> {
-                }
-            }
-        })
+        observeLoadData(mViewModel.loadingData){
+            srlRefresh.isRefreshing = false
+        }
+        observeErrorData(mViewModel.showErrorPageData){
+            mViewModel.getDetailList()
+        }
         mViewModel.detailListLiveData.observe(this, Observer {
             mAdapter.setData(it)
         })

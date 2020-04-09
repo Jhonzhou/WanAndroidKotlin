@@ -5,10 +5,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bee.baselibrary.ErrorState
 import com.bee.baselibrary.base.BaseFragment
-import com.bee.wanandroidkotlin.utils.showErrorPage
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.ui.project.adapter.HomeProjectTabAdapter
 import com.bee.wanandroidkotlin.ui.project.viewmodel.ProjectHomeViewModel
+import com.bee.wanandroidkotlin.utils.observeErrorData
+import com.bee.wanandroidkotlin.utils.observeLoadData
+import com.bee.wanandroidkotlin.utils.showErrorPage
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_home_project.*
 
@@ -42,28 +44,10 @@ class HomeProjectFragment : BaseFragment() {
 
     override fun observeViewModelData() {
         super.observeViewModelData()
-        mViewModel.loadingData.observe(this, Observer {
-            if (it) {
-                showLoadingDialog()
-            } else {
-                hideLoadingDialog()
-            }
-        })
-        mViewModel.showErrorPageData.observe(this, Observer {
-            when (it) {
-                ErrorState.NET_ERROR -> {
-                    showErrorPage(it) {
-                        mViewModel.getProjectTabList()
-                        showCorrectPage()
-                    }
-                }
-                ErrorState.NO_DATA -> {
-                    showErrorPage(it)
-                }
-                else -> {
-                }
-            }
-        })
+        observeLoadData(mViewModel.loadingData)
+        observeErrorData(mViewModel.showErrorPageData){
+            mViewModel.getProjectTabList()
+        }
         mViewModel.mProjectTagList.observe(this, Observer {
             if (it == null || it.isEmpty()) {
                 showErrorPage(ErrorState.NO_DATA)

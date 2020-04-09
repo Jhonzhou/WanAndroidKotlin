@@ -4,12 +4,12 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bee.baselibrary.ErrorState
 import com.bee.baselibrary.base.BaseFragment
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.ui.ground.adapter.SystemTagListAdapter
 import com.bee.wanandroidkotlin.ui.ground.viewmodel.SystemTagViewModel
-import com.bee.wanandroidkotlin.utils.showErrorPage
+import com.bee.wanandroidkotlin.utils.observeErrorData
+import com.bee.wanandroidkotlin.utils.observeLoadData
 import kotlinx.android.synthetic.main.fragment_system_tab.*
 
 /**
@@ -43,29 +43,12 @@ class SystemTabFragment : BaseFragment() {
 
     override fun observeViewModelData() {
         super.observeViewModelData()
-        mViewModel.loadingData.observe(this, Observer {
-            if (it) {
-                showLoadingDialog()
-            } else {
-                hideLoadingDialog()
-                srlRefresh.isRefreshing=false
-            }
-        })
-        mViewModel.showErrorPageData.observe(this, Observer {
-            when (it) {
-                ErrorState.NET_ERROR -> {
-                    showErrorPage(it) {
-                        mViewModel.getTreeTabList()
-                        showCorrectPage()
-                    }
-                }
-                ErrorState.NO_DATA -> {
-                    showErrorPage(it)
-                }
-                else -> {
-                }
-            }
-        })
+        observeLoadData(mViewModel.loadingData){
+            srlRefresh.isRefreshing=false
+        }
+       observeErrorData(mViewModel.showErrorPageData){
+           mViewModel.getTreeTabList()
+       }
         mViewModel.mSystemTagList.observe(this, Observer {
             mAdapter.setData(it)
         })

@@ -35,6 +35,13 @@ class NavigationTabFragment : BaseFragment() {
         rlContent.adapter = mAdapter
     }
 
+    override fun initListener() {
+        super.initListener()
+        srlRefresh.setOnRefreshListener {
+            mViewModel.getNavigationTabList()
+        }
+    }
+
     override fun observeViewModelData() {
         super.observeViewModelData()
         observeLoadData(mViewModel.loadingData) {

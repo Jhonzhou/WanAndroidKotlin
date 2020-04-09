@@ -10,14 +10,14 @@ import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bee.baselibrary.ErrorState
 import com.bee.baselibrary.base.BaseFragment
-import com.bee.wanandroidkotlin.utils.setOnLoadMoreListener
-import com.bee.wanandroidkotlin.utils.showErrorPage
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.ui.common.adapter.ArticleListAdapter
 import com.bee.wanandroidkotlin.ui.home.viewmodel.SearchViewModel
 import com.bee.wanandroidkotlin.utils.ToastAlone
+import com.bee.wanandroidkotlin.utils.observeErrorData
+import com.bee.wanandroidkotlin.utils.observeLoadData
+import com.bee.wanandroidkotlin.utils.setOnLoadMoreListener
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.title_search_input_layout.*
 
@@ -106,29 +106,12 @@ class SearchFragment : BaseFragment() {
                 srlRefresh.isEnabled = true
             }
         })
-        mViewModel.loadingData.observe(this, Observer {
-            if (it) {
-                showLoadingDialog()
-            } else {
-                srlRefresh.isRefreshing = false
-                hideLoadingDialog()
-            }
-        })
-        mViewModel.showErrorPageData.observe(this, Observer {
-            when (it) {
-                ErrorState.NET_ERROR -> {
-                    showErrorPage(it) {
-                        mViewModel.search(etSearch.text.toString())
-                        showCorrectPage()
-                    }
-                }
-                ErrorState.NO_DATA -> {
-                    showErrorPage(it)
-                }
-                else -> {
-                }
-            }
-        })
+        observeLoadData(mViewModel.loadingData) {
+            srlRefresh.isRefreshing = false
+        }
+        observeErrorData(mViewModel.showErrorPageData) {
+            mViewModel.search(etSearch.text.toString())
+        }
     }
 
     override fun initData(arguments: Bundle?) {
