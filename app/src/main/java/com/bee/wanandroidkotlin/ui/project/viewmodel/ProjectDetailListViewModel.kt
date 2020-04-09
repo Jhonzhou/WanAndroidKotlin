@@ -3,7 +3,7 @@ package com.bee.wanandroidkotlin.ui.project.viewmodel
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.bee.baselibrary.ErrorState
-import com.bee.baselibrary.utils.launchMain
+import com.bee.wanandroidkotlin.utils.launchMain
 import com.bee.wanandroidkotlin.base.BaseAppViewModel
 import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
 import com.bee.wanandroidkotlin.http.beans.TagResponseBean

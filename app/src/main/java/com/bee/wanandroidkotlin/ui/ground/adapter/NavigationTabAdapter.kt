@@ -5,7 +5,8 @@ import com.bee.baselibrary.adapter.BaseRvAdapter
 import com.bee.baselibrary.adapter.BaseViewHolder
 import com.bee.baselibrary.adapter.ItemViewDelegate
 import com.bee.wanandroidkotlin.R
-import com.bee.wanandroidkotlin.http.beans.TagResponseBean
+import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
+import com.bee.wanandroidkotlin.http.beans.NavigationResponseBean
 import com.bee.wanandroidkotlin.listener.TagClickListener
 import com.zhy.view.flowlayout.TagFlowLayout
 
@@ -16,29 +17,30 @@ import com.zhy.view.flowlayout.TagFlowLayout
  * @date:  2020/4/9
  * @Description:
  */
-class SystemTagListAdapter : BaseRvAdapter<TagResponseBean>() {
-    private var mTagClickListener: TagClickListener<TagResponseBean>? = null
+class NavigationTabAdapter : BaseRvAdapter<NavigationResponseBean>() {
+
+    private var mTagClickListener: TagClickListener<ArticleListResponseData>? = null
 
     init {
-        addDelegate(object : ItemViewDelegate<TagResponseBean> {
+        addDelegate(object : ItemViewDelegate<NavigationResponseBean> {
             override fun getItemViewLayoutId(): Int = R.layout.item_tag_title_list
 
-            override fun isForViewType(item: TagResponseBean, position: Int): Boolean = true
+            override fun isForViewType(item: NavigationResponseBean, position: Int): Boolean = true
 
-            override fun convert(holder: BaseViewHolder, item: TagResponseBean, position: Int) {
+            override fun convert(holder: BaseViewHolder, item: NavigationResponseBean, position: Int) {
                 val tvTitle = holder.getView<TextView>(R.id.tv_title)
                 tvTitle.text = item.name ?: ""
 
                 val tflContent = holder.getView<TagFlowLayout>(R.id.tflContent)
-                val mAdapter = SystemTagDetailListAdapter(
+                val mAdapter = NavigationTabDetailListAdapter(
                         holder.getConvertView().context,
-                        item.children!!)
+                        item.articles!!)
                 mTagClickListener?.let {
                     tflContent.setOnTagClickListener { _, position, _ ->
-                        if (position >= item.children.size) {
+                        if (position >= item.articles.size) {
                             return@setOnTagClickListener false
                         }
-                        it.onClick(item.children[position])
+                        it.onClick(item.articles[position])
                         true
                     }
                 }
@@ -49,8 +51,7 @@ class SystemTagListAdapter : BaseRvAdapter<TagResponseBean>() {
         })
     }
 
-    fun setTagClickListener(clickListener: TagClickListener<TagResponseBean>) {
+    fun setTagClickListener(clickListener: TagClickListener<ArticleListResponseData>) {
         mTagClickListener = clickListener
     }
-
 }

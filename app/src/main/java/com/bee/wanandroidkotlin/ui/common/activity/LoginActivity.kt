@@ -5,12 +5,12 @@ import android.text.TextUtils
 import android.view.View
 import com.bee.baselibrary.base.BaseActivity
 import com.bee.baselibrary.utils.Preference
-import com.bee.baselibrary.utils.launchMain
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.constants.Constants
 import com.bee.wanandroidkotlin.http.WanAndroidModel
 import com.bee.wanandroidkotlin.ui.common.MainActivity
 import com.bee.wanandroidkotlin.utils.ToastAlone
+import com.bee.wanandroidkotlin.utils.launchMain
 import kotlinx.android.synthetic.main.activity_login.*
 
 /**
@@ -61,8 +61,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             ToastAlone.showToast("密码不能为空")
             return
         }
-        launchMain{
-            showLoading()
+        launchMain {
+            showLoadingDialog()
             val loginResult = WanAndroidModel().login(name.toString(), password.toString())
             loginResult.handlerResult {
                 startActivity(Intent(getMActivity(), MainActivity::class.java))

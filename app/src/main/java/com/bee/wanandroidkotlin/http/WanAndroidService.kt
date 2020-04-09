@@ -79,4 +79,10 @@ interface WanAndroidService {
      */
     @GET(HttpConstants.TREE_DETAIL_LIST)
     fun getTreeDetailList(@Path("page") page: Int, @Query("cid") cid: Int): Call<ResponseResult<PageListResponse>>
+
+    /**
+     * 导航数据
+     */
+    @GET(HttpConstants.NAVIGATION_LIST)
+    fun getNavigationList(): Call<ResponseResult<List<NavigationResponseBean>>>
 }

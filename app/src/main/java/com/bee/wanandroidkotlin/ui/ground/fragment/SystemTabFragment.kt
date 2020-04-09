@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bee.baselibrary.ErrorState
 import com.bee.baselibrary.base.BaseFragment
-import com.bee.baselibrary.utils.showErrorPage
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.ui.ground.adapter.SystemTagListAdapter
 import com.bee.wanandroidkotlin.ui.ground.viewmodel.SystemTagViewModel
+import com.bee.wanandroidkotlin.utils.showErrorPage
 import kotlinx.android.synthetic.main.fragment_system_tab.*
 
 /**

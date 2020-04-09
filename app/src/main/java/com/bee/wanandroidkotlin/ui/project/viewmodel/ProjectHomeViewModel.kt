@@ -5,8 +5,8 @@ import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import com.bee.baselibrary.ErrorState
 import com.bee.baselibrary.utils.Preference
-import com.bee.baselibrary.utils.launchMain
-import com.bee.baselibrary.utils.tryCatch
+import com.bee.wanandroidkotlin.utils.launchMain
+import com.bee.wanandroidkotlin.utils.tryCatch
 import com.bee.wanandroidkotlin.base.BaseAppViewModel
 import com.bee.wanandroidkotlin.constants.Constants
 import com.bee.wanandroidkotlin.http.beans.TagResponseBean

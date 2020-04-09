@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bee.baselibrary.ErrorState
 import com.bee.baselibrary.base.BaseFragment
-import com.bee.baselibrary.utils.showErrorPage
+import com.bee.wanandroidkotlin.utils.showErrorPage
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.ui.project.adapter.HomeProjectTabAdapter
 import com.bee.wanandroidkotlin.ui.project.viewmodel.ProjectHomeViewModel

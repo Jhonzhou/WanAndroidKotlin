@@ -12,8 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bee.baselibrary.ErrorState
 import com.bee.baselibrary.base.BaseFragment
-import com.bee.baselibrary.utils.setOnLoadMoreListener
-import com.bee.baselibrary.utils.showErrorPage
+import com.bee.wanandroidkotlin.utils.setOnLoadMoreListener
+import com.bee.wanandroidkotlin.utils.showErrorPage
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.ui.common.adapter.ArticleListAdapter
 import com.bee.wanandroidkotlin.ui.home.viewmodel.SearchViewModel

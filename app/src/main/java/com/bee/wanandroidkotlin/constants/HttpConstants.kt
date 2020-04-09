@@ -54,5 +54,10 @@ object HttpConstants {
      */
     const val TREE_DETAIL_LIST = "/article/list/{page}/json"
 
+    /**
+     * 导航数据
+     */
+    const val NAVIGATION_LIST = "/navi/json"
+
 
 }

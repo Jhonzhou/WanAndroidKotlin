@@ -1,7 +1,7 @@
 package com.bee.wanandroidkotlin.http
 
 import com.bee.baselibrary.base.BaseDataModel
-import com.bee.baselibrary.utils.tryCatch
+import com.bee.wanandroidkotlin.utils.tryCatch
 import com.bee.wanandroidkotlin.http.WanAndroidModelManager.handleResponse
 import com.bee.wanandroidkotlin.http.WanAndroidModelManager.jobMap
 import com.bee.wanandroidkotlin.http.WanAndroidModelManager.service
@@ -131,6 +131,14 @@ class WanAndroidModel : BaseDataModel() {
     suspend fun getTreeTagList(): ResponseResult<List<TagResponseBean>> {
         return withHttpContext {
             val mProjectTabListCall = service.getTreeTagList()
+            val response = mProjectTabListCall.execute()
+            handleResponse(response)
+        }
+    }
+
+    suspend fun getNavigationList(): ResponseResult<List<NavigationResponseBean>> {
+        return withHttpContext {
+            val mProjectTabListCall = service.getNavigationList()
             val response = mProjectTabListCall.execute()
             handleResponse(response)
         }

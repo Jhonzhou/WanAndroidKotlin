@@ -5,12 +5,12 @@ import android.text.TextUtils
 import android.view.View
 import com.bee.baselibrary.base.BaseActivity
 import com.bee.baselibrary.utils.Preference
-import com.bee.baselibrary.utils.launchMain
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.constants.Constants
 import com.bee.wanandroidkotlin.http.WanAndroidModel
 import com.bee.wanandroidkotlin.ui.common.MainActivity
 import com.bee.wanandroidkotlin.utils.ToastAlone
+import com.bee.wanandroidkotlin.utils.launchMain
 import kotlinx.android.synthetic.main.activity_login.etName
 import kotlinx.android.synthetic.main.activity_login.etPassword
 import kotlinx.android.synthetic.main.activity_register.*
@@ -64,7 +64,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
                     return
                 }
                 launchMain {
-                    showLoading()
+                    showLoadingDialog()
                     val responseResult = WanAndroidModel().register(name.toString(), password.toString(), rePassword.toString())
                     responseResult.handlerResult {
                         startActivity(Intent(getMActivity(), MainActivity::class.java))

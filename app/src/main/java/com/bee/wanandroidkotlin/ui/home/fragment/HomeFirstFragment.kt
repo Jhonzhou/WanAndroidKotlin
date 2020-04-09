@@ -8,13 +8,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bee.baselibrary.ErrorState
 import com.bee.baselibrary.base.BaseFragment
-import com.bee.baselibrary.utils.setOnLoadMoreListener
-import com.bee.baselibrary.utils.showErrorPage
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.ui.common.activity.SearchActivity
 import com.bee.wanandroidkotlin.ui.common.adapter.ArticleListAdapter
 import com.bee.wanandroidkotlin.ui.home.adapter.HomeBannerAdapter
 import com.bee.wanandroidkotlin.ui.home.viewmodel.HomeFirstViewModel
+import com.bee.wanandroidkotlin.utils.setOnLoadMoreListener
+import com.bee.wanandroidkotlin.utils.showErrorPage
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.fragment_home_first.*
 import kotlin.math.abs

@@ -85,7 +85,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }.commit()
     }
 
-    fun showLoading(content: String = "") {
+    fun showLoadingDialog(content: String = "") {
 
         if (loadingDialog == null) {
             loadingDialog = TipDialog.Builder(this)
