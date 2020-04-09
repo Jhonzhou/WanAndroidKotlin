@@ -23,10 +23,10 @@
 
     <!--<color name="red">#FF3737</color>-->
     <color name="white">#ffffff</color>
+    <color name="text_black">#333333</color>
     <color name="black">#ff000000</color>
     <color name="theme_blue">#ff028be6</color>
     <color name="theme_blue_gray">#ff199bf1</color>
-    <color name="text_black">#ff333333</color>
     <color name="background_tab_pressed">#6633B5E5</color>
     <color name="text_gray">#7A7F85</color>
     <color name="app_black_light">#666666</color>

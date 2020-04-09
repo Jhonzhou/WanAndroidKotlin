@@ -6,7 +6,7 @@ import com.bee.baselibrary.ErrorState
 import com.bee.baselibrary.utils.launchMain
 import com.bee.wanandroidkotlin.base.BaseAppViewModel
 import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
-import com.bee.wanandroidkotlin.http.beans.ProjectTabResponseBean
+import com.bee.wanandroidkotlin.http.beans.TagResponseBean
 
 /**
  *
@@ -18,12 +18,12 @@ import com.bee.wanandroidkotlin.http.beans.ProjectTabResponseBean
 class ProjectDetailListViewModel(application: Application) : BaseAppViewModel(application) {
     private var currentPage = 0
     var isLoaded = false
-    var initData: ProjectTabResponseBean? = null
+    var initData: TagResponseBean? = null
     val detailListLiveData: MutableLiveData<ArrayList<ArticleListResponseData>> by lazy {
         MutableLiveData<ArrayList<ArticleListResponseData>>()
     }
 
-    fun initData(responseBean: ProjectTabResponseBean?) {
+    fun initData(responseBean: TagResponseBean?) {
         initData = responseBean
     }
 

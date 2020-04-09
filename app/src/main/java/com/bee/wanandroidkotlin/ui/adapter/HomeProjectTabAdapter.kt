@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.bee.wanandroidkotlin.constants.Constants
-import com.bee.wanandroidkotlin.http.beans.ProjectTabResponseBean
+import com.bee.wanandroidkotlin.http.beans.TagResponseBean
 import com.bee.wanandroidkotlin.ui.fragment.ProjectDetailListFragment
 
 /**
@@ -15,7 +15,7 @@ import com.bee.wanandroidkotlin.ui.fragment.ProjectDetailListFragment
  * @Description:
  */
 class HomeProjectTabAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
-    private val mDataList = arrayListOf<ProjectTabResponseBean>()
+    private val mDataList = arrayListOf<TagResponseBean>()
     override fun getItemCount(): Int = mDataList.size
 
     override fun createFragment(position: Int): Fragment {
@@ -35,7 +35,7 @@ class HomeProjectTabAdapter(fragment: Fragment) : FragmentStateAdapter(fragment)
         return mDataList[position].id.toLong()
     }
 
-    fun getItem(position: Int): ProjectTabResponseBean? {
+    fun getItem(position: Int): TagResponseBean? {
         return if (mDataList.size > position) {
             mDataList[position]
         } else {
@@ -43,7 +43,7 @@ class HomeProjectTabAdapter(fragment: Fragment) : FragmentStateAdapter(fragment)
         }
     }
 
-    fun setData(resultList: List<ProjectTabResponseBean>?) {
+    fun setData(resultList: List<TagResponseBean>?) {
         mDataList.clear()
         resultList?.let {
             mDataList.addAll(it)

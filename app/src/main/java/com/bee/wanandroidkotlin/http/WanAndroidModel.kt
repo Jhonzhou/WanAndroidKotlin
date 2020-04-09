@@ -17,6 +17,44 @@ import kotlinx.coroutines.*
  * @Description:
  */
 class WanAndroidModel : BaseDataModel() {
+    override fun onDestroy() {
+        val jobList = jobMap[this]
+        jobList?.apply {
+            forEach {
+                tryCatch {
+                    if (it.isActive) {
+                        it.cancel()
+                    }
+                }
+            }
+        }
+        jobMap.remove(this)
+
+    }
+
+
+    private fun addToCancelMap(job: Job) {
+        var list = jobMap[this]
+        list = list ?: arrayListOf()
+        list.add(job)
+        jobMap[this] = list
+        jobMap.remove(this)
+    }
+
+    private suspend fun <T> withHttpContext(block: () -> ResponseResult<T>): ResponseResult<T> {
+        val job = GlobalScope.async {
+            withContext(Dispatchers.IO) {
+                tryCatchAndResult {
+                    block()
+                }
+
+            }
+        }
+        addToCancelMap(job)
+        job.await()
+        return job.getCompleted()
+    }
+
     suspend fun login(username: String, password: String): ResponseResult<LoginResponseBean> {
         return withHttpContext {
             val loginCall = service.login(username, password)
@@ -74,7 +112,7 @@ class WanAndroidModel : BaseDataModel() {
         }
     }
 
-    suspend fun getProjectTabList(): ResponseResult<List<ProjectTabResponseBean>> {
+    suspend fun getProjectTabList(): ResponseResult<List<TagResponseBean>> {
         return withHttpContext {
             val mProjectTabListCall = service.getProjectTabList()
             val response = mProjectTabListCall.execute()
@@ -82,43 +120,20 @@ class WanAndroidModel : BaseDataModel() {
         }
     }
 
-
-    override fun onDestroy() {
-        val jobList = jobMap[this]
-        jobList?.apply {
-            forEach {
-                tryCatch {
-                    if (it.isActive) {
-                        it.cancel()
-                    }
-                }
-            }
+    suspend fun getTreeDetailList(page: Int, cId: Int): ResponseResult<PageListResponse> {
+        return withHttpContext {
+            val mProjectTabListCall = service.getTreeDetailList(page, cId)
+            val response = mProjectTabListCall.execute()
+            handleResponse(response)
         }
-        jobMap.remove(this)
-
     }
 
-
-    private fun addToCancelMap(job: Job) {
-        var list = jobMap[this]
-        list = list ?: arrayListOf()
-        list.add(job)
-        jobMap[this] = list
-        jobMap.remove(this)
-    }
-
-    private suspend fun <T> withHttpContext(block: () -> ResponseResult<T>): ResponseResult<T> {
-        val job = GlobalScope.async {
-            withContext(Dispatchers.IO) {
-                tryCatchAndResult {
-                    block()
-                }
-
-            }
+    suspend fun getTreeTagList(): ResponseResult<List<TagResponseBean>> {
+        return withHttpContext {
+            val mProjectTabListCall = service.getTreeTagList()
+            val response = mProjectTabListCall.execute()
+            handleResponse(response)
         }
-        addToCancelMap(job)
-        job.await()
-        return job.getCompleted()
     }
 
 

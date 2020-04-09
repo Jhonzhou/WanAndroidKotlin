@@ -45,6 +45,14 @@ object HttpConstants {
      * 项目分类列表详情
      */
     const val PROJECT_TAB_DETAIL_LIST = "project/list/{page}/json"
+    /**
+     * 体系数据
+     */
+    const val TREE_TAG = "/tree/json"
+    /**
+     * 体系对应列表
+     */
+    const val TREE_DETAIL_LIST = "/article/list/{page}/json"
 
 
 }

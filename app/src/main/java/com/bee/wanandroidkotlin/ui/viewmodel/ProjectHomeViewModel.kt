@@ -9,7 +9,7 @@ import com.bee.baselibrary.utils.launchMain
 import com.bee.baselibrary.utils.tryCatch
 import com.bee.wanandroidkotlin.base.BaseAppViewModel
 import com.bee.wanandroidkotlin.constants.Constants
-import com.bee.wanandroidkotlin.http.beans.ProjectTabResponseBean
+import com.bee.wanandroidkotlin.http.beans.TagResponseBean
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -23,8 +23,8 @@ import com.google.gson.reflect.TypeToken
 class ProjectHomeViewModel(application: Application) : BaseAppViewModel(application) {
     private var currentPage: Int = 0
     private var localTabListString: String? by Preference(Constants.SP.SP_PROJECT_TAB_LIST, "")
-    val mProjectTagList: MutableLiveData<List<ProjectTabResponseBean>> by lazy {
-        MutableLiveData<List<ProjectTabResponseBean>>()
+    val mProjectTagList: MutableLiveData<List<TagResponseBean>> by lazy {
+        MutableLiveData<List<TagResponseBean>>()
     }
 
 
@@ -32,9 +32,9 @@ class ProjectHomeViewModel(application: Application) : BaseAppViewModel(applicat
         if (!TextUtils.isEmpty(localTabListString)) {
             tryCatch {
                 val spTabList = Gson()
-                        .fromJson<List<ProjectTabResponseBean>>(
+                        .fromJson<List<TagResponseBean>>(
                                 localTabListString,
-                                object : TypeToken<List<ProjectTabResponseBean>>() {}.type)
+                                object : TypeToken<List<TagResponseBean>>() {}.type)
                 mProjectTagList.postValue(spTabList)
             }
         }
@@ -58,12 +58,4 @@ class ProjectHomeViewModel(application: Application) : BaseAppViewModel(applicat
         }
     }
 
-    fun pullOrInitDeatilList(cid: Int) {
-        currentPage = 0
-
-    }
-
-    fun getProjectList(cId: Int) {
-
-    }
 }

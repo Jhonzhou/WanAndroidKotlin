@@ -60,11 +60,23 @@ interface WanAndroidService {
      * 项目分类
      */
     @GET(HttpConstants.PROJECT_TAB)
-    fun getProjectTabList(): Call<ResponseResult<List<ProjectTabResponseBean>>>
+    fun getProjectTabList(): Call<ResponseResult<List<TagResponseBean>>>
 
     /**
      * 项目分类列表详情
      */
     @GET(HttpConstants.PROJECT_TAB_DETAIL_LIST)
     fun getProjectDetailList(@Path("page") page: Int, @Query("cid") cid: Int): Call<ResponseResult<PageListResponse>>
+
+    /**
+     * 体系数据
+     */
+    @GET(HttpConstants.TREE_TAG)
+    fun getTreeTagList(): Call<ResponseResult<List<TagResponseBean>>>
+
+    /**
+     * 项目分类列表详情
+     */
+    @GET(HttpConstants.TREE_DETAIL_LIST)
+    fun getTreeDetailList(@Path("page") page: Int, @Query("cid") cid: Int): Call<ResponseResult<PageListResponse>>
 }

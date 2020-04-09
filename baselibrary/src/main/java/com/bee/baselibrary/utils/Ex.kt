@@ -57,6 +57,8 @@ fun RecyclerView.setOnLoadMoreListener(block: (RecyclerView) -> Unit) {
     })
 }
 
+fun getRandomColor(): String = "#${Integer.toHexString((Math.random() * 16777215).toInt())}"
+
 fun BaseFragment.showCorrectPage() {
     flBaseContainer.visibility = View.VISIBLE
     clErrorLayout.visibility = View.GONE

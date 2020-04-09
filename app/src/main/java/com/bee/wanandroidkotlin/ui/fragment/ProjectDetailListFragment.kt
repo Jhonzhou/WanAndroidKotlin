@@ -10,7 +10,7 @@ import com.bee.baselibrary.utils.setOnLoadMoreListener
 import com.bee.baselibrary.utils.showErrorPage
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.constants.Constants
-import com.bee.wanandroidkotlin.http.beans.ProjectTabResponseBean
+import com.bee.wanandroidkotlin.http.beans.TagResponseBean
 import com.bee.wanandroidkotlin.ui.adapter.ArticleListAdapter
 import com.bee.wanandroidkotlin.ui.viewmodel.ProjectDetailListViewModel
 import kotlinx.android.synthetic.main.fragment_project_detail_list.*
@@ -87,7 +87,7 @@ class ProjectDetailListFragment : BaseFragment() {
     override fun initData(arguments: Bundle?) {
         arguments ?: showErrorPage(ErrorState.NO_DATA)
         if (arguments != null) {
-            val responseBean = arguments.getSerializable(Constants.KEY_DATA) as ProjectTabResponseBean
+            val responseBean = arguments.getSerializable(Constants.KEY_DATA) as TagResponseBean
             mViewModel.initData(responseBean)
             return
         }

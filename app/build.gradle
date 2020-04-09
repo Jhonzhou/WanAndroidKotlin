@@ -45,4 +45,6 @@ dependencies {
     api rootProject.ext.dependencies.okhttp_logging_interceptor
     api rootProject.ext.dependencies.rxjava
     api project(':baselibrary')
+
+    api rootProject.ext.dependencies.flowlayout
 }
