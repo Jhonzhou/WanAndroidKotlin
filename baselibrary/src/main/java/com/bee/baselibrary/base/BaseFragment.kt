@@ -6,7 +6,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.LayoutRes
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.bee.baselibrary.R
 import com.bee.baselibrary.ui.CommonToolBarBuilder
@@ -23,6 +27,10 @@ import kotlinx.android.synthetic.main.layout_common_title.*
  */
 abstract class BaseFragment : Fragment() {
     protected lateinit var toolBarBuilder: CommonToolBarBuilder
+    lateinit var ivErrorContent: ImageView
+    lateinit var tvErrorContent: TextView
+    lateinit var clErrorLayout: ConstraintLayout
+    lateinit var flBaseContainer: FrameLayout
     private var loadingDialog: TipDialog? = null
 
 
@@ -45,6 +53,7 @@ abstract class BaseFragment : Fragment() {
         observeViewModelData()
         initData(arguments)
     }
+
     /**
      * 注册viewModel中数据对象
      */
@@ -58,9 +67,14 @@ abstract class BaseFragment : Fragment() {
         rootView = view
         toolBarBuilder = CommonToolBarBuilder(activity!!, common_toolbar)
         val contentLayoutId = getContentLayoutId()
+        clErrorLayout = rootView.findViewById(R.id.cl_error_page)
+        ivErrorContent = rootView.findViewById(R.id.iv_error_content)
+        tvErrorContent = rootView.findViewById(R.id.tv_error_hint)
+        flBaseContainer = rootView.findViewById(R.id.baseContainer)
         if (contentLayoutId > 0) {
-            layoutInflater.inflate(contentLayoutId, baseContainer)
+            layoutInflater.inflate(contentLayoutId, flBaseContainer)
         }
+
         initView()
     }
 
@@ -108,7 +122,7 @@ abstract class BaseFragment : Fragment() {
 
 
     fun showCorrectPage() {
-        baseContainer.visibility = View.VISIBLE
+        flBaseContainer.visibility = View.VISIBLE
         cl_error_page.visibility = View.GONE
     }
 

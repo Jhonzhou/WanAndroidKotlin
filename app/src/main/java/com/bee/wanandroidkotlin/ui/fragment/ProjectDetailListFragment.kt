@@ -1,7 +1,6 @@
 package com.bee.wanandroidkotlin.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -61,18 +60,15 @@ class ProjectDetailListFragment : BaseFragment() {
         mViewModel.showErrorPageData.observe(this, Observer {
             when (it) {
                 ErrorState.NET_ERROR -> {
-                    Log.e(getLogTag(),"showErrorPageData state: net error")
                     showErrorPage(it) {
                         mViewModel.getDetailList()
                         showCorrectPage()
                     }
                 }
                 ErrorState.NO_DATA -> {
-                    Log.e(getLogTag(),"showErrorPageData state: net error")
                     showErrorPage(it)
                 }
                 else -> {
-                    Log.e(getLogTag(),"showErrorPageData state: net error")
                 }
             }
         })

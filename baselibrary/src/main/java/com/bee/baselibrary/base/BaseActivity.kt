@@ -5,15 +5,16 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.DrawableRes
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.bee.baselibrary.R
 import com.bee.baselibrary.ui.CommonToolBarBuilder
 import com.bee.baselibrary.view.dialog.TipDialog
-import kotlinx.android.synthetic.main.base_fragment_and_activity.*
-import kotlinx.android.synthetic.main.common_error_page.*
 import kotlinx.android.synthetic.main.layout_common_title.*
 
 /**
@@ -22,6 +23,10 @@ import kotlinx.android.synthetic.main.layout_common_title.*
 abstract class BaseActivity : AppCompatActivity() {
     protected lateinit var toolBarBuilder: CommonToolBarBuilder
     private var loadingDialog: TipDialog? = null
+    lateinit var ivErrorContent: ImageView
+    lateinit var tvErrorContent: TextView
+    lateinit var clErrorLayout: ConstraintLayout
+    lateinit var flBaseContainer: FrameLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +54,13 @@ abstract class BaseActivity : AppCompatActivity() {
     private fun initRootView() {
         setContentView(R.layout.base_fragment_and_activity)
         toolBarBuilder = CommonToolBarBuilder(this, common_toolbar)
+        clErrorLayout = findViewById(R.id.cl_error_page)
+        ivErrorContent = findViewById(R.id.iv_error_content)
+        tvErrorContent = findViewById(R.id.tv_error_hint)
+        flBaseContainer = findViewById(R.id.baseContainer)
         val contentLayoutId = getContentLayoutId()
         if (contentLayoutId > 0) {
-            layoutInflater.inflate(contentLayoutId, baseContainer)
+            layoutInflater.inflate(contentLayoutId, flBaseContainer)
         }
     }
 
@@ -118,16 +127,6 @@ abstract class BaseActivity : AppCompatActivity() {
      */
     open fun initListener() {
 
-    }
-
-
-    /**
-     * 显示错误界面
-     */
-    fun showErrorPage(errorContent: String = "网络异常", @DrawableRes errorImage: Int = R.drawable.ic_net_error) {
-        cl_error_page.visibility = View.VISIBLE
-        tv_error_hint.text = errorContent
-        iv_error_content.setImageResource(errorImage)
     }
 
 }

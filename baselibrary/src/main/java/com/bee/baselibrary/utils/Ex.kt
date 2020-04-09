@@ -8,8 +8,6 @@ import com.bee.baselibrary.ErrorState
 import com.bee.baselibrary.R
 import com.bee.baselibrary.base.BaseActivity
 import com.bee.baselibrary.base.BaseFragment
-import kotlinx.android.synthetic.main.base_fragment_and_activity.*
-import kotlinx.android.synthetic.main.common_error_page.*
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -60,8 +58,8 @@ fun RecyclerView.setOnLoadMoreListener(block: (RecyclerView) -> Unit) {
 }
 
 fun BaseFragment.showCorrectPage() {
-    baseContainer.visibility = View.VISIBLE
-    cl_error_page.visibility = View.GONE
+    flBaseContainer.visibility = View.VISIBLE
+    clErrorLayout.visibility = View.GONE
 }
 
 fun BaseFragment.showErrorPage(state: ErrorState, textClickListener: () -> Unit = {}) {
@@ -80,18 +78,18 @@ fun BaseFragment.showErrorPage(state: ErrorState, textClickListener: () -> Unit 
             return
         }
     }
-    baseContainer.visibility = View.GONE
-    cl_error_page.visibility = View.VISIBLE
-    tv_error_hint.text = errorContent
-    iv_error_content.setImageResource(errorImage)
-    tv_error_hint.setOnClickListener {
+    flBaseContainer.visibility = View.GONE
+    clErrorLayout.visibility = View.VISIBLE
+    tvErrorContent.text = errorContent
+    ivErrorContent.setImageResource(errorImage)
+    tvErrorContent.setOnClickListener {
         textClickListener()
     }
 }
 
 fun BaseActivity.showCorrectPage() {
-    baseContainer.visibility = View.VISIBLE
-    cl_error_page.visibility = View.GONE
+    flBaseContainer.visibility = View.VISIBLE
+    clErrorLayout.visibility = View.GONE
 }
 
 fun BaseActivity.showErrorPage(state: ErrorState, textClickListener: () -> Unit = {}) {
@@ -110,11 +108,11 @@ fun BaseActivity.showErrorPage(state: ErrorState, textClickListener: () -> Unit 
             return
         }
     }
-    baseContainer.visibility = View.GONE
-    cl_error_page.visibility = View.VISIBLE
-    tv_error_hint.text = errorContent
-    iv_error_content.setImageResource(errorImage)
-    tv_error_hint.setOnClickListener {
+    clErrorLayout.visibility = View.GONE
+    clErrorLayout.visibility = View.VISIBLE
+    tvErrorContent.text = errorContent
+    ivErrorContent.setImageResource(errorImage)
+    tvErrorContent.setOnClickListener {
         textClickListener()
     }
 }

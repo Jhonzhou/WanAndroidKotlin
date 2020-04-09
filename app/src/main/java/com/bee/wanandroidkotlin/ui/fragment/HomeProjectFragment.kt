@@ -1,7 +1,6 @@
 package com.bee.wanandroidkotlin.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bee.baselibrary.ErrorState
@@ -53,18 +52,15 @@ class HomeProjectFragment : BaseFragment() {
         mViewModel.showErrorPageData.observe(this, Observer {
             when (it) {
                 ErrorState.NET_ERROR -> {
-                    Log.e(getLogTag(),"showErrorPageData state: net error")
                     showErrorPage(it) {
                         mViewModel.getProjectTabList()
                         showCorrectPage()
                     }
                 }
                 ErrorState.NO_DATA -> {
-                    Log.e(getLogTag(),"showErrorPageData state: no data")
                     showErrorPage(it)
                 }
                 else -> {
-                    Log.e(getLogTag(),"showErrorPageData state: ...")
                 }
             }
         })

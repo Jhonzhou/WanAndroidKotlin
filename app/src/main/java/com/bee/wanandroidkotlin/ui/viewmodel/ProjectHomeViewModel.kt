@@ -45,7 +45,9 @@ class ProjectHomeViewModel(application: Application) : BaseAppViewModel(applicat
             loadingData.postValue(true)
             val projectTabListCall = httpModel.getProjectTabList()
             projectTabListCall.handlerResult(errorBlock = {
-                showErrorPageData.postValue(ErrorState.NET_ERROR)
+                if (mProjectTagList.value?.isEmpty() == true) {
+                    showErrorPageData.postValue(ErrorState.NET_ERROR)
+                }
             }) {
                 mProjectTagList.postValue(it.data)
                 if (it.data != null) {
