@@ -15,7 +15,7 @@ import com.bee.wanandroidkotlin.utils.observeErrorData
 import com.bee.wanandroidkotlin.utils.observeLoadData
 import com.bee.wanandroidkotlin.utils.setOnLoadMoreListener
 import com.bee.wanandroidkotlin.utils.showErrorPage
-import kotlinx.android.synthetic.main.fragment_project_detail_list.*
+import kotlinx.android.synthetic.main.common_refresh_and_recycleview.*
 
 /**
  *
@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.fragment_project_detail_list.*
  * @Description:
  */
 class ProjectDetailListFragment : BaseFragment() {
-    override fun getContentLayoutId(): Int = R.layout.fragment_project_detail_list
+    override fun getContentLayoutId(): Int = R.layout.common_refresh_and_recycleview
     private val mViewModel: ProjectDetailListViewModel by lazy {
         ViewModelProvider(this).get(ProjectDetailListViewModel::class.java)
     }

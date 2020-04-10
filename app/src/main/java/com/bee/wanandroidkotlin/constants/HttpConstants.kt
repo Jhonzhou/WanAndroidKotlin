@@ -58,6 +58,14 @@ object HttpConstants {
      * 导航数据
      */
     const val NAVIGATION_LIST = "/navi/json"
+    /**
+     * 公众号列表
+     */
+    const val TENCENT_LIST = "/wxarticle/chapters/json"
+    /**
+     * 公众号详情列表
+     */
+    const val TENCENT_DETAIL_LIST = "wxarticle/list/{cid}/{page}/json"
 
 
 }

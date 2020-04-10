@@ -5,6 +5,7 @@ import com.bee.baselibrary.adapter.BaseRvAdapter
 import com.bee.baselibrary.adapter.BaseViewHolder
 import com.bee.baselibrary.adapter.ItemViewDelegate
 import com.bee.wanandroidkotlin.R
+import com.bee.wanandroidkotlin.base.CommonTabDetailAdapter
 import com.bee.wanandroidkotlin.http.beans.TagResponseBean
 import com.bee.wanandroidkotlin.listener.TagClickListener
 import com.zhy.view.flowlayout.TagFlowLayout
@@ -30,7 +31,7 @@ class SystemTagListAdapter : BaseRvAdapter<TagResponseBean>() {
                 tvTitle.text = item.name ?: ""
 
                 val tflContent = holder.getView<TagFlowLayout>(R.id.tflContent)
-                val mAdapter = SystemTagDetailListAdapter(
+                val mAdapter = CommonTabDetailAdapter(
                         holder.getConvertView().context,
                         item.children!!)
                 mTagClickListener?.let {

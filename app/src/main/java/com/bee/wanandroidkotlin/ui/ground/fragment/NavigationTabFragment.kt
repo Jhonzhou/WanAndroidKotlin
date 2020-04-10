@@ -10,7 +10,7 @@ import com.bee.wanandroidkotlin.ui.ground.adapter.NavigationTabAdapter
 import com.bee.wanandroidkotlin.ui.ground.viewmodel.NavigationTabViewModel
 import com.bee.wanandroidkotlin.utils.observeErrorData
 import com.bee.wanandroidkotlin.utils.observeLoadData
-import kotlinx.android.synthetic.main.fragment_navigation_tab.*
+import kotlinx.android.synthetic.main.common_refresh_and_recycleview.*
 
 /**
  *
@@ -27,12 +27,12 @@ class NavigationTabFragment : BaseFragment() {
         ViewModelProvider(this).get(NavigationTabViewModel::class.java)
     }
 
-    override fun getContentLayoutId(): Int = R.layout.fragment_navigation_tab
+    override fun getContentLayoutId(): Int = R.layout.common_refresh_and_recycleview
 
     override fun initView() {
         toolBarBuilder.hideCommonBaseTitle()
-        rlContent.layoutManager = LinearLayoutManager(context)
-        rlContent.adapter = mAdapter
+        rvContent.layoutManager = LinearLayoutManager(context)
+        rvContent.adapter = mAdapter
     }
 
     override fun initListener() {

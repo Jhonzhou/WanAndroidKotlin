@@ -10,7 +10,7 @@ import com.bee.wanandroidkotlin.ui.ground.adapter.SystemTagListAdapter
 import com.bee.wanandroidkotlin.ui.ground.viewmodel.SystemTagViewModel
 import com.bee.wanandroidkotlin.utils.observeErrorData
 import com.bee.wanandroidkotlin.utils.observeLoadData
-import kotlinx.android.synthetic.main.fragment_system_tab.*
+import kotlinx.android.synthetic.main.common_refresh_and_recycleview.*
 
 /**
  *
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_system_tab.*
  * @Description:
  */
 class SystemTabFragment : BaseFragment() {
-    override fun getContentLayoutId(): Int = R.layout.fragment_system_tab
+    override fun getContentLayoutId(): Int = R.layout.common_refresh_and_recycleview
     private val mAdapter: SystemTagListAdapter by lazy {
         SystemTagListAdapter()
     }

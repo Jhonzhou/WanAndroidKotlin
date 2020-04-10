@@ -41,6 +41,10 @@
             android:name="com.bee.wanandroidkotlin.ui.common.activity.SearchActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ground.activity.TencentDetailListActivity"
+            android:configChanges="keyboard|screenSize|orientation|layoutDirection"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

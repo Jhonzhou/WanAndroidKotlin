@@ -5,6 +5,7 @@ import com.bee.baselibrary.adapter.BaseRvAdapter
 import com.bee.baselibrary.adapter.BaseViewHolder
 import com.bee.baselibrary.adapter.ItemViewDelegate
 import com.bee.wanandroidkotlin.R
+import com.bee.wanandroidkotlin.base.CommonTabDetailAdapter
 import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
 import com.bee.wanandroidkotlin.http.beans.NavigationResponseBean
 import com.bee.wanandroidkotlin.listener.TagClickListener
@@ -32,7 +33,7 @@ class NavigationTabAdapter : BaseRvAdapter<NavigationResponseBean>() {
                 tvTitle.text = item.name ?: ""
 
                 val tflContent = holder.getView<TagFlowLayout>(R.id.tflContent)
-                val mAdapter = NavigationTabDetailListAdapter(
+                val mAdapter = CommonTabDetailAdapter(
                         holder.getConvertView().context,
                         item.articles!!)
                 mTagClickListener?.let {

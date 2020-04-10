@@ -1,5 +1,7 @@
 package com.bee.wanandroidkotlin.http.beans
 
+import com.bee.wanandroidkotlin.beans.BaseTagTitleBean
+
 /**
  *
  *
@@ -38,7 +40,11 @@ data class ArticleListResponseData(val apkLink: String,
                                    val userId: Int,
                                    val visible: Int,
                                    val zan: Int
-) {
+) : BaseTagTitleBean {
+    override fun getTitleName(): String? {
+        return title
+    }
+
     data class TagBean(val name: String, val url: String)
 }
 

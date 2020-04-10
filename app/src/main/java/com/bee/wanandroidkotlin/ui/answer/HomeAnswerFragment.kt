@@ -12,7 +12,7 @@ import com.bee.wanandroidkotlin.R
  * @Description:
  */
 class HomeAnswerFragment : BaseFragment() {
-    override fun getContentLayoutId(): Int = R.layout.fragment_home_answer
+    override fun getContentLayoutId(): Int = R.layout.common_refresh_and_recycleview
     override fun initView() {
         toolBarBuilder.setTitle("问答")
     }

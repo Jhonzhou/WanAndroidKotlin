@@ -85,4 +85,16 @@ interface WanAndroidService {
      */
     @GET(HttpConstants.NAVIGATION_LIST)
     fun getNavigationList(): Call<ResponseResult<List<NavigationResponseBean>>>
+
+    /**
+     * 公众号类别
+     */
+    @GET(HttpConstants.TENCENT_LIST)
+    fun getTencentList(): Call<ResponseResult<List<TagResponseBean>>>
+
+    /**
+     * 公众号详情列表
+     */
+    @GET(HttpConstants.TENCENT_DETAIL_LIST)
+    fun getTencentDetailList(@Path("page") page: Int, @Path("cid") cid: Int): Call<ResponseResult<PageListResponse>>
 }

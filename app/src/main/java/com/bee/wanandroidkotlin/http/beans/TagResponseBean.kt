@@ -1,5 +1,6 @@
 package com.bee.wanandroidkotlin.http.beans
 
+import com.bee.wanandroidkotlin.beans.BaseTagTitleBean
 import java.io.Serializable
 
 /**
@@ -16,4 +17,8 @@ data class TagResponseBean(val children: List<TagResponseBean>?,
                            val order: Int,
                            val parentChapterId: Int,
                            val userControlSetTop: Boolean,
-                           val visible: Int):Serializable
+                           val visible: Int) : Serializable, BaseTagTitleBean {
+    override fun getTitleName(): String? {
+        return name
+    }
+}

@@ -1,12 +1,12 @@
 package com.bee.wanandroidkotlin.http
 
 import com.bee.baselibrary.base.BaseDataModel
-import com.bee.wanandroidkotlin.utils.tryCatch
 import com.bee.wanandroidkotlin.http.WanAndroidModelManager.handleResponse
 import com.bee.wanandroidkotlin.http.WanAndroidModelManager.jobMap
 import com.bee.wanandroidkotlin.http.WanAndroidModelManager.service
 import com.bee.wanandroidkotlin.http.WanAndroidModelManager.tryCatchAndResult
 import com.bee.wanandroidkotlin.http.beans.*
+import com.bee.wanandroidkotlin.utils.tryCatch
 import kotlinx.coroutines.*
 
 /**
@@ -139,6 +139,22 @@ class WanAndroidModel : BaseDataModel() {
     suspend fun getNavigationList(): ResponseResult<List<NavigationResponseBean>> {
         return withHttpContext {
             val mProjectTabListCall = service.getNavigationList()
+            val response = mProjectTabListCall.execute()
+            handleResponse(response)
+        }
+    }
+
+    suspend fun getTencentList(): ResponseResult<List<TagResponseBean>> {
+        return withHttpContext {
+            val mProjectTabListCall = service.getTencentList()
+            val response = mProjectTabListCall.execute()
+            handleResponse(response)
+        }
+    }
+
+    suspend fun getTencentDetailList(page: Int, cid: Int): ResponseResult<PageListResponse> {
+        return withHttpContext {
+            val mProjectTabListCall = service.getTencentDetailList(page, cid)
             val response = mProjectTabListCall.execute()
             handleResponse(response)
         }

@@ -18,7 +18,7 @@ import com.bee.wanandroidkotlin.utils.ToastAlone
 import com.bee.wanandroidkotlin.utils.observeErrorData
 import com.bee.wanandroidkotlin.utils.observeLoadData
 import com.bee.wanandroidkotlin.utils.setOnLoadMoreListener
-import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.common_refresh_and_recycleview.*
 import kotlinx.android.synthetic.main.title_search_input_layout.*
 
 /**
@@ -29,7 +29,7 @@ import kotlinx.android.synthetic.main.title_search_input_layout.*
  * @Description:
  */
 class SearchFragment : BaseFragment() {
-    override fun getContentLayoutId(): Int = R.layout.fragment_search
+    override fun getContentLayoutId(): Int = R.layout.common_refresh_and_recycleview
     private val mViewModel: SearchViewModel by lazy {
         ViewModelProvider(this).get(SearchViewModel::class.java)
     }
