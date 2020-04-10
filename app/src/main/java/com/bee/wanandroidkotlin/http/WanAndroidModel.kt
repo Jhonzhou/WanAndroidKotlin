@@ -122,40 +122,48 @@ class WanAndroidModel : BaseDataModel() {
 
     suspend fun getTreeDetailList(page: Int, cId: Int): ResponseResult<PageListResponse> {
         return withHttpContext {
-            val mProjectTabListCall = service.getTreeDetailList(page, cId)
-            val response = mProjectTabListCall.execute()
+            val mListCall = service.getTreeDetailList(page, cId)
+            val response = mListCall.execute()
             handleResponse(response)
         }
     }
 
     suspend fun getTreeTagList(): ResponseResult<List<TagResponseBean>> {
         return withHttpContext {
-            val mProjectTabListCall = service.getTreeTagList()
-            val response = mProjectTabListCall.execute()
+            val mListCall = service.getTreeTagList()
+            val response = mListCall.execute()
             handleResponse(response)
         }
     }
 
     suspend fun getNavigationList(): ResponseResult<List<NavigationResponseBean>> {
         return withHttpContext {
-            val mProjectTabListCall = service.getNavigationList()
-            val response = mProjectTabListCall.execute()
+            val mListCall = service.getNavigationList()
+            val response = mListCall.execute()
             handleResponse(response)
         }
     }
 
     suspend fun getTencentList(): ResponseResult<List<TagResponseBean>> {
         return withHttpContext {
-            val mProjectTabListCall = service.getTencentList()
-            val response = mProjectTabListCall.execute()
+            val mListCall = service.getTencentList()
+            val response = mListCall.execute()
             handleResponse(response)
         }
     }
 
     suspend fun getTencentDetailList(page: Int, cid: Int): ResponseResult<PageListResponse> {
         return withHttpContext {
-            val mProjectTabListCall = service.getTencentDetailList(page, cid)
-            val response = mProjectTabListCall.execute()
+            val mListCall = service.getTencentDetailList(page, cid)
+            val response = mListCall.execute()
+            handleResponse(response)
+        }
+    }
+
+    suspend fun getAnswerList(page: Int): ResponseResult<PageListResponse> {
+        return withHttpContext {
+            val mListCall = service.getAnswerList(page)
+            val response = mListCall.execute()
             handleResponse(response)
         }
     }

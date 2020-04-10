@@ -1,8 +1,10 @@
 package com.bee.wanandroidkotlin.ui.answer
 
 import android.os.Bundle
-import com.bee.baselibrary.base.BaseFragment
-import com.bee.wanandroidkotlin.R
+import androidx.lifecycle.ViewModelProvider
+import com.bee.wanandroidkotlin.base.BaseRefreshAndListFragment
+import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
+import com.bee.wanandroidkotlin.ui.common.adapter.ArticleListAdapter
 
 /**
  *
@@ -11,13 +13,22 @@ import com.bee.wanandroidkotlin.R
  * @date:  2020/4/9
  * @Description:
  */
-class HomeAnswerFragment : BaseFragment() {
-    override fun getContentLayoutId(): Int = R.layout.common_refresh_and_recycleview
-    override fun initView() {
-        toolBarBuilder.setTitle("问答")
+class HomeAnswerFragment : BaseRefreshAndListFragment<ArticleListResponseData, ArticleListAdapter, HomeAnswerViewModel>() {
+    override fun initData(arguments: Bundle?) {
+        mViewModel.initOrPullRefreshDataList()
     }
 
-    override fun initData(arguments: Bundle?) {
+    override val mAdapter: ArticleListAdapter by lazy {
+        ArticleListAdapter()
+    }
+    override val mViewModel: HomeAnswerViewModel by lazy {
+        ViewModelProvider(this).get(HomeAnswerViewModel::class.java)
+    }
+
+    override fun initView() {
+        super.initView()
+        toolBarBuilder.hideBackIcon()
+        toolBarBuilder.setTitle("问答")
     }
 
 }

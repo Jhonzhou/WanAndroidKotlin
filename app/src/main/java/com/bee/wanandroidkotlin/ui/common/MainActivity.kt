@@ -6,13 +6,12 @@ import com.bee.baselibrary.base.BaseActivity
 import com.bee.baselibrary.utils.Preference
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.constants.Constants
-import com.bee.wanandroidkotlin.ui.common.activity.LoginActivity
 import com.bee.wanandroidkotlin.ui.answer.HomeAnswerFragment
+import com.bee.wanandroidkotlin.ui.common.activity.LoginActivity
 import com.bee.wanandroidkotlin.ui.ground.fragment.HomeGroundFragment
-import com.bee.wanandroidkotlin.ui.home.fragment.*
+import com.bee.wanandroidkotlin.ui.home.fragment.HomeFirstFragment
 import com.bee.wanandroidkotlin.ui.me.HomeMeFragment
 import com.bee.wanandroidkotlin.ui.project.fragment.HomeProjectFragment
-import com.bee.wanandroidkotlin.utils.ToastAlone
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -59,7 +58,6 @@ class MainActivity : BaseActivity() {
                 }
             }
             showFragment(position)
-            ToastAlone.showToast(it.title.toString())
             true
         }
     }

@@ -50,6 +50,7 @@ interface WanAndroidService {
     @GET(HttpConstants.HOME_LIST)
     fun getHomePageList(@Path("page") page: Int): Call<ResponseResult<PageListResponse>>
 
+
     /**
      * 搜索
      */
@@ -97,4 +98,10 @@ interface WanAndroidService {
      */
     @GET(HttpConstants.TENCENT_DETAIL_LIST)
     fun getTencentDetailList(@Path("page") page: Int, @Path("cid") cid: Int): Call<ResponseResult<PageListResponse>>
+
+    /**
+     * 问答列表
+     */
+    @GET(HttpConstants.ANSWER_LIST)
+    fun getAnswerList(@Path("page") page: Int): Call<ResponseResult<PageListResponse>>
 }

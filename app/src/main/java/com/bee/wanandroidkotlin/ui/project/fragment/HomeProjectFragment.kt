@@ -45,7 +45,7 @@ class HomeProjectFragment : BaseFragment() {
     override fun observeViewModelData() {
         super.observeViewModelData()
         observeLoadData(mViewModel.loadingData)
-        observeErrorData(mViewModel.showErrorPageData){
+        observeErrorData(mViewModel.showErrorPageData) {
             mViewModel.getProjectTabList()
         }
         mViewModel.mProjectTagList.observe(this, Observer {

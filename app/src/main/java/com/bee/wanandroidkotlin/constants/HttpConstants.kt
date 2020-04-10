@@ -66,6 +66,10 @@ object HttpConstants {
      * 公众号详情列表
      */
     const val TENCENT_DETAIL_LIST = "wxarticle/list/{cid}/{page}/json"
+    /**
+     * 问答列表
+     */
+    const val ANSWER_LIST = "wenda/list/{page}/json "
 
 
 }
