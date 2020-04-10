@@ -24,7 +24,6 @@ abstract class BaseRefreshAndListFragment<D, A : BaseRvAdapter<D>, T : BaseRefre
     override fun getContentLayoutId(): Int = R.layout.common_refresh_and_recycleview
 
     override fun initView() {
-
         rvContent.layoutManager = LinearLayoutManager(context)
         rvContent.adapter = mAdapter
     }

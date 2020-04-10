@@ -1,11 +1,9 @@
 package com.bee.wanandroidkotlin.ui.ground.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.MutableLiveData
 import com.bee.baselibrary.ErrorState
-import com.bee.wanandroidkotlin.base.BaseAppViewModel
+import com.bee.wanandroidkotlin.base.BaseRefreshAndListViewModel
 import com.bee.wanandroidkotlin.http.beans.TagResponseBean
-import com.bee.wanandroidkotlin.utils.launchMain
 
 /**
  *
@@ -15,30 +13,22 @@ import com.bee.wanandroidkotlin.utils.launchMain
  * @Description:
  */
 
-class SystemTagViewModel(application: Application) : BaseAppViewModel(application) {
-    val mSystemTagList: MutableLiveData<List<TagResponseBean>> by lazy {
-        MutableLiveData<List<TagResponseBean>>()
-    }
-
-
-    fun getTreeTabList() {
-        launchMain {
-            loadingData.postValue(true)
-            val projectTabListCall = httpModel.getTreeTagList()
-            projectTabListCall.handlerResult(errorBlock = {
-                if (mSystemTagList.value?.isEmpty() !=false) {
-                    showErrorPageData.postValue(ErrorState.NET_ERROR)
-                }
-            }) {
-
-                if (it.data != null) {
-                    mSystemTagList.postValue(it.data)
-                } else {
-                    showErrorPageData.postValue(ErrorState.NO_DATA)
-                }
+class SystemTagViewModel(application: Application) : BaseRefreshAndListViewModel<TagResponseBean>(application) {
+    override suspend fun getDataFromRepository(preResultList: ArrayList<TagResponseBean>): Boolean {
+        var result = true
+        val projectTabListCall = httpModel.getTreeTagList()
+        projectTabListCall.handlerResult(errorBlock = {
+            if (preResultList.isEmpty()) {
+                showErrorPageData.postValue(ErrorState.NET_ERROR)
+                result = false
             }
-            loadingData.postValue(false)
+        }) {
+            it.data?.apply {
+                preResultList.addAll(this)
+            }
         }
+
+        return result
     }
 
 }
