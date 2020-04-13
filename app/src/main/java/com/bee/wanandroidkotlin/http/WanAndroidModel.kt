@@ -167,6 +167,13 @@ class WanAndroidModel : BaseDataModel() {
             handleResponse(response)
         }
     }
+    suspend fun getIntegral(): ResponseResult<IntegralResponseData> {
+        return withHttpContext {
+            val mListCall = service.getIntegral()
+            val response = mListCall.execute()
+            handleResponse(response)
+        }
+    }
 
 
 }

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/vTag"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_divider" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_left"
+            android:layout_marginLeft="@dimen/padding_left"
+            android:layout_marginEnd="@dimen/padding_right"
+            android:layout_marginRight="@dimen/padding_right"
+            android:layout_toStartOf="@+id/tvRight"
+            android:layout_toLeftOf="@+id/tvRight"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/text_black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="积分" />
+
+        <TextView
+            android:id="@+id/tvRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/padding_right"
+            android:layout_marginRight="@dimen/padding_right"
+            android:layout_toStartOf="@+id/ivArrowRight"
+            android:layout_toLeftOf="@+id/ivArrowRight"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_2"
+            tools:text="1000" />
+
+        <ImageView
+            android:id="@+id/ivArrowRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="@dimen/padding_right"
+            android:layout_marginRight="@dimen/padding_right"
+            android:src="@drawable/ic_arrow_right" />
+    </RelativeLayout>
+
+    <View
+        android:layout_marginStart="@dimen/padding_left"
+        android:layout_marginLeft="@dimen/padding_left"
+        android:layout_width="match_parent"
+        android:background="@color/color_divider"
+        android:id="@+id/vDivider"
+        android:layout_height="1dp" />
+</LinearLayout>

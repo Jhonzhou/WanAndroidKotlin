@@ -16,7 +16,7 @@
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:background="@drawable/mt" />
+            android:background="@drawable/ic_logo_blue" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilName"

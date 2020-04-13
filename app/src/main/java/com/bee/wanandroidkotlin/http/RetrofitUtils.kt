@@ -11,8 +11,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import javax.net.ssl.HostnameVerifier
-import javax.net.ssl.SSLSession
 
 /**
  *
@@ -116,16 +114,10 @@ object RetrofitUtils {
         val set = HashSet<String>()
         cookies
                 .map { cookie ->
-                    cookie.split(";".toRegex()).dropLastWhile {
-                        it.isEmpty()
-                    }.toTypedArray()
+                    cookie.split(";".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
                 }
                 .forEach {
-                    it.filterNot {
-                        set.contains(it)
-                    }.forEach {
-                        set.add(it)
-                    }
+                    it.filterNot { set.contains(it) }.forEach { set.add(it) }
                 }
 
         val ite = set.iterator()

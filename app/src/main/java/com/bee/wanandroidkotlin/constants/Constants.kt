@@ -14,7 +14,10 @@ object Constants {
         const val SP_LOGIN = "sp_login"
         const val SP_URL_COOKIE = "SP_url_cookie"
         const val SP_HOST_COOKIE = "sp_host_cookie"
+        //项目tablist
         const val SP_PROJECT_TAB_LIST = "sp_project_tab_list"
+        //积分
+        const val SP_INTEGRAL = "sp_integral"
 
     }
 

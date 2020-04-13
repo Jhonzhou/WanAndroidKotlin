@@ -98,10 +98,15 @@ interface WanAndroidService {
      */
     @GET(HttpConstants.TENCENT_DETAIL_LIST)
     fun getTencentDetailList(@Path("page") page: Int, @Path("cid") cid: Int): Call<ResponseResult<PageListResponse>>
-
     /**
      * 问答列表
      */
     @GET(HttpConstants.ANSWER_LIST)
     fun getAnswerList(@Path("page") page: Int): Call<ResponseResult<PageListResponse>>
+
+    /**
+     * 积分
+     */
+    @GET(HttpConstants.INTEGRAL)
+    fun getIntegral(): Call<ResponseResult<IntegralResponseData>>
 }

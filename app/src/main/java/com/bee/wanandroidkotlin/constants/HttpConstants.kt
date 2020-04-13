@@ -71,5 +71,10 @@ object HttpConstants {
      */
     const val ANSWER_LIST = "wenda/list/{page}/json "
 
+    /**
+     * 获取积分
+     */
+    const val INTEGRAL = "lg/coin/userinfo/json"
+
 
 }
