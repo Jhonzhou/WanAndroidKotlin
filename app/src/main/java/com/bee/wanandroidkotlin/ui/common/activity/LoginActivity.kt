@@ -1,8 +1,10 @@
 package com.bee.wanandroidkotlin.ui.common.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.text.TextUtils
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.bee.baselibrary.base.BaseActivity
 import com.bee.baselibrary.utils.Preference
 import com.bee.wanandroidkotlin.R
@@ -20,7 +22,30 @@ import kotlinx.android.synthetic.main.activity_login.*
  * @date:  2020/3/20
  * @Description:
  */
+private const val KEY_NEED_BACK = "KEY_NEED_BACK"
+private const val REQUEST_CODE_REGIST = 101
+
 class LoginActivity : BaseActivity(), View.OnClickListener {
+    companion object {
+        fun startForResult(fragment: Fragment, requestCode: Int) {
+            val intent = Intent(fragment.context, LoginActivity::class.java)
+            intent.putExtra(KEY_NEED_BACK, true)
+            fragment.startActivityForResult(intent, requestCode)
+        }
+
+        fun startForResult(activity: Activity, requestCode: Int) {
+            val intent = Intent(activity, LoginActivity::class.java)
+            intent.putExtra(KEY_NEED_BACK, true)
+            activity.startActivityForResult(intent, requestCode)
+        }
+
+        fun start(activity: Activity) {
+            val intent = Intent(activity, LoginActivity::class.java)
+            activity.startActivity(intent)
+        }
+    }
+
+    private var isNeedBack = false
 
     override fun getContentLayoutId(): Int = R.layout.activity_login
 
@@ -32,6 +57,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initData(intent: Intent?) {
+        intent?.apply {
+            isNeedBack = getBooleanExtra(KEY_NEED_BACK, false)
+        }
     }
 
     override fun onClick(v: View?) {
@@ -42,7 +70,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
             }
             R.id.tvRegister -> {
-                startActivity(Intent(this, RegisterActivity::class.java))
+                startActivityForResult(Intent(this, RegisterActivity::class.java), REQUEST_CODE_REGIST)
             }
             else -> {
                 return
@@ -65,14 +93,30 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             showLoadingDialog()
             val loginResult = WanAndroidModel().login(name.toString(), password.toString())
             loginResult.handlerResult {
-                startActivity(Intent(getMActivity(), MainActivity::class.java))
-                var isLogin by Preference(Constants.SP.SP_LOGIN, false)
-                isLogin = true
-                ToastAlone.showToast("登录成功")
-                finish()
+                loginSuccess()
             }
             hideLoadingDialog()
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_REGIST) {
+            if (resultCode == Activity.RESULT_OK) {
+                loginSuccess()
+            }
+        }
+    }
+
+    private fun loginSuccess() {
+        var isLogin by Preference(Constants.SP.SP_LOGIN, false)
+        isLogin = true
+        ToastAlone.showToast("登录成功")
+        if (isNeedBack) {
+            setResult(Activity.RESULT_OK)
+        } else {
+            startActivity(Intent(getMActivity(), MainActivity::class.java))
+        }
+        finish()
+    }
 }

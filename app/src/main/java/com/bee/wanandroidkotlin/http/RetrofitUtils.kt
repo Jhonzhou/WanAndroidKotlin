@@ -4,7 +4,6 @@ import android.text.TextUtils
 import android.util.Log
 import com.bee.baselibrary.utils.Preference
 import com.bee.wanandroidkotlin.BuildConfig
-import com.bee.wanandroidkotlin.constants.Constants
 import com.bee.wanandroidkotlin.constants.HttpConstants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -62,6 +61,8 @@ object RetrofitUtils {
                             val cookies = response.headers(SET_COOKIE_KEY)
                             val encodeCookie = encodeCookie(cookies)
                             saveCookie(encodeCookie, requestUrl, host)
+                        }else if (requestUrl.contains(HttpConstants.LOGOUT)){
+
                         }
                         response
                     }
@@ -97,11 +98,11 @@ object RetrofitUtils {
     private fun saveCookie(cookie: String?, url: String?, host: String?) {
         cookie ?: return
         url ?: return
-        var urlCookie: String by Preference(Constants.SP.SP_URL_COOKIE, cookie)
+        var urlCookie: String by Preference(url, cookie)
         @Suppress("UNUSED_VALUE")
         urlCookie = cookie
         host ?: return
-        var hostCookie: String by Preference(Constants.SP.SP_HOST_COOKIE, cookie)
+        var hostCookie: String by Preference(host, cookie)
         @Suppress("UNUSED_VALUE")
         hostCookie = cookie
     }

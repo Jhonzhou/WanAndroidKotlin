@@ -55,6 +55,13 @@ class WanAndroidModel : BaseDataModel() {
         return job.getCompleted()
     }
 
+    suspend fun logout(): ResponseResult<Any> {
+        return withHttpContext {
+            val loginCall = service.logout()
+            val response = loginCall.execute()
+            handleResponse(response)
+        }
+    }
     suspend fun login(username: String, password: String): ResponseResult<LoginResponseBean> {
         return withHttpContext {
             val loginCall = service.login(username, password)

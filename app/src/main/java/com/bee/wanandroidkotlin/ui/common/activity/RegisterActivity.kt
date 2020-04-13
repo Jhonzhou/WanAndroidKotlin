@@ -1,14 +1,12 @@
 package com.bee.wanandroidkotlin.ui.common.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.text.TextUtils
 import android.view.View
 import com.bee.baselibrary.base.BaseActivity
-import com.bee.baselibrary.utils.Preference
 import com.bee.wanandroidkotlin.R
-import com.bee.wanandroidkotlin.constants.Constants
 import com.bee.wanandroidkotlin.http.WanAndroidModel
-import com.bee.wanandroidkotlin.ui.common.MainActivity
 import com.bee.wanandroidkotlin.utils.ToastAlone
 import com.bee.wanandroidkotlin.utils.launchMain
 import kotlinx.android.synthetic.main.activity_login.etName
@@ -67,10 +65,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
                     showLoadingDialog()
                     val responseResult = WanAndroidModel().register(name.toString(), password.toString(), rePassword.toString())
                     responseResult.handlerResult {
-                        startActivity(Intent(getMActivity(), MainActivity::class.java))
-                        var isLogin by Preference(Constants.SP.SP_LOGIN, false)
-                        isLogin = true
-                        ToastAlone.showToast("注册成功")
+                        setResult(Activity.RESULT_OK)
                         finish()
                     }
                     hideLoadingDialog()

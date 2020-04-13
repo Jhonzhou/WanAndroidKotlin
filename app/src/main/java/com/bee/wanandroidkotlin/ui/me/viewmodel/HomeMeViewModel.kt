@@ -34,7 +34,9 @@ class HomeMeViewModel(application: Application) : BaseAppViewModel(application) 
         launchMain {
             loadingData.postValue(true)
             val responseResult = httpModel.getIntegral()
-            responseResult.handlerResult {
+            responseResult.handlerResult(errorBlock = {
+                mIntegralLiveData.postValue(null)
+            }) {
                 it.data?.apply {
                     mIntegralLiveData.postValue(this)
                     localIntegralString = Gson().toJson(this)

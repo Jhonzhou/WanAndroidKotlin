@@ -1,6 +1,7 @@
 package com.bee.wanandroidkotlin.ui.me
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -27,9 +28,11 @@ import kotlinx.android.synthetic.main.fragment_home_me.*
  * @date:  2020/3/30
  * @Description:
  */
+private const val SETTING_REQUEST_CODE = 100
+
 class HomeMeFragment : BaseFragment() {
-    //    private val isLogin = false
-    private val isLogin by Preference(Constants.SP.SP_LOGIN, false)
+
+    private var isLogin by Preference(Constants.SP.SP_LOGIN, false)
     private val mViewModel: HomeMeViewModel by lazy {
         ViewModelProvider(this).get(HomeMeViewModel::class.java)
     }
@@ -41,8 +44,6 @@ class HomeMeFragment : BaseFragment() {
 
     override fun initView() {
         toolBarBuilder.hideCommonBaseTitle()
-        tvUserName.text = "攻城狮"
-        tvId.text = "----"
         rvContent.layoutManager = LinearLayoutManager(context)
         rvContent.adapter = mAdapter
 
@@ -82,7 +83,8 @@ class HomeMeFragment : BaseFragment() {
                     }
                     HomeMeItemBean.ID.SETTING -> {
                         //设置
-
+                        val intent = Intent(context, SettingActivity::class.java)
+                        startActivityForResult(intent, SETTING_REQUEST_CODE)
                     }
                     else -> {
 
@@ -92,8 +94,7 @@ class HomeMeFragment : BaseFragment() {
 
         })
         tvNeedLogin.setOnClickListener {
-            val intent = Intent(activity, LoginActivity::class.java)
-            startActivity(intent)
+            LoginActivity.startForResult(this, SETTING_REQUEST_CODE)
         }
     }
 
@@ -109,7 +110,7 @@ class HomeMeFragment : BaseFragment() {
         dataList.add(HomeMeItemBean(HomeMeItemBean.ID.SETTING, "设置", isShowTag = true))
         mAdapter.setData(dataList)
         tvUserName.text = integralData?.username ?: ""
-        tvId.text = "当前积分: ${integralData?.userId ?: "----"}"
+        tvId.text = "${integralData?.userId ?: "----"}"
     }
 
     private fun initUserData() {
@@ -124,8 +125,18 @@ class HomeMeFragment : BaseFragment() {
         if (isLogin) {
             mViewModel.getIntegralFromLocal()
             mViewModel.getIntegral()
+        } else {
+            initListData(null)
         }
-        initListData(null)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == SETTING_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                initUserData()
+            }
+        }
     }
 
 

@@ -34,6 +34,7 @@ abstract class BaseActivity : AppCompatActivity() {
         initRootView()
         initView()
         initListener()
+        observeViewModelData()
         initData(intent)
     }
 

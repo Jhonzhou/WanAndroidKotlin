@@ -17,6 +17,10 @@ object HttpConstants {
      */
     const val LOGIN: String = "/user/login"
     /**
+     * 退出登录
+     */
+    const val LOGOUT: String = "/user/logout/json"
+    /**
      * 注册
      */
     const val REGISTER: String = "/user/register"

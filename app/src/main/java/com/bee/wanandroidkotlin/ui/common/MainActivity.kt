@@ -82,10 +82,10 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initData(intent: Intent?) {
-        val isLogin by Preference(Constants.SP.SP_LOGIN, false)
-        if (!isLogin) {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
+//        val isLogin by Preference(Constants.SP.SP_LOGIN, false)
+//        if (!isLogin) {
+//            startActivity(Intent(this, LoginActivity::class.java))
+//            finish()
+//        }
     }
 }

@@ -35,6 +35,12 @@ interface WanAndroidService {
     /**
      * 首页banner
      */
+    @GET(HttpConstants.LOGOUT)
+    fun logout(): Call<ResponseResult<Any>>
+
+    /**
+     * 首页banner
+     */
     @GET(HttpConstants.HOME_BANNER)
     fun getHomeBanner(): Call<ResponseResult<List<HomeBannerResponse>>>
 
@@ -98,6 +104,7 @@ interface WanAndroidService {
      */
     @GET(HttpConstants.TENCENT_DETAIL_LIST)
     fun getTencentDetailList(@Path("page") page: Int, @Path("cid") cid: Int): Call<ResponseResult<PageListResponse>>
+
     /**
      * 问答列表
      */
