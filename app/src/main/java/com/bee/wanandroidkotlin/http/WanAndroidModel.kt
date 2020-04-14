@@ -207,9 +207,18 @@ class WanAndroidModel : BaseDataModel() {
             handleResponse(response)
         }
     }
+
     suspend fun getCollectList(page: Int): ResponseResult<PageListResponse> {
         return withHttpContext {
             val mListCall = service.getCollectList(page)
+            val response = mListCall.execute()
+            handleResponse(response)
+        }
+    }
+
+    suspend fun getHotList(): ResponseResult<ArrayList<TagResponseBean>> {
+        return withHttpContext {
+            val mListCall = service.getHotList()
             val response = mListCall.execute()
             handleResponse(response)
         }

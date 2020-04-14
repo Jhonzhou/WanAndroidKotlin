@@ -1,5 +1,6 @@
 package com.bee.wanandroidkotlin.ui.home.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -12,10 +13,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bee.baselibrary.base.BaseFragment
 import com.bee.wanandroidkotlin.R
+import com.bee.wanandroidkotlin.base.CommonTabDetailAdapter
+import com.bee.wanandroidkotlin.constants.Constants
+import com.bee.wanandroidkotlin.http.beans.TagResponseBean
 import com.bee.wanandroidkotlin.ui.common.adapter.ArticleListAdapter
+import com.bee.wanandroidkotlin.ui.ground.activity.TagDetailListActivity
 import com.bee.wanandroidkotlin.ui.home.viewmodel.SearchViewModel
 import com.bee.wanandroidkotlin.utils.*
-import kotlinx.android.synthetic.main.common_refresh_and_recycleview.*
+import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.title_search_input_layout.*
 
 /**
@@ -26,10 +31,15 @@ import kotlinx.android.synthetic.main.title_search_input_layout.*
  * @Description:
  */
 class SearchFragment : BaseFragment() {
-    override fun getContentLayoutId(): Int = R.layout.common_refresh_and_recycleview
+    override fun getContentLayoutId(): Int = R.layout.fragment_search
+    private val hotList = arrayListOf<TagResponseBean>()
+    private val mHotTagListAdapter by lazy {
+        CommonTabDetailAdapter(activity!!, hotList)
+    }
     private val mViewModel: SearchViewModel by lazy {
         ViewModelProvider(this).get(SearchViewModel::class.java)
     }
+
     private val mAdapter: ArticleListAdapter by lazy {
         ArticleListAdapter()
     }
@@ -40,6 +50,7 @@ class SearchFragment : BaseFragment() {
         toolBarBuilder.addView(titleSearchView)
         rvContent.layoutManager = LinearLayoutManager(context)
         rvContent.adapter = mAdapter
+        tflHotContent.adapter = mHotTagListAdapter
     }
 
 
@@ -90,19 +101,33 @@ class SearchFragment : BaseFragment() {
         rvContent.setOnLoadMoreListener {
             mViewModel.loadMoreSearchResult(etSearch.text.toString())
         }
+        tflHotContent.setOnTagClickListener { view, position, parent ->
+            if (position >= hotList.size) {
+                return@setOnTagClickListener false
+            }
+            val intent = Intent(context, TagDetailListActivity::class.java)
+            intent.putExtra(Constants.KEY_DATA, hotList[position])
+            startActivity(intent)
+            true
+        }
     }
 
     override fun observeViewModelData() {
         super.observeViewModelData()
         mViewModel.searchResultData.observe(this, Observer {
-            if (it == null || it.isEmpty()) {
-                ToastAlone.showToast("搜索无结果")
-                rvContent.visibility = View.GONE
-                srlRefresh.isEnabled = false
+            if (it == null) {
+                //null 是情况界面
+                showCorrectPage()
+                showCommonPage(true)
             } else {
+                showCommonPage(false)
                 mAdapter.setData(it)
-                rvContent.visibility = View.VISIBLE
-                srlRefresh.isEnabled = true
+                if (it.isEmpty()) {
+                    ToastAlone.showToast("搜索无结果")
+                    srlRefresh.isEnabled = false
+                } else {
+                    srlRefresh.isEnabled = true
+                }
             }
         })
         observeLoadData(mViewModel.loadingData) {
@@ -111,10 +136,33 @@ class SearchFragment : BaseFragment() {
         observeErrorData(mViewModel.showErrorPageData) {
             mViewModel.search(etSearch.text.toString())
         }
+        mViewModel.hotListLiveData.observe(this, Observer {
+            refreshHotList(it)
+        })
+    }
+
+    private fun refreshHotList(dataList: ArrayList<TagResponseBean>?) {
+        dataList?.apply {
+            hotList.clear()
+            hotList.addAll(this)
+            mHotTagListAdapter.notifyDataChanged()
+        }
+    }
+
+    private fun showCommonPage(isShowCommonPage: Boolean) {
+        if (isShowCommonPage) {
+            srlRefresh.visibility = View.GONE
+            llCommonPage.visibility = View.VISIBLE
+        } else {
+            srlRefresh.visibility = View.VISIBLE
+            llCommonPage.visibility = View.GONE
+
+        }
     }
 
     override fun initData(arguments: Bundle?) {
-
+        mViewModel.getHotList()
+        showCommonPage(true)
     }
 
 }

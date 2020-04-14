@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/vDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_divider" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srlRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/vDivider">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/llCommonPage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/vDivider"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_left"
+            android:layout_marginLeft="@dimen/padding_left"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="大家都在搜"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_1"
+            android:textStyle="bold" />
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/tflHotContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/padding_left"
+            android:layout_marginLeft="@dimen/padding_left"
+            android:layout_marginEnd="@dimen/padding_right"
+            android:layout_marginRight="@dimen/padding_right" />
+
+    </LinearLayout>
+</RelativeLayout>

@@ -140,4 +140,10 @@ interface WanAndroidService {
      */
     @GET(HttpConstants.COLLECT_LIST)
     fun getCollectList(@Path("page") page: Int): Call<ResponseResult<PageListResponse>>
+
+    /**
+     * 收藏列表
+     */
+    @GET(HttpConstants.HOT_LIST)
+    fun getHotList(): Call<ResponseResult<ArrayList<TagResponseBean>>>
 }

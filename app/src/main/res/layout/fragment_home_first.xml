@@ -19,9 +19,9 @@
             android:background="@color/transparent">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/ctlVPContainer"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:id="@+id/ctlVPContainer"
                 android:background="@color/transparent"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:title="">
@@ -73,6 +73,7 @@
                         android:textColor="@color/common_blue"
                         android:textSize="@dimen/text_title"
                         android:textStyle="bold" />
+
 
                     <ImageView
                         android:id="@+id/ivSearch"
