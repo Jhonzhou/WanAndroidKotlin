@@ -18,7 +18,7 @@ class CollectViewModel(application: Application) : BaseAppViewModel(application)
     /**
      * 添加收藏
      */
-    fun addCollcet(responseData: ArticleListResponseData,
+    fun addCollect(responseData: ArticleListResponseData,
                    successBlock: () -> Unit = {},
                    errorBlock: () -> Unit = {}) {
         launchMain {

@@ -37,6 +37,11 @@ class HomeMeAdapter : BaseRvAdapter<HomeMeItemBean>() {
                 } else {
                     View.GONE
                 }
+                holder.getConvertView().setOnClickListener {
+                    item.itemClickListener?.apply {
+                        this()
+                    }
+                }
             }
 
         })

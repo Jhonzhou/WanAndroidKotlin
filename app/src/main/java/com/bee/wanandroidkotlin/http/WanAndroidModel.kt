@@ -207,7 +207,13 @@ class WanAndroidModel : BaseDataModel() {
             handleResponse(response)
         }
     }
-
+    suspend fun getCollectList(page: Int): ResponseResult<PageListResponse> {
+        return withHttpContext {
+            val mListCall = service.getCollectList(page)
+            val response = mListCall.execute()
+            handleResponse(response)
+        }
+    }
 
 }
 

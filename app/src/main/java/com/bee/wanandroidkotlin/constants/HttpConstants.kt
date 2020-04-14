@@ -91,6 +91,9 @@ object HttpConstants {
      * 收藏详情取消收藏（该页面包含自己录入的内容）
      */
     const val DETAIL_UN_COLLECT = "lg/uncollect/{id}/json"
-
+    /**
+     * 问答列表
+     */
+    const val COLLECT_LIST = "/lg/collect/list/{page}/json "
 
 }

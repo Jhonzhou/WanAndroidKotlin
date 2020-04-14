@@ -40,11 +40,11 @@ class SettingActivity : BaseActivity() {
 
     override fun initData(intent: Intent?) {
         val dataList = arrayListOf<HomeMeItemBean>()
-        dataList.add(HomeMeItemBean(HomeMeItemBean.ID.COLLECT, "清除缓存"))
-        dataList.add(HomeMeItemBean(HomeMeItemBean.ID.ARTICLE, "版本", isShowDivider = false))
-        dataList.add(HomeMeItemBean(HomeMeItemBean.ID.SETTING, "作者", isShowTag = true))
-        dataList.add(HomeMeItemBean(HomeMeItemBean.ID.SETTING, "项目"))
-        dataList.add(HomeMeItemBean(HomeMeItemBean.ID.SETTING, "版权声明"))
+        dataList.add(HomeMeItemBean( "清除缓存"))
+        dataList.add(HomeMeItemBean( "版本", isShowDivider = false))
+        dataList.add(HomeMeItemBean( "作者", isShowTag = true))
+        dataList.add(HomeMeItemBean( "项目"))
+        dataList.add(HomeMeItemBean("版权声明"))
         mAdapter.setData(dataList)
         btnLogout.visibility = if (isLogin) {
             View.VISIBLE

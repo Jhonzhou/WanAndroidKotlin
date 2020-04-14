@@ -34,7 +34,7 @@ private fun ArticleListAdapter.getCommonCollectClickListener(model: CollectViewM
                     ToastAlone.showToast("取消收藏失败")
                 })
             } else {
-                model.addCollcet(item, successBlock = {
+                model.addCollect(item, successBlock = {
                     item.collect = !item.collect
                     notifyItemChanged(position)
                     ToastAlone.showToast("收藏成功")

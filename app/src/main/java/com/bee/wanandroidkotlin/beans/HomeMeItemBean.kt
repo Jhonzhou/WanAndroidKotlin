@@ -8,20 +8,10 @@ package com.bee.wanandroidkotlin.beans
  * @Description:
  */
 data class HomeMeItemBean(
-        var id: ID,
         val title: String,
         var isShowTag: Boolean = false,
         val rightText: String = "",
-        var isShowDivider: Boolean = true
+        var isShowDivider: Boolean = true,
+        var itemClickListener: (() -> Unit)? = null
 ) {
-    enum class ID {
-        //收藏
-        COLLECT,
-        //积分
-        INTEGRAL,
-        //文章
-        ARTICLE,
-        //设置
-        SETTING,
-    }
 }

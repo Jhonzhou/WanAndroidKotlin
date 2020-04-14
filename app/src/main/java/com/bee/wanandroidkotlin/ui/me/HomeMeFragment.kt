@@ -8,8 +8,6 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bee.baselibrary.adapter.BaseRvAdapter
-import com.bee.baselibrary.adapter.BaseViewHolder
 import com.bee.baselibrary.base.BaseFragment
 import com.bee.baselibrary.utils.Preference
 import com.bee.wanandroidkotlin.R
@@ -69,30 +67,6 @@ class HomeMeFragment : BaseFragment() {
 
     override fun initListener() {
         super.initListener()
-        mAdapter.setOnItemClickListener(object : BaseRvAdapter.OnItemClickListener<HomeMeItemBean> {
-            override fun onItemClick(baseViewHolder: BaseViewHolder, position: Int, item: HomeMeItemBean) {
-                when (item.id) {
-                    HomeMeItemBean.ID.INTEGRAL -> {
-                        //积分
-                    }
-                    HomeMeItemBean.ID.COLLECT -> {
-                        //收藏
-                    }
-                    HomeMeItemBean.ID.ARTICLE -> {
-                        //我的文章
-                    }
-                    HomeMeItemBean.ID.SETTING -> {
-                        //设置
-                        val intent = Intent(context, SettingActivity::class.java)
-                        startActivityForResult(intent, SETTING_REQUEST_CODE)
-                    }
-                    else -> {
-
-                    }
-                }
-            }
-
-        })
         tvNeedLogin.setOnClickListener {
             LoginActivity.startForResult(this, SETTING_REQUEST_CODE)
         }
@@ -102,12 +76,17 @@ class HomeMeFragment : BaseFragment() {
     private fun initListData(integralData: IntegralResponseData?) {
         val dataList = arrayListOf<HomeMeItemBean>()
         if (isLogin) {
-            dataList.add(HomeMeItemBean(HomeMeItemBean.ID.INTEGRAL, "我的积分", isShowTag = true,
+            dataList.add(HomeMeItemBean("我的积分", isShowTag = true,
                     rightText = "${integralData?.coinCount ?: "0"}"))
-            dataList.add(HomeMeItemBean(HomeMeItemBean.ID.COLLECT, "我的收藏", isShowTag = false))
-            dataList.add(HomeMeItemBean(HomeMeItemBean.ID.ARTICLE, "我的文章", isShowTag = false, isShowDivider = false))
+            dataList.add(HomeMeItemBean("我的收藏", isShowTag = false){
+                startActivity(Intent(activity, MyCollectionDetailListActivity::class.java))
+            })
+            dataList.add(HomeMeItemBean("我的文章", isShowTag = false, isShowDivider = false))
         }
-        dataList.add(HomeMeItemBean(HomeMeItemBean.ID.SETTING, "设置", isShowTag = true))
+        dataList.add(HomeMeItemBean("设置", isShowTag = true) {
+            val intent = Intent(context, SettingActivity::class.java)
+            startActivityForResult(intent, SETTING_REQUEST_CODE)
+        })
         mAdapter.setData(dataList)
         tvUserName.text = integralData?.username ?: ""
         tvId.text = "${integralData?.userId ?: "----"}"

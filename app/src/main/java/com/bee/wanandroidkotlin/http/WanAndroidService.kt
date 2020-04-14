@@ -134,4 +134,10 @@ interface WanAndroidService {
      */
     @POST(HttpConstants.DETAIL_UN_COLLECT)
     fun unCollectFromDetail(@Path("id") id: Int): Call<ResponseResult<Any>>
+
+    /**
+     * 收藏列表
+     */
+    @GET(HttpConstants.COLLECT_LIST)
+    fun getCollectList(@Path("page") page: Int): Call<ResponseResult<PageListResponse>>
 }
