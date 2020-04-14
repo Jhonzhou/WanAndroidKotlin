@@ -44,6 +44,8 @@ class HomeGroundFragment : BaseFragment() {
     override fun initView() {
         toolBarBuilder.hideCommonBaseTitle()
         vpContent.adapter = mAdapter
+        //true:滑动，false：禁止滑动
+        vpContent.isUserInputEnabled = false
         TabLayoutMediator(tlTitle, vpContent,
                 TabLayoutMediator.TabConfigurationStrategy { tab, position ->
                     tab.text = when (position) {

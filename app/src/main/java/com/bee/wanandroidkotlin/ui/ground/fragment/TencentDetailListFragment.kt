@@ -10,6 +10,7 @@ import com.bee.wanandroidkotlin.ui.common.adapter.ArticleListAdapter
 import com.bee.wanandroidkotlin.ui.ground.viewmodel.TencentDetailListViewModel
 import com.bee.wanandroidkotlin.utils.ToastAlone
 import com.bee.wanandroidkotlin.utils.setCommonCollectClickListener
+import com.bee.wanandroidkotlin.utils.setItemClick
 
 /**
  *
@@ -39,6 +40,7 @@ class TencentDetailListFragment :
     override fun initListener() {
         super.initListener()
         mAdapter.setCommonCollectClickListener(this)
+        mAdapter.setItemClick(this)
     }
 
     override fun onItemClick(item: ArticleListResponseData, position: Int) {

@@ -1,12 +1,15 @@
 package com.bee.wanandroidkotlin.utils
 
 import androidx.lifecycle.ViewModelProvider
+import com.bee.baselibrary.adapter.BaseRvAdapter
+import com.bee.baselibrary.adapter.BaseViewHolder
 import com.bee.baselibrary.base.BaseActivity
 import com.bee.baselibrary.base.BaseFragment
 import com.bee.baselibrary.utils.Preference
 import com.bee.wanandroidkotlin.constants.Constants
 import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
 import com.bee.wanandroidkotlin.ui.common.CollectViewModel
+import com.bee.wanandroidkotlin.ui.common.activity.DetailContentWebActivity
 import com.bee.wanandroidkotlin.ui.common.activity.LoginActivity
 import com.bee.wanandroidkotlin.ui.common.adapter.ArticleListAdapter
 
@@ -18,8 +21,10 @@ import com.bee.wanandroidkotlin.ui.common.adapter.ArticleListAdapter
  * @Description:
  */
 
-private const val REQUEST_CODE_LOGIN=10
-private fun ArticleListAdapter.getCommonCollectClickListener(model: CollectViewModel, loginBlock: () -> Boolean): (item: ArticleListResponseData, position: Int) -> Unit {
+private const val REQUEST_CODE_LOGIN = 10
+
+private fun ArticleListAdapter.getCommonCollectClickListener(model: CollectViewModel, loginBlock: () -> Boolean)
+        : (item: ArticleListResponseData, position: Int) -> Unit {
     return fun(item: ArticleListResponseData, position: Int) {
         model.apply {
             if (loginBlock()) {
@@ -47,27 +52,45 @@ private fun ArticleListAdapter.getCommonCollectClickListener(model: CollectViewM
     }
 }
 
+
 fun ArticleListAdapter.setCommonCollectClickListener(baseFragment: BaseFragment) {
     val mCollectViewModel = ViewModelProvider(baseFragment).get(CollectViewModel::class.java)
     baseFragment.observeLoadData(mCollectViewModel.loadingData)
     setCollectClickListener(getCommonCollectClickListener(mCollectViewModel) {
-        val isLogin by Preference(Constants.SP.SP_LOGIN,false)
-        if (isLogin){
+        val isLogin by Preference(Constants.SP.SP_LOGIN, false)
+        if (isLogin) {
             ToastAlone.showToast("请先登录...")
-            LoginActivity.startForResult(baseFragment,REQUEST_CODE_LOGIN)
+            LoginActivity.startForResult(baseFragment, REQUEST_CODE_LOGIN)
         }
         isLogin
+    })
+}
+
+fun ArticleListAdapter.setItemClick(baseFragment: BaseFragment) {
+    setOnItemClickListener(object : BaseRvAdapter.OnItemClickListener<ArticleListResponseData> {
+        override fun onItemClick(baseViewHolder: BaseViewHolder, position: Int, item: ArticleListResponseData) {
+            DetailContentWebActivity.startFragment(baseFragment, item.link, item.title)
+        }
+
+    })
+}
+
+fun ArticleListAdapter.setItemClick(baseActivity: BaseActivity) {
+    setOnItemClickListener(object : BaseRvAdapter.OnItemClickListener<ArticleListResponseData> {
+        override fun onItemClick(baseViewHolder: BaseViewHolder, position: Int, item: ArticleListResponseData) {
+            DetailContentWebActivity.startActivity(baseActivity, item.link, item.title)
+        }
     })
 }
 
 fun ArticleListAdapter.setCommonCollectClickListener(baseActivity: BaseActivity) {
     val mCollectViewModel = ViewModelProvider(baseActivity).get(CollectViewModel::class.java)
     baseActivity.observeLoadData(mCollectViewModel.loadingData)
-    setCollectClickListener(getCommonCollectClickListener(mCollectViewModel){
-        val isLogin by Preference(Constants.SP.SP_LOGIN,false)
-        if (isLogin){
+    setCollectClickListener(getCommonCollectClickListener(mCollectViewModel) {
+        val isLogin by Preference(Constants.SP.SP_LOGIN, false)
+        if (isLogin) {
             ToastAlone.showToast("请先登录...")
-            LoginActivity.startForResult(baseActivity,REQUEST_CODE_LOGIN)
+            LoginActivity.startForResult(baseActivity, REQUEST_CODE_LOGIN)
         }
         isLogin
     })

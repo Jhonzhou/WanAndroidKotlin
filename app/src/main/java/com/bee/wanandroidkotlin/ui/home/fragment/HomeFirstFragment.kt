@@ -10,17 +10,14 @@ import com.bee.baselibrary.adapter.BaseRvAdapter
 import com.bee.baselibrary.adapter.BaseViewHolder
 import com.bee.baselibrary.base.BaseFragment
 import com.bee.wanandroidkotlin.R
-import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
+import com.bee.wanandroidkotlin.http.beans.HomeBannerResponse
 import com.bee.wanandroidkotlin.ui.common.CollectViewModel
 import com.bee.wanandroidkotlin.ui.common.activity.DetailContentWebActivity
 import com.bee.wanandroidkotlin.ui.common.activity.SearchActivity
 import com.bee.wanandroidkotlin.ui.common.adapter.ArticleListAdapter
 import com.bee.wanandroidkotlin.ui.home.adapter.HomeBannerAdapter
 import com.bee.wanandroidkotlin.ui.home.viewmodel.HomeFirstViewModel
-import com.bee.wanandroidkotlin.utils.observeErrorData
-import com.bee.wanandroidkotlin.utils.observeLoadData
-import com.bee.wanandroidkotlin.utils.setCommonCollectClickListener
-import com.bee.wanandroidkotlin.utils.setOnLoadMoreListener
+import com.bee.wanandroidkotlin.utils.*
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.fragment_home_first.*
 import kotlin.math.abs
@@ -90,9 +87,10 @@ class HomeFirstFragment : BaseFragment() {
             mViewModel.loadMoreHomePageList()
         }
         homePageListAdapter.setCommonCollectClickListener(this)
-        homePageListAdapter.setOnItemClickListener(object : BaseRvAdapter.OnItemClickListener<ArticleListResponseData> {
-            override fun onItemClick(baseViewHolder: BaseViewHolder, position: Int, item: ArticleListResponseData) {
-                DetailContentWebActivity.startFragment(this@HomeFirstFragment, item.link, item.title)
+        homePageListAdapter.setItemClick(this)
+        bannerAdapter.setOnItemClickListener(object : BaseRvAdapter.OnItemClickListener<HomeBannerResponse> {
+            override fun onItemClick(baseViewHolder: BaseViewHolder, position: Int, item: HomeBannerResponse) {
+                DetailContentWebActivity.startFragment(this@HomeFirstFragment, item.url, item.title)
             }
 
         })

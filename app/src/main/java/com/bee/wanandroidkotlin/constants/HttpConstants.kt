@@ -95,5 +95,9 @@ object HttpConstants {
      * 问答列表
      */
     const val COLLECT_LIST = "/lg/collect/list/{page}/json "
+    /**
+     * 热搜
+     */
+    const val HOT_LIST = "hotkey/json "
 
 }

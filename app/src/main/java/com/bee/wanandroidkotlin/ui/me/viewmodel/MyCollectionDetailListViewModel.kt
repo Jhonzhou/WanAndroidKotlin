@@ -14,8 +14,8 @@ import com.bee.wanandroidkotlin.utils.launchMain
  * @date:  2020/4/14
  * @Description:
  */
-class MyCollectionDetailListViewModel (application: Application)
-    :BaseRefreshAndListViewModel<ArticleListResponseData>(application){
+class MyCollectionDetailListViewModel(application: Application)
+    : BaseRefreshAndListViewModel<ArticleListResponseData>(application) {
     override suspend fun getDataFromRepository(preResultList: ArrayList<ArticleListResponseData>): Boolean {
         var result = true
         val answerListCall =
@@ -28,14 +28,18 @@ class MyCollectionDetailListViewModel (application: Application)
         }) {
             it.data?.apply {
                 currentPage = curPage + 1
-                datas?.let {
-                    preResultList.addAll(datas)
+                datas?.apply {
+                    forEach { responseData ->
+                        responseData.collect = true
+                    }
+                    preResultList.addAll(this)
                 }
             }
             result = true
         }
         return result
     }
+
     /**
      * 取消收藏
      */
