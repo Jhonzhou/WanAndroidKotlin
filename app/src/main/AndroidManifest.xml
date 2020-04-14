@@ -53,6 +53,10 @@
             android:name=".ui.me.SettingActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.common.activity.DetailContentWebActivity"
+            android:configChanges="keyboard|screenSize|orientation|layoutDirection"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

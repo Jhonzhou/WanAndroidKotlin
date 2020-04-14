@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 进度条背景色 -->
+    <item android:id="@android:id/background">
+        <shape>
+            <corners android:radius="6dp" />
+            <solid android:color="@color/color_hint_tips" />
+            <size android:height="12dp" />
+            <!--边线-->
+            <!--<stroke-->
+            <!--android:width="2dp"-->
+            <!--android:color="@color/white" />-->
+        </shape>
+    </item>
+    <!-- 第一进度条 -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <corners android:radius="6dp" />
+                <solid android:color="@color/common_blue" />
+                <size android:height="12dp" />
+                <!--渐变色-->
+                <!--<gradient-->
+                <!--android:startColor="#57e8ff"-->
+                <!--android:centerColor="#74ebff"-->
+                <!--android:centerY="0.75"-->
+                <!--android:endColor="#8eefff"-->
+                <!--android:angle="270"-->
+                <!--/>-->
+            </shape>
+        </clip>
+    </item>
+    <!-- 第二进度条 -->
+    <!--<item android:id="@android:id/secondaryProgress">-->
+        <!--<clip>-->
+            <!--<shape>-->
+                <!--<corners android:radius="6dp" />-->
+                <!--<size android:height="12dp" />-->
+            <!--</shape>-->
+        <!--</clip>-->
+    <!--</item>-->
+
+
+</layer-list>

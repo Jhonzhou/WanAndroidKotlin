@@ -6,8 +6,12 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bee.baselibrary.adapter.BaseRvAdapter
+import com.bee.baselibrary.adapter.BaseViewHolder
 import com.bee.baselibrary.base.BaseFragment
 import com.bee.wanandroidkotlin.R
+import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
+import com.bee.wanandroidkotlin.ui.common.activity.DetailContentWebActivity
 import com.bee.wanandroidkotlin.ui.common.activity.SearchActivity
 import com.bee.wanandroidkotlin.ui.common.adapter.ArticleListAdapter
 import com.bee.wanandroidkotlin.ui.home.adapter.HomeBannerAdapter
@@ -79,6 +83,12 @@ class HomeFirstFragment : BaseFragment() {
         rvContent.setOnLoadMoreListener {
             mViewModel.loadMoreHomePageList()
         }
+        homePageListAdapter.setOnItemClickListener(object : BaseRvAdapter.OnItemClickListener<ArticleListResponseData> {
+            override fun onItemClick(baseViewHolder: BaseViewHolder, position: Int, item: ArticleListResponseData) {
+                DetailContentWebActivity.startFragment(this@HomeFirstFragment, item.link, item.title)
+            }
+
+        })
     }
 
     override fun observeViewModelData() {
