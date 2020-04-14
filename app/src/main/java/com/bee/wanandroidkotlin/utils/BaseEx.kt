@@ -59,9 +59,10 @@ fun BaseFragment.observeErrorData(errorState: MutableLiveData<ErrorState>,
     })
 }
 
-fun BaseFragment.observeLoadData(loadingData: MutableLiveData<Boolean>,
+fun BaseFragment.observeLoadData(loadingData: MutableLiveData<Boolean>?,
                                  showBlock: () -> Unit = {},
                                  hideBlock: () -> Unit = {}) {
+    loadingData ?: return
     loadingData.observe(this, Observer {
         if (it) {
             showLoadingDialog()
@@ -73,9 +74,10 @@ fun BaseFragment.observeLoadData(loadingData: MutableLiveData<Boolean>,
     })
 }
 
-fun BaseActivity.observeLoadData(loadingData: MutableLiveData<Boolean>,
+fun BaseActivity.observeLoadData(loadingData: MutableLiveData<Boolean>?,
                                  showBlock: () -> Unit = {},
                                  hideBlock: () -> Unit = {}) {
+    loadingData ?: return
     loadingData.observe(this, Observer {
         if (it) {
             showLoadingDialog()

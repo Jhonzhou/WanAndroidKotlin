@@ -62,6 +62,7 @@ class WanAndroidModel : BaseDataModel() {
             handleResponse(response)
         }
     }
+
     suspend fun login(username: String, password: String): ResponseResult<LoginResponseBean> {
         return withHttpContext {
             val loginCall = service.login(username, password)
@@ -174,9 +175,34 @@ class WanAndroidModel : BaseDataModel() {
             handleResponse(response)
         }
     }
+
     suspend fun getIntegral(): ResponseResult<IntegralResponseData> {
         return withHttpContext {
             val mListCall = service.getIntegral()
+            val response = mListCall.execute()
+            handleResponse(response)
+        }
+    }
+
+    suspend fun collect(id: Int): ResponseResult<Any> {
+        return withHttpContext {
+            val mListCall = service.collect(id)
+            val response = mListCall.execute()
+            handleResponse(response)
+        }
+    }
+
+    suspend fun unCollect(id: Int): ResponseResult<Any> {
+        return withHttpContext {
+            val mListCall = service.unCollect(id)
+            val response = mListCall.execute()
+            handleResponse(response)
+        }
+    }
+
+    suspend fun unCollectFromDetail(id: Int): ResponseResult<Any> {
+        return withHttpContext {
+            val mListCall = service.unCollectFromDetail(id)
             val response = mListCall.execute()
             handleResponse(response)
         }

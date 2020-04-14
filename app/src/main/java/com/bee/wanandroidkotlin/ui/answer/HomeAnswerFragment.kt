@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bee.wanandroidkotlin.base.BaseRefreshAndListFragment
 import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
 import com.bee.wanandroidkotlin.ui.common.adapter.ArticleListAdapter
+import com.bee.wanandroidkotlin.utils.setCommonCollcetClickListener
 
 /**
  *
@@ -29,6 +30,7 @@ class HomeAnswerFragment : BaseRefreshAndListFragment<ArticleListResponseData, A
         super.initView()
         toolBarBuilder.hideBackIcon()
         toolBarBuilder.setTitle("问答")
+        mAdapter.setCommonCollcetClickListener(this)
     }
 
 }

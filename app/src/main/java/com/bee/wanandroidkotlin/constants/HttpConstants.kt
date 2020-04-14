@@ -78,7 +78,19 @@ object HttpConstants {
     /**
      * 获取积分
      */
-    const val INTEGRAL = "lg/coin/userinfo/json"
+    const val INTEGRAL = "/lg/coin/userinfo/json"
+    /**
+     * 收藏
+     */
+    const val COLLECT = "/lg/collect/{id}/json"
+    /**
+     * 列表取消收藏
+     */
+    const val UN_COLLECT = "/lg/uncollect_originId/{id}/json"
+    /**
+     * 收藏详情取消收藏（该页面包含自己录入的内容）
+     */
+    const val DETAIL_UN_COLLECT = "lg/uncollect/{id}/json"
 
 
 }

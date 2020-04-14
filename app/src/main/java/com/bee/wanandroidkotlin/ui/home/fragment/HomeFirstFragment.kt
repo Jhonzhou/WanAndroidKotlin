@@ -11,6 +11,7 @@ import com.bee.baselibrary.adapter.BaseViewHolder
 import com.bee.baselibrary.base.BaseFragment
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
+import com.bee.wanandroidkotlin.ui.common.CollectViewModel
 import com.bee.wanandroidkotlin.ui.common.activity.DetailContentWebActivity
 import com.bee.wanandroidkotlin.ui.common.activity.SearchActivity
 import com.bee.wanandroidkotlin.ui.common.adapter.ArticleListAdapter
@@ -18,6 +19,7 @@ import com.bee.wanandroidkotlin.ui.home.adapter.HomeBannerAdapter
 import com.bee.wanandroidkotlin.ui.home.viewmodel.HomeFirstViewModel
 import com.bee.wanandroidkotlin.utils.observeErrorData
 import com.bee.wanandroidkotlin.utils.observeLoadData
+import com.bee.wanandroidkotlin.utils.setCommonCollcetClickListener
 import com.bee.wanandroidkotlin.utils.setOnLoadMoreListener
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.fragment_home_first.*
@@ -33,6 +35,10 @@ import kotlin.math.abs
 class HomeFirstFragment : BaseFragment() {
 
     override fun getContentLayoutId(): Int = R.layout.fragment_home_first
+
+    private val mCollectViewModel: CollectViewModel by lazy {
+        ViewModelProvider(activity!!).get(CollectViewModel::class.java)
+    }
     private val mViewModel: HomeFirstViewModel by lazy {
         ViewModelProvider(activity!!).get(HomeFirstViewModel::class.java)
     }
@@ -83,6 +89,7 @@ class HomeFirstFragment : BaseFragment() {
         rvContent.setOnLoadMoreListener {
             mViewModel.loadMoreHomePageList()
         }
+        homePageListAdapter.setCommonCollcetClickListener(this)
         homePageListAdapter.setOnItemClickListener(object : BaseRvAdapter.OnItemClickListener<ArticleListResponseData> {
             override fun onItemClick(baseViewHolder: BaseViewHolder, position: Int, item: ArticleListResponseData) {
                 DetailContentWebActivity.startFragment(this@HomeFirstFragment, item.link, item.title)

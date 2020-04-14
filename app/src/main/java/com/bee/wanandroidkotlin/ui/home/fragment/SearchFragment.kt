@@ -14,10 +14,7 @@ import com.bee.baselibrary.base.BaseFragment
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.ui.common.adapter.ArticleListAdapter
 import com.bee.wanandroidkotlin.ui.home.viewmodel.SearchViewModel
-import com.bee.wanandroidkotlin.utils.ToastAlone
-import com.bee.wanandroidkotlin.utils.observeErrorData
-import com.bee.wanandroidkotlin.utils.observeLoadData
-import com.bee.wanandroidkotlin.utils.setOnLoadMoreListener
+import com.bee.wanandroidkotlin.utils.*
 import kotlinx.android.synthetic.main.common_refresh_and_recycleview.*
 import kotlinx.android.synthetic.main.title_search_input_layout.*
 
@@ -43,6 +40,15 @@ class SearchFragment : BaseFragment() {
         toolBarBuilder.addView(titleSearchView)
         rvContent.layoutManager = LinearLayoutManager(context)
         rvContent.adapter = mAdapter
+    }
+
+
+    override fun initListener() {
+        super.initListener()
+        srlRefresh.setOnRefreshListener {
+            mViewModel.search(etSearch.text.toString())
+        }
+        mAdapter.setCommonCollcetClickListener(this)
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val key = s?.toString()
@@ -82,14 +88,6 @@ class SearchFragment : BaseFragment() {
         }
         rvContent.setOnLoadMoreListener {
             mViewModel.loadMoreSearchResult(etSearch.text.toString())
-        }
-    }
-
-
-    override fun initListener() {
-        super.initListener()
-        srlRefresh.setOnRefreshListener {
-            mViewModel.search(etSearch.text.toString())
         }
     }
 

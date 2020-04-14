@@ -116,4 +116,22 @@ interface WanAndroidService {
      */
     @GET(HttpConstants.INTEGRAL)
     fun getIntegral(): Call<ResponseResult<IntegralResponseData>>
+
+    /**
+     * 收藏
+     */
+    @POST(HttpConstants.COLLECT)
+    fun collect(@Path("id") id: Int): Call<ResponseResult<Any>>
+
+    /**
+     * 列表取消收藏
+     */
+    @POST(HttpConstants.UN_COLLECT)
+    fun unCollect(@Path("id") id: Int): Call<ResponseResult<Any>>
+
+    /**
+     * 收藏详情取消收藏
+     */
+    @POST(HttpConstants.DETAIL_UN_COLLECT)
+    fun unCollectFromDetail(@Path("id") id: Int): Call<ResponseResult<Any>>
 }

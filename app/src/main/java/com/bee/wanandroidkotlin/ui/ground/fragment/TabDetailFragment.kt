@@ -9,6 +9,7 @@ import com.bee.wanandroidkotlin.http.beans.TagResponseBean
 import com.bee.wanandroidkotlin.ui.common.adapter.ArticleListAdapter
 import com.bee.wanandroidkotlin.ui.ground.viewmodel.SystemTabDetailViewModel
 import com.bee.wanandroidkotlin.utils.ToastAlone
+import com.bee.wanandroidkotlin.utils.setCommonCollcetClickListener
 
 /**
  *
@@ -19,7 +20,9 @@ import com.bee.wanandroidkotlin.utils.ToastAlone
  */
 class TabDetailFragment
     : BaseRefreshAndListFragment<ArticleListResponseData, ArticleListAdapter, SystemTabDetailViewModel>() {
-    override val mAdapter: ArticleListAdapter = ArticleListAdapter()
+    override val mAdapter: ArticleListAdapter by lazy {
+        ArticleListAdapter()
+    }
     override val mViewModel: SystemTabDetailViewModel by lazy {
         ViewModelProvider(this).get(SystemTabDetailViewModel::class.java)
     }
@@ -32,8 +35,13 @@ class TabDetailFragment
         mViewModel.initOrPullRefreshDataList()
     }
 
-    override fun onItemClick(item: ArticleListResponseData) {
-        super.onItemClick(item)
+    override fun initListener() {
+        super.initListener()
+        mAdapter.setCommonCollcetClickListener(this)
+    }
+
+    override fun onItemClick(item: ArticleListResponseData, position: Int) {
+        super.onItemClick(item, position)
         ToastAlone.showToast(item.title)
     }
 }

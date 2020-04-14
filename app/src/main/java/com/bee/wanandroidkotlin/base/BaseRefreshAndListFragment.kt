@@ -3,6 +3,7 @@ package com.bee.wanandroidkotlin.base
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bee.baselibrary.adapter.BaseRvAdapter
+import com.bee.baselibrary.adapter.BaseViewHolder
 import com.bee.baselibrary.base.BaseFragment
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.utils.observeErrorData
@@ -49,6 +50,18 @@ abstract class BaseRefreshAndListFragment<D, A : BaseRvAdapter<D>, T : BaseRefre
         rvContent.setOnLoadMoreListener {
             loadMoreData()
         }
+        mAdapter.setOnItemClickListener(object : BaseRvAdapter.OnItemClickListener<D> {
+            override fun onItemClick(baseViewHolder: BaseViewHolder, position: Int, item: D) {
+                onItemClick(item, position)
+            }
+
+        })
+        mAdapter.setOnItemLongClickListener(object : BaseRvAdapter.OnItemLongClickListener<D> {
+            override fun onItemLongClick(baseViewHolder: BaseViewHolder, position: Int, item: D): Boolean {
+                return onItemLongClick(item, position)
+            }
+
+        })
     }
 
     open fun initOrPullRefreshData() {
@@ -59,10 +72,10 @@ abstract class BaseRefreshAndListFragment<D, A : BaseRvAdapter<D>, T : BaseRefre
         mViewModel.loadMoreDataList()
     }
 
-    open fun onItemClick(item: D) {
+    open fun onItemClick(item: D, position: Int) {
 
     }
 
-    open fun onItemLongClick(item: D): Boolean = false
+    open fun onItemLongClick(item: D, position: Int): Boolean = false
 
 }

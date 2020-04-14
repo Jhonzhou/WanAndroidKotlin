@@ -17,7 +17,7 @@ import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
  * @date:  2020/4/1
  * @Description:
  */
-class ArticleListItemDelegate : ItemViewDelegate<ArticleListResponseData> {
+class ArticleListItemDelegate (val collectClick:(item:ArticleListResponseData,position:Int)-> Unit): ItemViewDelegate<ArticleListResponseData> {
     override fun getItemViewLayoutId(): Int = R.layout.item_article_item
 
     override fun isForViewType(item: ArticleListResponseData, position: Int): Boolean = true
@@ -47,6 +47,9 @@ class ArticleListItemDelegate : ItemViewDelegate<ArticleListResponseData> {
         }
         tvSuperChapterName.text = item.superChapterName ?: ""
         ivCollect.isSelected = item.collect
+        ivCollect.setOnClickListener {
+            collectClick(item,position)
+        }
 
     }
 

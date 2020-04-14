@@ -11,8 +11,19 @@ import com.bee.wanandroidkotlin.ui.common.adapter.delegate.ArticleListItemDelega
  * @date:  2020/4/1
  * @Description:
  */
+
 class ArticleListAdapter : BaseRvAdapter<ArticleListResponseData>() {
     init {
-        addDelegate(ArticleListItemDelegate())
+        addDelegate(ArticleListItemDelegate(fun(item: ArticleListResponseData, position: Int) {
+            collectClickListener?.let {
+                it(item, position)
+            }
+        }))
+    }
+
+    private var collectClickListener: ((ArticleListResponseData, Int) -> Unit?)? = null
+
+    fun setCollectClickListener(clickListener: (item: ArticleListResponseData, position: Int) -> Unit) {
+        collectClickListener = clickListener
     }
 }

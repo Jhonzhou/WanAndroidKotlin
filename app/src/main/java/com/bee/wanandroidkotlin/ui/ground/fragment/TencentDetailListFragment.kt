@@ -9,6 +9,7 @@ import com.bee.wanandroidkotlin.http.beans.TagResponseBean
 import com.bee.wanandroidkotlin.ui.common.adapter.ArticleListAdapter
 import com.bee.wanandroidkotlin.ui.ground.viewmodel.TencentDetailListViewModel
 import com.bee.wanandroidkotlin.utils.ToastAlone
+import com.bee.wanandroidkotlin.utils.setCommonCollcetClickListener
 
 /**
  *
@@ -19,7 +20,9 @@ import com.bee.wanandroidkotlin.utils.ToastAlone
  */
 class TencentDetailListFragment :
         BaseRefreshAndListFragment<ArticleListResponseData, ArticleListAdapter, TencentDetailListViewModel>() {
-    override val mAdapter: ArticleListAdapter = ArticleListAdapter()
+    override val mAdapter: ArticleListAdapter by lazy {
+        ArticleListAdapter()
+    }
     override val mViewModel: TencentDetailListViewModel by lazy {
         ViewModelProvider(this).get(TencentDetailListViewModel::class.java)
     }
@@ -33,8 +36,13 @@ class TencentDetailListFragment :
         mViewModel.initOrPullRefreshDataList()
     }
 
-    override fun onItemClick(item: ArticleListResponseData) {
-        super.onItemClick(item)
+    override fun initListener() {
+        super.initListener()
+        mAdapter.setCommonCollcetClickListener(this)
+    }
+
+    override fun onItemClick(item: ArticleListResponseData, position: Int) {
+        super.onItemClick(item, position)
         ToastAlone.showToast(item.title)
     }
 
