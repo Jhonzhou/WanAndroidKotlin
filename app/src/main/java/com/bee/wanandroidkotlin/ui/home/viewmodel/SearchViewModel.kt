@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.bee.baselibrary.ErrorState
 import com.bee.wanandroidkotlin.base.BaseAppViewModel
 import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
-import com.bee.wanandroidkotlin.http.beans.TagResponseBean
+import com.bee.wanandroidkotlin.http.beans.HotTagResponseBean
 import com.bee.wanandroidkotlin.utils.ToastAlone
 import com.bee.wanandroidkotlin.utils.launchMain
 
@@ -20,8 +20,8 @@ import com.bee.wanandroidkotlin.utils.launchMain
 class SearchViewModel(application: Application) : BaseAppViewModel(application) {
     private var currentPage = 0
 
-    val hotListLiveData: MutableLiveData<ArrayList<TagResponseBean>> by lazy {
-        MutableLiveData<ArrayList<TagResponseBean>>()
+    val hotListLiveData: MutableLiveData<ArrayList<HotTagResponseBean>> by lazy {
+        MutableLiveData<ArrayList<HotTagResponseBean>>()
     }
     val searchResultData: MutableLiveData<ArrayList<ArticleListResponseData>> by lazy {
         MutableLiveData<ArrayList<ArticleListResponseData>>()

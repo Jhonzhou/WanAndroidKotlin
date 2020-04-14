@@ -216,7 +216,7 @@ class WanAndroidModel : BaseDataModel() {
         }
     }
 
-    suspend fun getHotList(): ResponseResult<ArrayList<TagResponseBean>> {
+    suspend fun getHotList(): ResponseResult<ArrayList<HotTagResponseBean>> {
         return withHttpContext {
             val mListCall = service.getHotList()
             val response = mListCall.execute()

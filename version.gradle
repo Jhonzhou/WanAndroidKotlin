@@ -48,6 +48,8 @@ ext {
             //自动化测试
             "espresso_core"             : "androidx.test.espresso:espresso-core:3.2.0",
 
+            "bugly"                     : "com.tencent.bugly:crashreport:latest.release",
+
 
 //            LifeExtensions              : "android.arch.lifecycle:extensions:$versions.lifecycleVersion",
 //            LifeViewModle               : "android.arch.lifecycle:viewmodel:$versions.lifecycleVersion",
@@ -77,7 +79,6 @@ ext {
             "glideAnnotation"           : "com.github.bumptech.glide:compiler:${versions.glide}",
 
     ]
-
 
 
 }

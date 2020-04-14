@@ -1,6 +1,5 @@
 package com.bee.wanandroidkotlin.ui.home.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -14,10 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bee.baselibrary.base.BaseFragment
 import com.bee.wanandroidkotlin.R
 import com.bee.wanandroidkotlin.base.CommonTabDetailAdapter
-import com.bee.wanandroidkotlin.constants.Constants
-import com.bee.wanandroidkotlin.http.beans.TagResponseBean
+import com.bee.wanandroidkotlin.http.beans.HotTagResponseBean
 import com.bee.wanandroidkotlin.ui.common.adapter.ArticleListAdapter
-import com.bee.wanandroidkotlin.ui.ground.activity.TagDetailListActivity
 import com.bee.wanandroidkotlin.ui.home.viewmodel.SearchViewModel
 import com.bee.wanandroidkotlin.utils.*
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -32,7 +29,7 @@ import kotlinx.android.synthetic.main.title_search_input_layout.*
  */
 class SearchFragment : BaseFragment() {
     override fun getContentLayoutId(): Int = R.layout.fragment_search
-    private val hotList = arrayListOf<TagResponseBean>()
+    private val hotList = arrayListOf<HotTagResponseBean>()
     private val mHotTagListAdapter by lazy {
         CommonTabDetailAdapter(activity!!, hotList)
     }
@@ -105,9 +102,7 @@ class SearchFragment : BaseFragment() {
             if (position >= hotList.size) {
                 return@setOnTagClickListener false
             }
-            val intent = Intent(context, TagDetailListActivity::class.java)
-            intent.putExtra(Constants.KEY_DATA, hotList[position])
-            startActivity(intent)
+            mViewModel.search(hotList[position].name)
             true
         }
     }
@@ -141,7 +136,7 @@ class SearchFragment : BaseFragment() {
         })
     }
 
-    private fun refreshHotList(dataList: ArrayList<TagResponseBean>?) {
+    private fun refreshHotList(dataList: ArrayList<HotTagResponseBean>?) {
         dataList?.apply {
             hotList.clear()
             hotList.addAll(this)

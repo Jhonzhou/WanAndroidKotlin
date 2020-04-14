@@ -145,5 +145,5 @@ interface WanAndroidService {
      * 收藏列表
      */
     @GET(HttpConstants.HOT_LIST)
-    fun getHotList(): Call<ResponseResult<ArrayList<TagResponseBean>>>
+    fun getHotList(): Call<ResponseResult<ArrayList<HotTagResponseBean>>>
 }
