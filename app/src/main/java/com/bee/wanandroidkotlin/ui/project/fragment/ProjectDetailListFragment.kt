@@ -9,7 +9,7 @@ import com.bee.wanandroidkotlin.http.beans.ArticleListResponseData
 import com.bee.wanandroidkotlin.http.beans.TagResponseBean
 import com.bee.wanandroidkotlin.ui.common.adapter.ArticleListAdapter
 import com.bee.wanandroidkotlin.ui.project.viewmodel.ProjectDetailListViewModel
-import com.bee.wanandroidkotlin.utils.setCommonCollcetClickListener
+import com.bee.wanandroidkotlin.utils.setCommonCollectClickListener
 import com.bee.wanandroidkotlin.utils.showErrorPage
 
 /**
@@ -52,7 +52,7 @@ class ProjectDetailListFragment : BaseRefreshAndListFragment<ArticleListResponse
 
     override fun initListener() {
         super.initListener()
-        mAdapter.setCommonCollcetClickListener(this)
+        mAdapter.setCommonCollectClickListener(this)
     }
     override fun getLogTag(): String {
         return "DetailListFragment---${mViewModel.initData?.name}"

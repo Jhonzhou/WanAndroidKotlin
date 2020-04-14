@@ -19,7 +19,7 @@ import com.bee.wanandroidkotlin.ui.home.adapter.HomeBannerAdapter
 import com.bee.wanandroidkotlin.ui.home.viewmodel.HomeFirstViewModel
 import com.bee.wanandroidkotlin.utils.observeErrorData
 import com.bee.wanandroidkotlin.utils.observeLoadData
-import com.bee.wanandroidkotlin.utils.setCommonCollcetClickListener
+import com.bee.wanandroidkotlin.utils.setCommonCollectClickListener
 import com.bee.wanandroidkotlin.utils.setOnLoadMoreListener
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.fragment_home_first.*
@@ -89,7 +89,7 @@ class HomeFirstFragment : BaseFragment() {
         rvContent.setOnLoadMoreListener {
             mViewModel.loadMoreHomePageList()
         }
-        homePageListAdapter.setCommonCollcetClickListener(this)
+        homePageListAdapter.setCommonCollectClickListener(this)
         homePageListAdapter.setOnItemClickListener(object : BaseRvAdapter.OnItemClickListener<ArticleListResponseData> {
             override fun onItemClick(baseViewHolder: BaseViewHolder, position: Int, item: ArticleListResponseData) {
                 DetailContentWebActivity.startFragment(this@HomeFirstFragment, item.link, item.title)

@@ -48,7 +48,7 @@ class SearchFragment : BaseFragment() {
         srlRefresh.setOnRefreshListener {
             mViewModel.search(etSearch.text.toString())
         }
-        mAdapter.setCommonCollcetClickListener(this)
+        mAdapter.setCommonCollectClickListener(this)
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val key = s?.toString()
