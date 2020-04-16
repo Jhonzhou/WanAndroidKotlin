@@ -1,13 +1,12 @@
 package com.bee.wanandroidkotlin.ui.common
 
 import android.content.Intent
+import android.util.Log
 import androidx.fragment.app.Fragment
 import com.bee.baselibrary.base.BaseActivity
-import com.bee.baselibrary.utils.Preference
 import com.bee.wanandroidkotlin.R
-import com.bee.wanandroidkotlin.constants.Constants
+import com.bee.wanandroidkotlin.WanAndroidKotlinApplication
 import com.bee.wanandroidkotlin.ui.answer.HomeAnswerFragment
-import com.bee.wanandroidkotlin.ui.common.activity.LoginActivity
 import com.bee.wanandroidkotlin.ui.ground.fragment.HomeGroundFragment
 import com.bee.wanandroidkotlin.ui.home.fragment.HomeFirstFragment
 import com.bee.wanandroidkotlin.ui.me.HomeMeFragment
@@ -33,6 +32,10 @@ class MainActivity : BaseActivity() {
         showFragment(0)
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.e("test","sssss:${WanAndroidKotlinApplication.mTestActivity}")
+    }
     override fun initListener() {
         super.initListener()
         bottomNavigationView.setOnNavigationItemSelectedListener {

@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.webkit.*
 import androidx.fragment.app.Fragment
 import com.bee.baselibrary.base.BaseActivity
+import com.bee.wanandroidkotlin.WanAndroidKotlinApplication
 import com.bee.wanandroidkotlin.utils.ToastAlone
 import kotlinx.android.synthetic.main.activity_detail_content_web.*
 
@@ -55,6 +56,7 @@ class DetailContentWebActivity : BaseActivity() {
 
     override fun initView() {
         initWebView()
+        WanAndroidKotlinApplication.mTestActivity = this
     }
 
     override fun onBackPressed() {
@@ -146,7 +148,7 @@ class DetailContentWebActivity : BaseActivity() {
                 super.onReceivedTitle(view, title)
                 //更新标题
                 toolBarBuilder.setTitle(title ?: mTitle)
-                Log.e(TAG,"onReceivedTitle:$title")
+                Log.e(TAG, "onReceivedTitle:$title")
             }
 
             override fun onJsAlert(view: WebView?, url: String?, message: String?, result: JsResult?): Boolean {
