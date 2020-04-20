@@ -1,7 +1,6 @@
 package com.bee.wanandroidkotlin
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import androidx.multidex.MultiDexApplication
 import com.bee.baselibrary.utils.Preference
@@ -13,7 +12,6 @@ import com.tencent.bugly.crashreport.CrashReport
 class WanAndroidKotlinApplication : MultiDexApplication() {
 
     companion object {
-        var mTestActivity: Activity? = null
         @SuppressLint("StaticFieldLeak")
         lateinit var mContext: Context
 

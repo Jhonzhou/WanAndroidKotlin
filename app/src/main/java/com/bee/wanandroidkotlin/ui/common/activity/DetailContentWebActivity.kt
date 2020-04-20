@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.webkit.*
 import androidx.fragment.app.Fragment
 import com.bee.baselibrary.base.BaseActivity
-import com.bee.wanandroidkotlin.WanAndroidKotlinApplication
 import com.bee.wanandroidkotlin.utils.ToastAlone
 import kotlinx.android.synthetic.main.activity_detail_content_web.*
 
@@ -56,7 +55,6 @@ class DetailContentWebActivity : BaseActivity() {
 
     override fun initView() {
         initWebView()
-        WanAndroidKotlinApplication.mTestActivity = this
     }
 
     override fun onBackPressed() {

@@ -108,6 +108,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
+    @Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
     private fun loginSuccess() {
         var isLogin by Preference(Constants.SP.SP_LOGIN, false)
         isLogin = true

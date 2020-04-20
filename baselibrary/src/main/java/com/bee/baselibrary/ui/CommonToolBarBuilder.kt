@@ -34,6 +34,7 @@ class CommonToolBarBuilder(private var mActivity: Activity, private var toolbar:
         ivRight = toolbar.findViewById(R.id.iv_right)
         ivRightTwo = toolbar.findViewById(R.id.iv_right_two)
         toolbar.setNavigationIcon(defaultBackIconResId)
+        toolbar.title=""
         toolbar.setNavigationOnClickListener {
             mActivity.onBackPressed()
         }
