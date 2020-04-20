@@ -21,14 +21,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
         android:ellipsize="end"
         android:gravity="center"
+        android:maxWidth="240dp"
         android:maxLines="1"
         android:textColor="@color/color_text_primary"
         android:textSize="18sp"
-        tools:text="标题" />
+        tools:text="标题标题标题标题标题标题标题标题" />
 
     <TextView
         android:id="@+id/tv_right"
@@ -41,7 +40,8 @@
         android:textColor="@color/color_text_primary"
         android:textSize="16sp"
         android:visibility="gone"
-        tools:text="取消" />
+        tools:text="取消"
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/iv_right"
@@ -51,7 +51,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:gravity="center"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/iv_right_two"
@@ -63,7 +64,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:gravity="center"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visibility="visible" />
 
 
 </androidx.appcompat.widget.Toolbar>
