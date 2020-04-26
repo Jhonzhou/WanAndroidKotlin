@@ -13,6 +13,7 @@ import com.bee.wanandroidkotlin.beans.HomeMeItemBean
 import com.bee.wanandroidkotlin.constants.Constants
 import com.bee.wanandroidkotlin.ui.me.adapter.HomeMeAdapter
 import com.bee.wanandroidkotlin.ui.me.viewmodel.SettingViewModel
+import com.bee.wanandroidkotlin.utils.ToastAlone
 import kotlinx.android.synthetic.main.activity_setting.*
 
 /**
@@ -40,10 +41,19 @@ class SettingActivity : BaseActivity() {
 
     override fun initData(intent: Intent?) {
         val dataList = arrayListOf<HomeMeItemBean>()
-        dataList.add(HomeMeItemBean( "清除缓存"))
-        dataList.add(HomeMeItemBean( "版本", isShowDivider = false))
-        dataList.add(HomeMeItemBean( "作者", isShowTag = true))
-        dataList.add(HomeMeItemBean( "项目"))
+        dataList.add(HomeMeItemBean("清除缓存"))
+        dataList.add(HomeMeItemBean("一件黑白化") {
+            var isChangeToBlack by Preference(Constants.SP.SP_BLACK_AND_WHITE_CHANGE, false)
+            isChangeToBlack = !isChangeToBlack
+            ToastAlone.showToast(if (isChangeToBlack) {
+                "添加一键置灰效果成功,请重启后查看"
+            } else {
+                "取消一键置灰效果成功,,请重启后查看"
+            })
+        })
+        dataList.add(HomeMeItemBean("版本", isShowDivider = false))
+        dataList.add(HomeMeItemBean("作者", isShowTag = true))
+        dataList.add(HomeMeItemBean("项目"))
         dataList.add(HomeMeItemBean("版权声明"))
         mAdapter.setData(dataList)
         btnLogout.visibility = if (isLogin) {
@@ -66,7 +76,7 @@ class SettingActivity : BaseActivity() {
         mViewModel.mLogoutResult.observe(this, Observer {
             if (it) {
                 setResult(Activity.RESULT_OK)
-                isLogin=false
+                isLogin = false
                 btnLogout.visibility = View.GONE
             } else {
                 btnLogout.visibility = View.VISIBLE

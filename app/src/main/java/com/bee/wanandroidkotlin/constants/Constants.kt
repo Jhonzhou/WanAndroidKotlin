@@ -16,6 +16,8 @@ object Constants {
         const val SP_PROJECT_TAB_LIST = "sp_project_tab_list"
         //积分
         const val SP_INTEGRAL = "sp_integral"
+        //一件黑白化本地设置
+        const val SP_BLACK_AND_WHITE_CHANGE = "sp_black_and_white_change"
 
     }
 

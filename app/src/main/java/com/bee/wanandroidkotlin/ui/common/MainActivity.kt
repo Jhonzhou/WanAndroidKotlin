@@ -9,9 +9,12 @@ import com.bee.wanandroidkotlin.ui.ground.fragment.HomeGroundFragment
 import com.bee.wanandroidkotlin.ui.home.fragment.HomeFirstFragment
 import com.bee.wanandroidkotlin.ui.me.HomeMeFragment
 import com.bee.wanandroidkotlin.ui.project.fragment.HomeProjectFragment
+import com.bee.wanandroidkotlin.utils.ToastAlone
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
+
+
     override fun getContentLayoutId(): Int = R.layout.activity_main
     private var currentFragment: Fragment? = null
     private val fragmentList: ArrayList<Fragment> by lazy {
@@ -24,15 +27,15 @@ class MainActivity : BaseActivity() {
         list
     }
 
+    override fun initData(intent: Intent?) {
+    }
+
     override fun initView() {
         toolBarBuilder.hideCommonBaseTitle()
         bottomNavigationView.itemIconTintList = null
         showFragment(0)
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
     override fun initListener() {
         super.initListener()
         bottomNavigationView.setOnNavigationItemSelectedListener {
@@ -74,18 +77,32 @@ class MainActivity : BaseActivity() {
                 }
             }
             if (!selectFragment.isAdded) {
-               add(R.id.flContainer, selectFragment)
+                add(R.id.flContainer, selectFragment)
             }
             show(selectFragment)
             currentFragment = selectFragment
         }.commit()
     }
 
-    override fun initData(intent: Intent?) {
-//        val isLogin by Preference(Constants.SP.SP_LOGIN, false)
-//        if (!isLogin) {
-//            startActivity(Intent(this, LoginActivity::class.java))
-//            finish()
-//        }
+
+    private var lastPressTime = 0L
+    override fun onBackPressed() {
+        val currentPressTime = System.currentTimeMillis()
+        if (currentPressTime - lastPressTime > 2000) {
+            ToastAlone.showToast("再按一次退出")
+            lastPressTime = currentPressTime
+            return
+        } else {
+            lastPressTime = 0L
+            //打开主界面等同按下home键  虚假退出
+//            val mIntent = Intent()
+//            mIntent.action = Intent.ACTION_MAIN
+//            mIntent.addCategory(Intent.CATEGORY_HOME)
+//            startActivity(mIntent)
+
+            super.onBackPressed()
+        }
+
     }
+
 }
