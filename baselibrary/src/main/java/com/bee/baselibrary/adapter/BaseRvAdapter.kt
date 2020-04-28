@@ -99,9 +99,17 @@ open class BaseRvAdapter<T> : RecyclerView.Adapter<BaseViewHolder>() {
         }
     }
 
+    fun removePosition(position: Int) {
+        if (position<0||position>=mDataList.size){
+            return
+        }
+        mDataList.removeAt(position)
+        notifyItemRemoved(position)
+    }
     fun removeData(item: T?) {
         item ?: return
         val position = mDataList.indexOf(item)
+        mDataList.removeAt(position)
         if (position != -1) {
             notifyItemRemoved(position)
         }

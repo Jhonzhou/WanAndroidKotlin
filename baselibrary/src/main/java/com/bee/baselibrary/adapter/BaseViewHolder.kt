@@ -1,10 +1,19 @@
 package com.bee.baselibrary.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Paint
+import android.graphics.Typeface
+import android.graphics.drawable.Drawable
+import android.os.Build
+import android.text.util.Linkify
 import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -48,5 +57,171 @@ class BaseViewHolder(private val mContext: Context, private val mConvertView: Vi
             mViews.put(viewId, view)
         }
         return view as T
+    }
+    /****以下为辅助方法*****/
+
+    /**
+     * 设置TextView的值
+     *
+     * @param viewId
+     * @param text
+     * @return
+     */
+    fun setText(viewId: Int, text: String): BaseViewHolder {
+        val tv = getView<TextView>(viewId)
+        tv.text = text
+        return this
+    }
+
+    fun setImageBitmap(viewId: Int, bitmap: Bitmap): BaseViewHolder {
+        val view = getView<ImageView>(viewId)
+        view.setImageBitmap(bitmap)
+        return this
+    }
+
+    fun setImageDrawable(viewId: Int, drawable: Drawable): BaseViewHolder {
+        val view = getView<ImageView>(viewId)
+        view.setImageDrawable(drawable)
+        return this
+    }
+
+    fun setBackgroundColor(viewId: Int, color: Int): BaseViewHolder {
+        val view = getView<View>(viewId)
+        view.setBackgroundColor(color)
+        return this
+    }
+
+    fun setBackgroundRes(viewId: Int, backgroundRes: Int): BaseViewHolder {
+        val view = getView<View>(viewId)
+        view.setBackgroundResource(backgroundRes)
+        return this
+    }
+
+    fun setTextColor(viewId: Int, textColor: Int): BaseViewHolder {
+        val view = getView<TextView>(viewId)
+        view.setTextColor(textColor)
+        return this
+    }
+
+    @Suppress("DEPRECATION")
+    fun setTextColorRes(viewId: Int, textColorRes: Int): BaseViewHolder {
+        val view = getView<TextView>(viewId)
+        view.setTextColor(getConvertView().context.resources.getColor(textColorRes))
+        return this
+    }
+
+    @SuppressLint("NewApi")
+    fun setAlpha(viewId: Int, value: Float): BaseViewHolder {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            getView<View>(viewId).alpha = value
+        } else {
+            // Pre-honeycomb hack to set Alpha value
+            val alpha = AlphaAnimation(value, value)
+            alpha.duration = 0
+            alpha.fillAfter = true
+            getView<View>(viewId).startAnimation(alpha)
+        }
+        return this
+    }
+
+    fun setVisible(viewId: Int, visible: Boolean): BaseViewHolder {
+        val view = getView<View>(viewId)
+        view.visibility = if (visible) View.VISIBLE else View.GONE
+        return this
+    }
+
+    fun linkify(viewId: Int): BaseViewHolder {
+        val view = getView<TextView>(viewId)
+        Linkify.addLinks(view, Linkify.ALL)
+        return this
+    }
+
+    fun setTypeface(typeface: Typeface, vararg viewIds: Int): BaseViewHolder {
+        for (viewId in viewIds) {
+            val view = getView<TextView>(viewId)
+            view.typeface = typeface
+            view.paintFlags = view.paintFlags or Paint.SUBPIXEL_TEXT_FLAG
+        }
+        return this
+    }
+
+    fun setProgress(viewId: Int, progress: Int): BaseViewHolder {
+        val view = getView<ProgressBar>(viewId)
+        view.progress = progress
+        return this
+    }
+
+    fun setProgress(viewId: Int, progress: Int, max: Int): BaseViewHolder {
+        val view = getView<ProgressBar>(viewId)
+        view.max = max
+        view.progress = progress
+        return this
+    }
+
+    fun setMax(viewId: Int, max: Int): BaseViewHolder {
+        val view = getView<ProgressBar>(viewId)
+        view.max = max
+        return this
+    }
+
+    fun setRating(viewId: Int, rating: Float): BaseViewHolder {
+        val view = getView<RatingBar>(viewId)
+        view.rating = rating
+        return this
+    }
+
+    fun setRating(viewId: Int, rating: Float, max: Int): BaseViewHolder {
+        val view = getView<RatingBar>(viewId)
+        view.max = max
+        view.rating = rating
+        return this
+    }
+
+    fun setTag(viewId: Int, tag: Any): BaseViewHolder {
+        val view = getView<View>(viewId)
+        view.tag = tag
+        return this
+    }
+
+    fun setTag(viewId: Int, key: Int, tag: Any): BaseViewHolder {
+        val view = getView<View>(viewId)
+        view.setTag(key, tag)
+        return this
+    }
+
+    fun setChecked(viewId: Int, checked: Boolean): BaseViewHolder {
+        val view = getView<View>(viewId) as Checkable
+        view.isChecked = checked
+        return this
+    }
+
+    /**
+     * 关于事件的
+     */
+    fun setOnClickListener(
+            viewId: Int,
+            listener: View.OnClickListener
+    ): BaseViewHolder {
+        val view = getView<View>(viewId)
+        view.setOnClickListener(listener)
+        return this
+    }
+
+    fun setOnTouchListener(
+            viewId: Int,
+            listener: View.OnTouchListener
+    ): BaseViewHolder {
+        val view = getView<View>(viewId)
+        view.setOnTouchListener(listener)
+        return this
+    }
+
+    fun setOnLongClickListener(
+            viewId: Int,
+            listener: View.OnLongClickListener
+    ): BaseViewHolder {
+        val view = getView<View>(viewId)
+        view.setOnLongClickListener(listener)
+        return this
     }
 }

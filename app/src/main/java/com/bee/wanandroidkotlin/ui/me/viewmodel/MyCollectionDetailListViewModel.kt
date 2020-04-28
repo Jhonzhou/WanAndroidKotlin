@@ -48,7 +48,12 @@ class MyCollectionDetailListViewModel(application: Application)
                       errorBlock: () -> Unit = {}) {
         launchMain {
             loadingData.postValue(true)
-            val responseResult = httpModel.unCollect(responseData.id)
+            val id=if (responseData.originId==-1){
+                responseData.id
+            }else{
+                responseData.originId
+            }
+            val responseResult = httpModel.unCollect(id)
             responseResult.handlerResult(errorBlock = {
                 ToastAlone.showToast("取消收藏失败")
                 errorBlock()

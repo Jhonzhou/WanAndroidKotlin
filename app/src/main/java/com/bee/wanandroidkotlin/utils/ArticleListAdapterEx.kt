@@ -27,7 +27,7 @@ private fun ArticleListAdapter.getCommonCollectClickListener(model: CollectViewM
         : (item: ArticleListResponseData, position: Int) -> Unit {
     return fun(item: ArticleListResponseData, position: Int) {
         model.apply {
-            if (loginBlock()) {
+            if (!loginBlock()) {
                 return
             }
             if (item.collect) {
@@ -58,7 +58,7 @@ fun ArticleListAdapter.setCommonCollectClickListener(baseFragment: BaseFragment)
     baseFragment.observeLoadData(mCollectViewModel.loadingData)
     setCollectClickListener(getCommonCollectClickListener(mCollectViewModel) {
         val isLogin by Preference(Constants.SP.SP_LOGIN, false)
-        if (isLogin) {
+        if (!isLogin) {
             ToastAlone.showToast("请先登录...")
             LoginActivity.startForResult(baseFragment, REQUEST_CODE_LOGIN)
         }

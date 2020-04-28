@@ -1,4 +1,4 @@
-package com.bee.baselibrary.view.dialog
+package com.bee.baselibrary.view.dialog.ui
 
 import android.app.Dialog
 import android.content.Context
@@ -20,7 +20,7 @@ import androidx.core.content.ContextCompat
 import com.bee.baselibrary.R
 import com.bee.baselibrary.utils.DensityUtils
 import com.bee.baselibrary.view.LoadingView
-import com.bee.baselibrary.view.dialog.TipDialog.Builder.IconType
+import com.bee.baselibrary.view.dialog.ui.TipDialog.Builder.IconType
 
 /**
  * 提示性对话框

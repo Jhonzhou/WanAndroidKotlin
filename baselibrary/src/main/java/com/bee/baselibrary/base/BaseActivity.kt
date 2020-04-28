@@ -14,7 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.bee.baselibrary.R
 import com.bee.baselibrary.ui.CommonToolBarBuilder
-import com.bee.baselibrary.view.dialog.TipDialog
+import com.bee.baselibrary.view.dialog.ui.TipDialog
 import kotlinx.android.synthetic.main.layout_common_title.*
 
 /**
