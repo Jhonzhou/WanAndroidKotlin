@@ -32,9 +32,12 @@ class MyCollectionDetailListFragment :
     override fun initListener() {
         super.initListener()
         toolBarBuilder.setTitle("我的收藏")
-        mAdapter.setCollectClickListener { item, _ ->
-            DetailContentWebActivity.startFragment(this@MyCollectionDetailListFragment, item.link, item.title)
-        }
+        mAdapter.setOnItemClickListener(object : BaseRvAdapter.OnItemClickListener<ArticleListResponseData>{
+            override fun onItemClick(baseViewHolder: BaseViewHolder, position: Int, item: ArticleListResponseData) {
+                DetailContentWebActivity.startFragment(this@MyCollectionDetailListFragment, item.link, item.title)
+            }
+
+        })
         mAdapter.setOnItemLongClickListener(object : BaseRvAdapter.OnItemLongClickListener<ArticleListResponseData> {
             override fun onItemLongClick(baseViewHolder: BaseViewHolder, position: Int, item: ArticleListResponseData): Boolean {
                 MiddleListDialogFragment.Builder().addItem(HintDialogOrPopItemBean("删除") {
