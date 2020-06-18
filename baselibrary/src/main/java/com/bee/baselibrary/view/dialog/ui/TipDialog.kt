@@ -32,9 +32,8 @@ import com.bee.baselibrary.view.dialog.ui.TipDialog.Builder.IconType
  * Created by Administrator on 2018/1/17.
  */
 
-class TipDialog : Dialog {
-    constructor(context: Context) : this(context, R.style.TipDialog)
-    constructor(context: Context, themeResId: Int = R.style.TipDialog) : super(context, themeResId)
+class TipDialog @JvmOverloads constructor(context: Context, themeResId: Int = R.style.TipDialog)
+    : Dialog(context, themeResId) {
 
     init {
         setCanceledOnTouchOutside(false)
